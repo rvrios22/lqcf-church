@@ -47,14 +47,14 @@ router.put('/:id', async (req, res, next) => {
 })
 
 router.delete('/:id', async (req, res, next) => {
+    const id = req.params.id
     try {
-        const id = req.params.id
         const event = await MonthEvent.findByPk(id)
         if (!event) {
             res.status(404).json({ message: 'The event cannot be found' })
         }
         await event.destroy()
-        res.status(204)
+        res.status(204).end()
     } catch (err) {
         next(err)
     }
