@@ -29,6 +29,7 @@ router.put('/:id', async (req, res, next) => {
         const study = await Study.findByPk(id)
         if (!study) {
             res.status(404).json({ message: "study does not exist" })
+            return
         }
         await study.update({ name: name })
         res.status(200).json(study)
@@ -43,6 +44,7 @@ router.delete('/:id', async (req, res, next) => {
         const study = await Study.findByPk(id)
         if (!study) {
             res.status(404).json({ message: "study does not exist" })
+            return
         }
         await study.destroy()
         res.status(204).end()

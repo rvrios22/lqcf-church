@@ -34,6 +34,7 @@ router.put('/:id', async (req, res, next) => {
         const event = await MonthEvent.findByPk(id)
         if (!event) {
             res.status(404).json({ message: "The event does not exist" })
+            return
         }
         await event.update({
             title: title,
@@ -52,6 +53,7 @@ router.delete('/:id', async (req, res, next) => {
         const event = await MonthEvent.findByPk(id)
         if (!event) {
             res.status(404).json({ message: 'The event cannot be found' })
+            return
         }
         await event.destroy()
         res.status(204).end()
