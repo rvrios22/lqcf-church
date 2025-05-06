@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
-import { WindowDimensionsProvider } from "./hooks/WindowDimensionsContext";
+import { WindowDimensionsProvider } from "./context/WindowDimensionsContext";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
@@ -16,6 +16,15 @@ declare module "@tanstack/react-router" {
   }
 }
 
+const removeLoader = () => {
+  const loader = document.getElementById("loader");
+  if (loader) {
+    loader.style.opacity = "0";
+    loader.style.transition = "opacity 300ms ease";
+    setTimeout(() => loader.remove(), 1000);
+  }
+};
+
 // Render the app
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
@@ -28,3 +37,5 @@ if (!rootElement.innerHTML) {
     </StrictMode>
   );
 }
+
+removeLoader()

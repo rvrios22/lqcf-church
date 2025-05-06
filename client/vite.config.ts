@@ -8,8 +8,15 @@ export default defineConfig({
     // Please make sure that '@tanstack/router-plugin' is passed before '@vitejs/plugin-react'
     TanStackRouterVite({ target: 'react', autoCodeSplitting: true }),
     react(),
-    // ...,
   ],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      }
+    }
+  },
   css: {
     modules: {
       scopeBehaviour: 'local',

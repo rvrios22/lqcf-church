@@ -1,20 +1,22 @@
-import * as React from "react";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 import "../css/global.css";
 import "../css/reset.css";
 import { useWindowDimensions } from "../hooks/useWindowDimensions";
+import Navbar from "../components/Navbar/Navbar";
+import MobileNavbar from "../components/MobileNavbar/MobileNavbar";
+import Footer from "../components/Footer/Footer";
 
 export const Route = createRootRoute({
   component: RootComponent,
 });
 
 function RootComponent() {
-  const { width, height } = useWindowDimensions();
-  console.log(width, height);
+  const { width } = useWindowDimensions();
   return (
-    <React.Fragment>
-      <div>Hello "__root"!</div>
+    <>
+      <nav>{width > 700 ? <Navbar /> : <MobileNavbar />}</nav>
       <Outlet />
-    </React.Fragment>
+      <Footer />
+    </>
   );
 }

@@ -11,8 +11,8 @@ export const WindowDimensionsProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const [dimensions, setDimensions] = useState<WindowDimensions>({
-    width: window.innerHeight,
-    height: window.innerHeight,
+    width: 0,
+    height: 0,
   });
 
   useEffect(() => {
@@ -22,6 +22,7 @@ export const WindowDimensionsProvider: React.FC<{
         height: window.innerHeight,
       });
     };
+    handleResize()
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);

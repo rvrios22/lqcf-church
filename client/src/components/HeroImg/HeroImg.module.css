@@ -1,0 +1,29 @@
+.container {
+    position: relative;
+    /* applying font size on conatiner as there was issue applying font size directly to text */
+    font-size: clamp(20px, 3vw, 34px);
+}
+
+.img {
+    object-fit: cover;
+}
+
+.text {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    opacity: 0; /* Initial opacity */
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    font-family: 'Inter', Tahoma, Verdana, sans-serif;
+    -webkit-text-fill-color: white;
+    text-shadow: 3px 2px 3px rgb(0, 0, 0);
+    transition: opacity 300ms ease; /* Add transition for opacity */
+}
+
+.slide {
+    top: 50%;
+    opacity: 1; /* Final opacity */
+    transition: top 1000ms ease, opacity 1000ms ease; /* Ensure opacity transition is included */
+}

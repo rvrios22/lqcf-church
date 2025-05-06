@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { WindowDimensionsContext } from "./WindowDimensionsContext";
+import { WindowDimensionsContext } from "../context/WindowDimensionsContext";
 
 export const useWindowDimensions = () => {
   const context = useContext(WindowDimensionsContext);
