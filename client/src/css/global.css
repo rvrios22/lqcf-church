@@ -27,3 +27,7 @@
     color: rgb(146, 146, 146);
     white-space: nowrap;
 }
+
+.img-cover {
+    object-fit: cover;
+}

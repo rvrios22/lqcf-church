@@ -8,12 +8,114 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 
+// Create Virtual Routes
+
+const WomensStudyLazyImport = createFileRoute('/womens-study')()
+const WhatWeBelieveLazyImport = createFileRoute('/what-we-believe')()
+const SchoolLazyImport = createFileRoute('/school')()
+const PrayerChainLazyImport = createFileRoute('/prayer-chain')()
+const PrayerLazyImport = createFileRoute('/prayer')()
+const MensStudyLazyImport = createFileRoute('/mens-study')()
+const LoginLazyImport = createFileRoute('/login')()
+const IdentityYouthLazyImport = createFileRoute('/identity-youth')()
+const GivingLazyImport = createFileRoute('/giving')()
+const EventsLazyImport = createFileRoute('/events')()
+const ErrorPageLazyImport = createFileRoute('/error-page')()
+const EldersLazyImport = createFileRoute('/elders')()
+const CurrentStudiesLazyImport = createFileRoute('/current-studies')()
+
 // Create/Update Routes
+
+const WomensStudyLazyRoute = WomensStudyLazyImport.update({
+  id: '/womens-study',
+  path: '/womens-study',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/womens-study.lazy').then((d) => d.Route))
+
+const WhatWeBelieveLazyRoute = WhatWeBelieveLazyImport.update({
+  id: '/what-we-believe',
+  path: '/what-we-believe',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/what-we-believe.lazy').then((d) => d.Route),
+)
+
+const SchoolLazyRoute = SchoolLazyImport.update({
+  id: '/school',
+  path: '/school',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/school.lazy').then((d) => d.Route))
+
+const PrayerChainLazyRoute = PrayerChainLazyImport.update({
+  id: '/prayer-chain',
+  path: '/prayer-chain',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/prayer-chain.lazy').then((d) => d.Route))
+
+const PrayerLazyRoute = PrayerLazyImport.update({
+  id: '/prayer',
+  path: '/prayer',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/prayer.lazy').then((d) => d.Route))
+
+const MensStudyLazyRoute = MensStudyLazyImport.update({
+  id: '/mens-study',
+  path: '/mens-study',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/mens-study.lazy').then((d) => d.Route))
+
+const LoginLazyRoute = LoginLazyImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/login.lazy').then((d) => d.Route))
+
+const IdentityYouthLazyRoute = IdentityYouthLazyImport.update({
+  id: '/identity-youth',
+  path: '/identity-youth',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/identity-youth.lazy').then((d) => d.Route),
+)
+
+const GivingLazyRoute = GivingLazyImport.update({
+  id: '/giving',
+  path: '/giving',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/giving.lazy').then((d) => d.Route))
+
+const EventsLazyRoute = EventsLazyImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/events.lazy').then((d) => d.Route))
+
+const ErrorPageLazyRoute = ErrorPageLazyImport.update({
+  id: '/error-page',
+  path: '/error-page',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/error-page.lazy').then((d) => d.Route))
+
+const EldersLazyRoute = EldersLazyImport.update({
+  id: '/elders',
+  path: '/elders',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/elders.lazy').then((d) => d.Route))
+
+const CurrentStudiesLazyRoute = CurrentStudiesLazyImport.update({
+  id: '/current-studies',
+  path: '/current-studies',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/current-studies.lazy').then((d) => d.Route),
+)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -32,6 +134,97 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/current-studies': {
+      id: '/current-studies'
+      path: '/current-studies'
+      fullPath: '/current-studies'
+      preLoaderRoute: typeof CurrentStudiesLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/elders': {
+      id: '/elders'
+      path: '/elders'
+      fullPath: '/elders'
+      preLoaderRoute: typeof EldersLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/error-page': {
+      id: '/error-page'
+      path: '/error-page'
+      fullPath: '/error-page'
+      preLoaderRoute: typeof ErrorPageLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/giving': {
+      id: '/giving'
+      path: '/giving'
+      fullPath: '/giving'
+      preLoaderRoute: typeof GivingLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/identity-youth': {
+      id: '/identity-youth'
+      path: '/identity-youth'
+      fullPath: '/identity-youth'
+      preLoaderRoute: typeof IdentityYouthLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/mens-study': {
+      id: '/mens-study'
+      path: '/mens-study'
+      fullPath: '/mens-study'
+      preLoaderRoute: typeof MensStudyLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/prayer': {
+      id: '/prayer'
+      path: '/prayer'
+      fullPath: '/prayer'
+      preLoaderRoute: typeof PrayerLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/prayer-chain': {
+      id: '/prayer-chain'
+      path: '/prayer-chain'
+      fullPath: '/prayer-chain'
+      preLoaderRoute: typeof PrayerChainLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/school': {
+      id: '/school'
+      path: '/school'
+      fullPath: '/school'
+      preLoaderRoute: typeof SchoolLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/what-we-believe': {
+      id: '/what-we-believe'
+      path: '/what-we-believe'
+      fullPath: '/what-we-believe'
+      preLoaderRoute: typeof WhatWeBelieveLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/womens-study': {
+      id: '/womens-study'
+      path: '/womens-study'
+      fullPath: '/womens-study'
+      preLoaderRoute: typeof WomensStudyLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -39,32 +232,140 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/current-studies': typeof CurrentStudiesLazyRoute
+  '/elders': typeof EldersLazyRoute
+  '/error-page': typeof ErrorPageLazyRoute
+  '/events': typeof EventsLazyRoute
+  '/giving': typeof GivingLazyRoute
+  '/identity-youth': typeof IdentityYouthLazyRoute
+  '/login': typeof LoginLazyRoute
+  '/mens-study': typeof MensStudyLazyRoute
+  '/prayer': typeof PrayerLazyRoute
+  '/prayer-chain': typeof PrayerChainLazyRoute
+  '/school': typeof SchoolLazyRoute
+  '/what-we-believe': typeof WhatWeBelieveLazyRoute
+  '/womens-study': typeof WomensStudyLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/current-studies': typeof CurrentStudiesLazyRoute
+  '/elders': typeof EldersLazyRoute
+  '/error-page': typeof ErrorPageLazyRoute
+  '/events': typeof EventsLazyRoute
+  '/giving': typeof GivingLazyRoute
+  '/identity-youth': typeof IdentityYouthLazyRoute
+  '/login': typeof LoginLazyRoute
+  '/mens-study': typeof MensStudyLazyRoute
+  '/prayer': typeof PrayerLazyRoute
+  '/prayer-chain': typeof PrayerChainLazyRoute
+  '/school': typeof SchoolLazyRoute
+  '/what-we-believe': typeof WhatWeBelieveLazyRoute
+  '/womens-study': typeof WomensStudyLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/current-studies': typeof CurrentStudiesLazyRoute
+  '/elders': typeof EldersLazyRoute
+  '/error-page': typeof ErrorPageLazyRoute
+  '/events': typeof EventsLazyRoute
+  '/giving': typeof GivingLazyRoute
+  '/identity-youth': typeof IdentityYouthLazyRoute
+  '/login': typeof LoginLazyRoute
+  '/mens-study': typeof MensStudyLazyRoute
+  '/prayer': typeof PrayerLazyRoute
+  '/prayer-chain': typeof PrayerChainLazyRoute
+  '/school': typeof SchoolLazyRoute
+  '/what-we-believe': typeof WhatWeBelieveLazyRoute
+  '/womens-study': typeof WomensStudyLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/current-studies'
+    | '/elders'
+    | '/error-page'
+    | '/events'
+    | '/giving'
+    | '/identity-youth'
+    | '/login'
+    | '/mens-study'
+    | '/prayer'
+    | '/prayer-chain'
+    | '/school'
+    | '/what-we-believe'
+    | '/womens-study'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/current-studies'
+    | '/elders'
+    | '/error-page'
+    | '/events'
+    | '/giving'
+    | '/identity-youth'
+    | '/login'
+    | '/mens-study'
+    | '/prayer'
+    | '/prayer-chain'
+    | '/school'
+    | '/what-we-believe'
+    | '/womens-study'
+  id:
+    | '__root__'
+    | '/'
+    | '/current-studies'
+    | '/elders'
+    | '/error-page'
+    | '/events'
+    | '/giving'
+    | '/identity-youth'
+    | '/login'
+    | '/mens-study'
+    | '/prayer'
+    | '/prayer-chain'
+    | '/school'
+    | '/what-we-believe'
+    | '/womens-study'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CurrentStudiesLazyRoute: typeof CurrentStudiesLazyRoute
+  EldersLazyRoute: typeof EldersLazyRoute
+  ErrorPageLazyRoute: typeof ErrorPageLazyRoute
+  EventsLazyRoute: typeof EventsLazyRoute
+  GivingLazyRoute: typeof GivingLazyRoute
+  IdentityYouthLazyRoute: typeof IdentityYouthLazyRoute
+  LoginLazyRoute: typeof LoginLazyRoute
+  MensStudyLazyRoute: typeof MensStudyLazyRoute
+  PrayerLazyRoute: typeof PrayerLazyRoute
+  PrayerChainLazyRoute: typeof PrayerChainLazyRoute
+  SchoolLazyRoute: typeof SchoolLazyRoute
+  WhatWeBelieveLazyRoute: typeof WhatWeBelieveLazyRoute
+  WomensStudyLazyRoute: typeof WomensStudyLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CurrentStudiesLazyRoute: CurrentStudiesLazyRoute,
+  EldersLazyRoute: EldersLazyRoute,
+  ErrorPageLazyRoute: ErrorPageLazyRoute,
+  EventsLazyRoute: EventsLazyRoute,
+  GivingLazyRoute: GivingLazyRoute,
+  IdentityYouthLazyRoute: IdentityYouthLazyRoute,
+  LoginLazyRoute: LoginLazyRoute,
+  MensStudyLazyRoute: MensStudyLazyRoute,
+  PrayerLazyRoute: PrayerLazyRoute,
+  PrayerChainLazyRoute: PrayerChainLazyRoute,
+  SchoolLazyRoute: SchoolLazyRoute,
+  WhatWeBelieveLazyRoute: WhatWeBelieveLazyRoute,
+  WomensStudyLazyRoute: WomensStudyLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +378,63 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/current-studies",
+        "/elders",
+        "/error-page",
+        "/events",
+        "/giving",
+        "/identity-youth",
+        "/login",
+        "/mens-study",
+        "/prayer",
+        "/prayer-chain",
+        "/school",
+        "/what-we-believe",
+        "/womens-study"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/current-studies": {
+      "filePath": "current-studies.lazy.tsx"
+    },
+    "/elders": {
+      "filePath": "elders.lazy.tsx"
+    },
+    "/error-page": {
+      "filePath": "error-page.lazy.tsx"
+    },
+    "/events": {
+      "filePath": "events.lazy.tsx"
+    },
+    "/giving": {
+      "filePath": "giving.lazy.tsx"
+    },
+    "/identity-youth": {
+      "filePath": "identity-youth.lazy.tsx"
+    },
+    "/login": {
+      "filePath": "login.lazy.tsx"
+    },
+    "/mens-study": {
+      "filePath": "mens-study.lazy.tsx"
+    },
+    "/prayer": {
+      "filePath": "prayer.lazy.tsx"
+    },
+    "/prayer-chain": {
+      "filePath": "prayer-chain.lazy.tsx"
+    },
+    "/school": {
+      "filePath": "school.lazy.tsx"
+    },
+    "/what-we-believe": {
+      "filePath": "what-we-believe.lazy.tsx"
+    },
+    "/womens-study": {
+      "filePath": "womens-study.lazy.tsx"
     }
   }
 }

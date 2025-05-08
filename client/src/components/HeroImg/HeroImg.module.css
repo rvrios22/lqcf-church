@@ -12,18 +12,18 @@
     position: absolute;
     top: 60%;
     left: 50%;
-    opacity: 0; /* Initial opacity */
+    opacity: 0;
     transform: translate(-50%, -50%);
     color: white;
     text-align: center;
     font-family: 'Inter', Tahoma, Verdana, sans-serif;
     -webkit-text-fill-color: white;
     text-shadow: 3px 2px 3px rgb(0, 0, 0);
-    transition: opacity 300ms ease; /* Add transition for opacity */
+    transition: opacity 300ms ease; 
 }
 
 .slide {
     top: 50%;
-    opacity: 1; /* Final opacity */
-    transition: top 1000ms ease, opacity 1000ms ease; /* Ensure opacity transition is included */
+    opacity: 1;
+    transition: top 1000ms ease, opacity 1000ms ease;
 }
