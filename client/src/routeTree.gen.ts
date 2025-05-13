@@ -30,6 +30,7 @@ const EventsLazyImport = createFileRoute('/events')()
 const ErrorPageLazyImport = createFileRoute('/error-page')()
 const EldersLazyImport = createFileRoute('/elders')()
 const CurrentStudiesLazyImport = createFileRoute('/current-studies')()
+const BeliefsLazyImport = createFileRoute('/beliefs')()
 
 // Create/Update Routes
 
@@ -117,6 +118,12 @@ const CurrentStudiesLazyRoute = CurrentStudiesLazyImport.update({
   import('./routes/current-studies.lazy').then((d) => d.Route),
 )
 
+const BeliefsLazyRoute = BeliefsLazyImport.update({
+  id: '/beliefs',
+  path: '/beliefs',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/beliefs.lazy').then((d) => d.Route))
+
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
@@ -132,6 +139,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/beliefs': {
+      id: '/beliefs'
+      path: '/beliefs'
+      fullPath: '/beliefs'
+      preLoaderRoute: typeof BeliefsLazyImport
       parentRoute: typeof rootRoute
     }
     '/current-studies': {
@@ -232,6 +246,7 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/beliefs': typeof BeliefsLazyRoute
   '/current-studies': typeof CurrentStudiesLazyRoute
   '/elders': typeof EldersLazyRoute
   '/error-page': typeof ErrorPageLazyRoute
@@ -249,6 +264,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/beliefs': typeof BeliefsLazyRoute
   '/current-studies': typeof CurrentStudiesLazyRoute
   '/elders': typeof EldersLazyRoute
   '/error-page': typeof ErrorPageLazyRoute
@@ -267,6 +283,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/beliefs': typeof BeliefsLazyRoute
   '/current-studies': typeof CurrentStudiesLazyRoute
   '/elders': typeof EldersLazyRoute
   '/error-page': typeof ErrorPageLazyRoute
@@ -286,6 +303,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/beliefs'
     | '/current-studies'
     | '/elders'
     | '/error-page'
@@ -302,6 +320,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/beliefs'
     | '/current-studies'
     | '/elders'
     | '/error-page'
@@ -318,6 +337,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/beliefs'
     | '/current-studies'
     | '/elders'
     | '/error-page'
@@ -336,6 +356,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BeliefsLazyRoute: typeof BeliefsLazyRoute
   CurrentStudiesLazyRoute: typeof CurrentStudiesLazyRoute
   EldersLazyRoute: typeof EldersLazyRoute
   ErrorPageLazyRoute: typeof ErrorPageLazyRoute
@@ -353,6 +374,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BeliefsLazyRoute: BeliefsLazyRoute,
   CurrentStudiesLazyRoute: CurrentStudiesLazyRoute,
   EldersLazyRoute: EldersLazyRoute,
   ErrorPageLazyRoute: ErrorPageLazyRoute,
@@ -379,6 +401,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/beliefs",
         "/current-studies",
         "/elders",
         "/error-page",
@@ -396,6 +419,9 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/beliefs": {
+      "filePath": "beliefs.lazy.tsx"
     },
     "/current-studies": {
       "filePath": "current-studies.lazy.tsx"

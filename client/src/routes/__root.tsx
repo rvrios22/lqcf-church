@@ -14,7 +14,7 @@ function RootComponent() {
   const { width } = useWindowDimensions();
   return (
     <>
-      <nav>{width > 700 ? <Navbar /> : <MobileNavbar />}</nav>
+      {width > 700 ? <Navbar /> : <MobileNavbar />}
       <Outlet />
       <Footer />
     </>
