@@ -38,8 +38,8 @@ function RouteComponent() {
         style={{
           display: width >= 700 ? "grid" : "block",
           gridTemplateColumns: width >= 700 ? "1fr 1fr" : "none",
+          padding: width >= 700 ? "1em" : "0",
           gap: "1em",
-          padding: "1em",
         }}
       >
         {whatsGoingOnData.map(({ title, desc, link, src }, idx) => (
