@@ -10,7 +10,7 @@ function RouteComponent() {
     <main>
       <ul>
         {belifs.map(({ title, statement, citations }, idx) => (
-          <li>
+          <li key={idx}>
             <h2 className="sub-header" style={{ marginBottom: 0 }}>
               {title}
             </h2>
