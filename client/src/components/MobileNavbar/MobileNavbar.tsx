@@ -48,19 +48,27 @@ function MobileNavbar() {
               />
             </span>
           </div>
-          <ul>
-            <li>
-              <Link to="/identity-youth">Identity Youth</Link>
-            </li>
-            <li>
-              <Link to="/mens-study">Men's Study</Link>
-            </li>
-            <li>
-              <Link to="/womens-study">Women's Study</Link>
-            </li>
-            <li>
-              <Link to="/prayer-chain">Prayer Chain</Link>
-            </li>
+          <ul
+            className={
+              isSubMenuOpen === "ministry"
+                ? `${styles.ulMenu} ${styles.showMenu}`
+                : `${styles.ulMenu}`
+            }
+          >
+            <div className={styles.gridDiv}>
+              <li>
+                <Link to="/identity-youth">Identity Youth</Link>
+              </li>
+              <li>
+                <Link to="/mens-study">Men's Study</Link>
+              </li>
+              <li>
+                <Link to="/womens-study">Women's Study</Link>
+              </li>
+              <li>
+                <Link to="/prayer-chain">Prayer Chain</Link>
+              </li>
+            </div>
           </ul>
         </li>
         <li>
@@ -75,13 +83,21 @@ function MobileNavbar() {
               />
             </span>
           </div>
-          <ul>
-            <li>
-              <Link to="/elders">Our Elders</Link>
-            </li>
-            <li>
-              <Link to="/beliefs">What We Believe</Link>
-            </li>
+          <ul
+            className={
+              isSubMenuOpen === "who"
+                ? `${styles.ulMenu} ${styles.showMenu}`
+                : `${styles.ulMenu}`
+            }
+          >
+            <div className={styles.gridDiv}>
+              <li>
+                <Link to="/elders">Our Elders</Link>
+              </li>
+              <li>
+                <Link to="/beliefs">What We Believe</Link>
+              </li>
+            </div>
           </ul>
         </li>
         <li>

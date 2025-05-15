@@ -47,3 +47,19 @@ nav label {
     transition: rotate 100ms;
     rotate: 180deg;
 }
+
+.ulMenu {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 500ms ease-out;
+    margin: 0;
+}
+
+.gridDiv {
+    overflow: hidden;
+}
+
+.ulMenu.showMenu {
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 500ms ease-out;
+}
