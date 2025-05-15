@@ -35,3 +35,8 @@
 .img-cover {
     object-fit: cover;
 }
+
+.underline {
+    text-decoration: underline;
+    cursor: pointer;
+}
