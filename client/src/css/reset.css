@@ -71,6 +71,10 @@ a:-webkit-any-link {
   max-width: max-content;
 }
 
+a:active, a:visited {
+  color: black;
+}
+
 /* Make images easier to work with */
 img,
 picture {
