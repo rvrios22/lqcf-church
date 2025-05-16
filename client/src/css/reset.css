@@ -116,3 +116,13 @@ ul {
 li {
   list-style-type: none;
 }
+
+input, textarea {
+  margin: 0 auto;
+  padding: 5px 10px 0 05px;
+  width: 60%;
+  height: 2em;
+  border-radius: 10px;
+  border: 1px solid black;
+  resize: none;
+}

@@ -11,9 +11,14 @@ function MobileNavbar() {
   const handleOnClick = (menu: string) => {
     setIsSubMenuOpen((prev) => (prev === menu ? null : menu));
   };
-  console.log(isSubMenuOpen);
   useEffect(() => {
-    const unsubscribe = router.history.subscribe(() => setIsMenuShowing(false));
+    const unsubscribe = router.history.subscribe(() => {
+      setIsMenuShowing(false);
+      setIsSubMenuOpen(null);
+      if (hamburger.current) {
+        hamburger.current.checked = false;
+      }
+    });
     return () => unsubscribe();
   }, [router]);
   return (
