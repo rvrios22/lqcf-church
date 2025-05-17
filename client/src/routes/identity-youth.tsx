@@ -1,8 +1,8 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import HeroImg from "../components/HeroImg/HeroImg";
 import { useWindowDimensions } from "../hooks/useWindowDimensions";
 
-export const Route = createLazyFileRoute("/identity-youth")({
+export const Route = createFileRoute("/identity-youth")({
   component: RouteComponent,
 });
 

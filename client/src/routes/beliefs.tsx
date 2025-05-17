@@ -1,15 +1,14 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
-import belifs from "../../public/beliefs";
-
-export const Route = createLazyFileRoute("/beliefs")({
+import { createFileRoute } from '@tanstack/react-router'
+import beliefs from '../../public/beliefs';
+export const Route = createFileRoute('/beliefs')({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
   return (
     <main>
       <ul>
-        {belifs.map(({ title, statement, citations }, idx) => (
+        {beliefs.map(({ title, statement, citations }, idx) => (
           <li key={idx}>
             <h2 className="sub-header" style={{ marginBottom: 0 }}>
               {title}

@@ -1,9 +1,9 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import Swal from "sweetalert2";
 
-export const Route = createLazyFileRoute("/prayer")({
+export const Route = createFileRoute("/prayer")({
   component: RouteComponent,
 });
 

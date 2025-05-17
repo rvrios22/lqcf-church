@@ -1,11 +1,11 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
-import HeroImg from "../components/HeroImg/HeroImg";
-import { useWindowDimensions } from "../hooks/useWindowDimensions";
-import { Link } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
+import HeroImg from '../components/HeroImg/HeroImg'
+import { useWindowDimensions } from '../hooks/useWindowDimensions'
+import { Link } from '@tanstack/react-router'
 
-export const Route = createLazyFileRoute("/womens-study")({
+export const Route = createFileRoute('/womens-study')({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
   const { width, height } = useWindowDimensions();
@@ -15,7 +15,7 @@ function RouteComponent() {
         width={width}
         height={height}
         img="womensStudyHeader.avif"
-        text="Women's Study"
+        text="Womenen's Study"
       />
       <h1 className="sub-header">Women's Study</h1>
       <p className="general-text">

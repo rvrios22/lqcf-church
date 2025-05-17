@@ -1,14 +1,12 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
-import { useWindowDimensions } from "../hooks/useWindowDimensions";
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createLazyFileRoute("/school")({
+export const Route = createFileRoute("/school")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const { height } = useWindowDimensions();
   return (
-    <main style={{ height: '50dvh' }}>
+    <main style={{ height: "50dvh" }}>
       <h1 className="sub-header">La Quinta Christian Fellowship School</h1>
       <p className="general-text">
         La Quinta Christian Fellowship School is a ministry of our church.

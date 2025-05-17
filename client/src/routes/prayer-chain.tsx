@@ -1,10 +1,10 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
-import HeroImg from "../components/HeroImg/HeroImg";
-import { useWindowDimensions } from "../hooks/useWindowDimensions";
+import { createFileRoute } from '@tanstack/react-router'
+import HeroImg from '../components/HeroImg/HeroImg'
+import { useWindowDimensions } from '../hooks/useWindowDimensions'
 
-export const Route = createLazyFileRoute("/prayer-chain")({
+export const Route = createFileRoute('/prayer-chain')({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
   const { width, height } = useWindowDimensions();
