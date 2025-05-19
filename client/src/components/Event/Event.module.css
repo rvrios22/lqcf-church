@@ -1,0 +1,15 @@
+.section {
+    width: 90%;
+    border-bottom: 1px solid black;
+    margin: .5em auto;
+}
+
+.section:last-of-type {
+    border: none;
+}
+
+.section h2,
+.section p {
+    margin: 0;
+    text-align: left;
+}
