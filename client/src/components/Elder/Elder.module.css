@@ -1,0 +1,22 @@
+.img {
+    margin: 0 auto;
+    border-radius: 10px;
+    object-position: top;
+}
+
+figure {
+    margin-bottom: 2em;
+}
+
+@media (min-width: 700px) {
+    figure {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        padding-left: 2em;
+        gap: 1em;
+    }
+
+    figure > div:last-child > p {
+        margin-top: 0;
+    }
+}

@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import HeroImg from '../components/HeroImg/HeroImg'
 import { useWindowDimensions } from '../hooks/useWindowDimensions'
-import { Link } from '@tanstack/react-router'
+// import { Link } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/womens-study')({
   component: RouteComponent,
@@ -46,7 +46,7 @@ function RouteComponent() {
         pairs beautifully with the previous and upcoming studies. This allows
         the opportunity for ladies to join in when their schedule permits. To
         see a list of all of the outlines in this series click{" "}
-        <span
+        {/* <span
           onClick={() => {
             setIsModalShowing(true);
             setIsModalMounted(true);
@@ -54,7 +54,7 @@ function RouteComponent() {
           className="underline"
         >
           here
-        </span>
+        </span> */}
         . <br></br>
         Jennifer has a passion for learning and teaching Scripture, and a heart
         for encouraging and leading the women in this ministry. Please feel free

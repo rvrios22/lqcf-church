@@ -48,7 +48,7 @@ function RouteComponent() {
         </Link>{" "}
         page to verify our meeting dates each month as well as the topic of our
         study. To see a list of all of the outlines in this series click{" "}
-        <span
+        {/* <span
           className="underline"
           onClick={() => {
             setIsModalShowing(true);
@@ -56,7 +56,7 @@ function RouteComponent() {
           }}
         >
           here
-        </span>
+        </span> */}
         .
       </p>
     </>
