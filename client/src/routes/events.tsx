@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import Event from "../components/Event/Event";
 import EventTypes from "../types/EventTypes";
+import AddEventForm from "../components/AddEventForm/AddEventForm";
 
 
 const fetchEvents = async () => {
@@ -29,6 +30,7 @@ function RouteComponent() {
           date={date}
         />
       ))}
+      <AddEventForm />
     </>
   );
 }
