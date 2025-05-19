@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Elder.module.css";
 import { useWindowDimensions } from "../../hooks/useWindowDimensions";
 
@@ -10,7 +9,7 @@ interface ElderTypes {
 function Elder({ name, bio, img }: ElderTypes) {
   const { width, height } = useWindowDimensions();
   return (
-    <figure>
+    <figure className={styles.figure}>
       <div>
         <img
           src={`api/static/imgs/${img}`}
@@ -18,6 +17,7 @@ function Elder({ name, bio, img }: ElderTypes) {
           className={`img-cover ${styles.img}`}
           width={width * 0.9}
           height={height * 0.75}
+          loading="lazy"
         />
         <h2 className="sub-header">{name}</h2>
       </div>
