@@ -9,6 +9,7 @@ function Event({
   events,
   setEvents,
 }: EventTypes) {
+  
   const handleDelete = async (id: number) => {
     const options = {
       method: "DELETE",

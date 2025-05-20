@@ -1,5 +1,6 @@
 import { useState } from "react";
 import EventTypes from "../../types/EventTypes";
+import customFetch from "../../utils/customFetch";
 interface AddEventFormTypes {
   events?: EventTypes[];
   setEvents?: React.Dispatch<React.SetStateAction<EventTypes[]>>;
@@ -22,12 +23,8 @@ function AddEventForm({ events, setEvents }: AddEventFormTypes) {
       body: JSON.stringify(formData),
     };
     try {
-      const response = await fetch("/api/event", options);
-      if (!response.ok) {
-        throw new Error("Something went wrong");
-      }
-      const data = await response.json();
-      if (setEvents && events) {
+      const data = await customFetch<EventTypes>("/api/event", options);
+      if (events && setEvents) {
         setEvents([...events, data]);
       }
     } catch (e) {

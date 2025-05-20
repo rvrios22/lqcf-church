@@ -3,20 +3,15 @@ import Event from "../components/Event/Event";
 import EventTypes from "../types/EventTypes";
 import AddEventForm from "../components/AddEventForm/AddEventForm";
 import { useState } from "react";
-
-const fetchEvents = async () => {
-  const response = await fetch("/api/event");
-  const data = await response.json();
-  return data;
-};
+import customFetch from "../utils/customFetch";
 
 export const Route = createFileRoute("/events")({
   component: RouteComponent,
-  loader: () => fetchEvents(),
+  loader: () => customFetch("/api/event"),
 });
 
 function RouteComponent() {
-  const e = Route.useLoaderData()
+  const e = Route.useLoaderData();
   const [events, setEvents] = useState<EventTypes[]>(e);
   return (
     <>
