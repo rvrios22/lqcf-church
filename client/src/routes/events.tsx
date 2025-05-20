@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import Event from "../components/Event/Event";
 import EventTypes from "../types/EventTypes";
 import AddEventForm from "../components/AddEventForm/AddEventForm";
-
+import { useState } from "react";
 
 const fetchEvents = async () => {
   const response = await fetch("/api/event");
@@ -16,8 +16,8 @@ export const Route = createFileRoute("/events")({
 });
 
 function RouteComponent() {
-  const events = Route.useLoaderData();
-  console.log(events);
+  const e = Route.useLoaderData()
+  const [events, setEvents] = useState<EventTypes[]>(e);
   return (
     <>
       <h1 className="sub-header">Upcoming Events:</h1>
@@ -28,9 +28,11 @@ function RouteComponent() {
           title={title}
           description={description}
           date={date}
+          events={events}
+          setEvents={setEvents}
         />
       ))}
-      <AddEventForm />
+      <AddEventForm events={events} setEvents={setEvents} />
     </>
   );
 }
