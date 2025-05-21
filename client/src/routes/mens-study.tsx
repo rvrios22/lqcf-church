@@ -2,11 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import HeroImg from "../components/HeroImg/HeroImg";
 import { useWindowDimensions } from "../hooks/useWindowDimensions";
 import { Link } from "@tanstack/react-router";
+import { useState } from "react";
+import PDFModal from "../components/PDFModal/PDFModal";
+import PDFUpload from "../components/PDFUpload/PDFUpload";
 export const Route = createFileRoute("/mens-study")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
+  const [isModalShowing, setIsModalShowing] = useState<boolean>(false);
   const { width, height } = useWindowDimensions();
   return (
     <>
@@ -48,17 +52,16 @@ function RouteComponent() {
         </Link>{" "}
         page to verify our meeting dates each month as well as the topic of our
         study. To see a list of all of the outlines in this series click{" "}
-        {/* <span
+        <span
           className="underline"
-          onClick={() => {
-            setIsModalShowing(true);
-            setIsModalMounted(true);
-          }}
+          onClick={() => setIsModalShowing(!isModalShowing)}
         >
           here
-        </span> */}
+        </span>
         .
       </p>
+      {isModalShowing && <PDFModal />}
+      <PDFUpload />
     </>
   );
 }
