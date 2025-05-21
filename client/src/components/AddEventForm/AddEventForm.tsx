@@ -1,6 +1,7 @@
 import { useState } from "react";
 import EventTypes from "../../types/EventTypes";
 import customFetch from "../../utils/customFetch";
+import sortEvents from "../../utils/sortEvents";
 interface AddEventFormTypes {
   events?: EventTypes[];
   setEvents?: React.Dispatch<React.SetStateAction<EventTypes[]>>;
@@ -25,7 +26,8 @@ function AddEventForm({ events, setEvents }: AddEventFormTypes) {
     try {
       const data = await customFetch<EventTypes>("/api/event", options);
       if (events && setEvents) {
-        setEvents([...events, data]);
+        const sortedEvents = sortEvents([...events, data]);
+        setEvents(sortedEvents);
       }
     } catch (e) {
       console.error(e);

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import Event from "../components/Event/Event";
 import EventTypes from "../types/EventTypes";
 import AddEventForm from "../components/AddEventForm/AddEventForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import customFetch from "../utils/customFetch";
 
 export const Route = createFileRoute("/events")({

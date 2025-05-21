@@ -2,6 +2,7 @@ import { useState } from "react";
 import EventTypes from "../../types/EventTypes";
 import styles from "./Event.module.css";
 import customFetch from "../../utils/customFetch";
+import sortEvents from "../../utils/sortEvents";
 
 function Event({
   id,
@@ -56,7 +57,8 @@ function Event({
         event.id === id ? { ...event, ...data } : event
       );
       if (updatedEvents && setEvents) {
-        setEvents(updatedEvents);
+        const sortedEvents = sortEvents(updatedEvents);
+        setEvents(sortedEvents);
       }
       setIsEventEditable(false);
     } catch (e) {
