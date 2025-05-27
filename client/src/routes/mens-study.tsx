@@ -5,12 +5,24 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import PDFModal from "../components/PDFModal/PDFModal";
 import PDFUpload from "../components/PDFUpload/PDFUpload";
+import fetchStudiesAndPDFs from "../utils/fetchStudiesAndPDFs";
+import StudyTypes from "../types/StudyTypes.d";
+import PDFTypes from "../types/PDFTypes";
 export const Route = createFileRoute("/mens-study")({
   component: RouteComponent,
+  loader: () =>
+    fetchStudiesAndPDFs<StudyTypes, PDFTypes>(
+      "/api/study",
+      `/api/pdf/${import.meta.env.VITE_MEN_STUDY_NAME}`
+    ),
 });
 
 function RouteComponent() {
+  const loaderData = Route.useLoaderData();
+  const study = loaderData?.[0];
+  const pdfs = loaderData?.[1];
   const [isModalShowing, setIsModalShowing] = useState<boolean>(false);
+  const [studies, setStudies] = useState<StudyTypes | undefined>(study);
   const { width, height } = useWindowDimensions();
   return (
     <>
@@ -61,7 +73,7 @@ function RouteComponent() {
         .
       </p>
       {isModalShowing && <PDFModal />}
-      <PDFUpload />
+      <PDFUpload studies={studies} setStudies={setStudies} />
     </>
   );
 }
