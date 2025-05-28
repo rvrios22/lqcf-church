@@ -20,9 +20,14 @@ export const Route = createFileRoute("/mens-study")({
 function RouteComponent() {
   const loaderData = Route.useLoaderData();
   const study = loaderData?.[0];
-  const pdfs = loaderData?.[1];
+  const pdf = loaderData?.[1];
   const [isModalShowing, setIsModalShowing] = useState<boolean>(false);
-  const [studies, setStudies] = useState<StudyTypes | undefined>(study);
+  const [studies, setStudies] = useState<StudyTypes[]>(
+    Array.isArray(study) ? study : study ? [study] : []
+  );
+  const [pdfs, setPdfs] = useState<PDFTypes[]>(
+    Array.isArray(pdf) ? pdf : pdf ? [pdf] : []
+  );
   const { width, height } = useWindowDimensions();
   return (
     <>
@@ -72,7 +77,7 @@ function RouteComponent() {
         </span>
         .
       </p>
-      {isModalShowing && <PDFModal />}
+      {isModalShowing && <PDFModal pdfs={pdfs} setPdfs={setPdfs} setIsModalShowing={setIsModalShowing}/>}
       <PDFUpload studies={studies} setStudies={setStudies} />
     </>
   );

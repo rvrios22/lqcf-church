@@ -1,0 +1,42 @@
+.container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 0 auto;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.close {
+    position: absolute;
+    right: 0;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    padding: .25em 2em;
+    border-bottom: 1px solid black;
+}
+
+
+.flex>* {
+    margin: 0;
+}
+
+.flex>span {
+    text-align: unset;
+}
+
+.flex>span:last-of-type {
+    text-align: right;
+}
