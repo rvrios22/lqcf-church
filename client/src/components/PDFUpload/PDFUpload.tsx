@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import StudyTypes from "../../types/StudyTypes.d";
 import customFetch from "../../utils/customFetch";
 
@@ -19,9 +19,10 @@ function PDFUpload({ studies, setStudies }: PDFUploadTypes) {
     pdf: null,
   });
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('asdf')
     const formData = new FormData();
     formData.append("title", form.title);
     formData.append("studyName", form.studyName);
@@ -46,7 +47,10 @@ function PDFUpload({ studies, setStudies }: PDFUploadTypes) {
           },
         ]);
       }
-      console.log(data)
+      setForm({ title: "", studyName: "", date: "", pdf: null });
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ""; // <-- This clears the file input
+      }
     } catch (e) {
       console.error(e);
     }
@@ -56,6 +60,7 @@ function PDFUpload({ studies, setStudies }: PDFUploadTypes) {
     <form action="POST" onSubmit={handleSubmit}>
       <input
         onChange={(e) => setForm({ ...form, title: e.target.value })}
+        value={form.title}
         type="text"
         name="title"
         id="title"
@@ -64,6 +69,7 @@ function PDFUpload({ studies, setStudies }: PDFUploadTypes) {
       />
       <input
         onChange={(e) => setForm({ ...form, studyName: e.target.value })}
+        value={form.studyName}
         type="text"
         name="studyName"
         placeholder="Study Name"
@@ -80,6 +86,7 @@ function PDFUpload({ studies, setStudies }: PDFUploadTypes) {
       </datalist>
       <input
         onChange={(e) => setForm({ ...form, date: e.target.value })}
+        value={form.date}
         type="date"
         name="date"
         id="date"
@@ -96,8 +103,9 @@ function PDFUpload({ studies, setStudies }: PDFUploadTypes) {
         id="pdf"
         required
         accept=".pdf"
+        ref={fileInputRef} // <-- Add the ref here
       />
-      <input type="button" value="Upload" className="button" />
+      <input type="submit" value="Upload" className="button" />
     </form>
   );
 }
