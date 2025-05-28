@@ -6,7 +6,7 @@ const { Study } = db
 router.get('/', async (req, res, next) => {
     try {
         const studies = await Study.findAll()
-        res.status(200).json({ studies })
+        res.status(200).json(studies)
     } catch (err) {
         next(err)
     }
