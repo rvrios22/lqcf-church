@@ -77,7 +77,14 @@ function RouteComponent() {
         </span>
         .
       </p>
-      {isModalShowing && <PDFModal pdfs={pdfs} setPdfs={setPdfs} setIsModalShowing={setIsModalShowing}/>}
+      {isModalShowing && (
+        <PDFModal
+          pdfs={pdfs}
+          setPdfs={setPdfs}
+          setIsModalShowing={setIsModalShowing}
+          studies={studies}
+        />
+      )}
       <PDFUpload studies={studies} setStudies={setStudies} />
     </>
   );
