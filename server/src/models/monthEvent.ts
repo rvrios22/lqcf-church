@@ -7,7 +7,7 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes): ModelStati
             allowNull: false
         },
         description: {
-            type: dataTypes.STRING,
+            type: dataTypes.TEXT,
             allowNull: false
         },
         date: {
