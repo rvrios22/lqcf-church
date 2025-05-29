@@ -69,6 +69,7 @@ a:not([class]) {
 a:-webkit-any-link {
   text-decoration: none;
   max-width: max-content;
+  color: black;
 }
 
 a:active, a:visited {

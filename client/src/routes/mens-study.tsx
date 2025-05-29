@@ -83,6 +83,7 @@ function RouteComponent() {
           setPdfs={setPdfs}
           setIsModalShowing={setIsModalShowing}
           studies={studies}
+          env={import.meta.env.VITE_MEN_STUDY_NAME}
         />
       )}
       <PDFUpload studies={studies} setStudies={setStudies} />

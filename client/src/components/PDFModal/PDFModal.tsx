@@ -11,6 +11,7 @@ interface PDFModalTypes {
   setPdfs: React.Dispatch<React.SetStateAction<PDFTypes[]>>;
   setIsModalShowing: React.Dispatch<React.SetStateAction<boolean>>;
   studies: StudyTypes[];
+  env: string;
 }
 
 function PDFModal({
@@ -18,11 +19,10 @@ function PDFModal({
   setPdfs,
   setIsModalShowing,
   studies,
+  env,
 }: PDFModalTypes) {
   const { height, width } = useWindowDimensions();
-  const [study, setStudy] = useState<string>(
-    import.meta.env.VITE_MEN_STUDY_NAME
-  );
+  const [study, setStudy] = useState<string>(env);
   const fetchPDFs = async (study: string) => {
     try {
       const data = await customFetch(`/api/pdf/${study}`);
@@ -46,7 +46,7 @@ function PDFModal({
       <div className={styles.flex}>
         <h2 className="sub-header">Title</h2>
         <select
-        className={styles.select}
+          className={styles.select}
           value={study}
           onChange={(e) => {
             setStudy(e.target.value);

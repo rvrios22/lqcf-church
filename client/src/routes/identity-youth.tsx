@@ -18,7 +18,7 @@ function RouteComponent() {
       />
       <p className="general-text">
         Our youth group meets wednesday nights during our wednesday night
-        service after worship. The group is lead by our youth director Reina
+        service after worship. The group is lead by our youth director Rafael
         Rios and Pastor Mark Cook.
       </p>
       <h2 className="sub-header">Purpose Statement</h2>

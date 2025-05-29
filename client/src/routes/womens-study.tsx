@@ -1,13 +1,33 @@
-import { createFileRoute } from '@tanstack/react-router'
-import HeroImg from '../components/HeroImg/HeroImg'
-import { useWindowDimensions } from '../hooks/useWindowDimensions'
-// import { Link } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import HeroImg from "../components/HeroImg/HeroImg";
+import { useWindowDimensions } from "../hooks/useWindowDimensions";
+import { useState } from "react";
+import PDFModal from "../components/PDFModal/PDFModal";
+import PDFUpload from "../components/PDFUpload/PDFUpload";
+import fetchStudiesAndPDFs from "../utils/fetchStudiesAndPDFs";
+import StudyTypes from "../types/StudyTypes.d";
+import PDFTypes from "../types/PDFTypes";
 
-export const Route = createFileRoute('/womens-study')({
+export const Route = createFileRoute("/womens-study")({
   component: RouteComponent,
-})
+  loader: () =>
+    fetchStudiesAndPDFs<StudyTypes, PDFTypes>(
+      "/api/study",
+      `/api/pdf/${import.meta.env.VITE_WOMEN_STUDY_NAME}`
+    ),
+});
 
 function RouteComponent() {
+  const loaderData = Route.useLoaderData();
+  const study = loaderData?.[0];
+  const pdf = loaderData?.[1];
+  const [isModalShowing, setIsModalShowing] = useState<boolean>(false);
+  const [studies, setStudies] = useState<StudyTypes[]>(
+    Array.isArray(study) ? study : study ? [study] : []
+  );
+  const [pdfs, setPdfs] = useState<PDFTypes[]>(
+    Array.isArray(pdf) ? pdf : pdf ? [pdf] : []
+  );
   const { width, height } = useWindowDimensions();
   return (
     <>
@@ -18,6 +38,14 @@ function RouteComponent() {
         text="Womenen's Study"
       />
       <h1 className="sub-header">Women's Study</h1>
+      <img
+        src="./womensStudySubHeader.avif"
+        alt="Women's Group"
+        width={width * 0.75}
+        height={height * 0.7}
+        className="img-cover"
+        style={{ margin: "0 auto", borderRadius: "10px" }}
+      />
       <p className="general-text">
         Women joining together in the Word, fellowship, encouragement, and
         prayer; to glorify God and enjoy Him forever! The call of this ministry
@@ -46,15 +74,9 @@ function RouteComponent() {
         pairs beautifully with the previous and upcoming studies. This allows
         the opportunity for ladies to join in when their schedule permits. To
         see a list of all of the outlines in this series click{" "}
-        {/* <span
-          onClick={() => {
-            setIsModalShowing(true);
-            setIsModalMounted(true);
-          }}
-          className="underline"
-        >
+        <span onClick={() => setIsModalShowing(true)} className="underline">
           here
-        </span> */}
+        </span>
         . <br></br>
         Jennifer has a passion for learning and teaching Scripture, and a heart
         for encouraging and leading the women in this ministry. Please feel free
@@ -65,9 +87,19 @@ function RouteComponent() {
         (call or text), or email:{" "}
         <a className="underline" href="mailto:jenniferclaire77@gmail.com">
           jenniferclaire77@gmail.com
-        </a>
+        </a>{" "}
         with any questions about this ministry.
       </p>
+      {isModalShowing && (
+        <PDFModal
+          pdfs={pdfs}
+          setPdfs={setPdfs}
+          setIsModalShowing={setIsModalShowing}
+          studies={studies}
+          env={import.meta.env.VITE_WOMEN_STUDY_NAME}
+        />
+      )}
+      <PDFUpload studies={studies} setStudies={setStudies} />
     </>
   );
 }
