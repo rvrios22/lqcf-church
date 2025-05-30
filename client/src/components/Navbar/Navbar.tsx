@@ -2,10 +2,12 @@ import { Link } from "@tanstack/react-router";
 import styles from "./Navbar.module.css";
 import DropDown from "../DropDown/DropDown";
 import { useState } from "react";
+import { useUser } from "../../hooks/useUser";
 
 function Navbar() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
-
+  const { user } = useUser();
+  console.log(user);
   const handleMouseEnter = (menu: string) => setOpenMenu(menu);
   const handleMouseLeave = () => setOpenMenu(null);
 
