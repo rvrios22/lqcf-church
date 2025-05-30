@@ -7,7 +7,6 @@ import { useUser } from "../../hooks/useUser";
 function Navbar() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const { user } = useUser();
-  console.log(user);
   const handleMouseEnter = (menu: string) => setOpenMenu(menu);
   const handleMouseLeave = () => setOpenMenu(null);
 
@@ -16,6 +15,11 @@ function Navbar() {
       <div>
         <Link to="/">
           <span className="general-text">LQCF Church</span>
+          {user && (
+            <span style={{ marginLeft: "1em" }} className="general-text">
+              {user.username}
+            </span>
+          )}
         </Link>
       </div>
       <div className={styles.flex}>

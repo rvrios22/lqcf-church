@@ -4,6 +4,7 @@ import EventTypes from "../types/EventTypes";
 import AddEventForm from "../components/AddEventForm/AddEventForm";
 import { useState } from "react";
 import customFetch from "../utils/customFetch";
+import { useUser } from "../hooks/useUser";
 
 export const Route = createFileRoute("/events")({
   component: RouteComponent,
@@ -11,6 +12,7 @@ export const Route = createFileRoute("/events")({
 });
 
 function RouteComponent() {
+  const { user } = useUser();
   const e = Route.useLoaderData();
   const [events, setEvents] = useState<EventTypes[]>(e);
   return (
@@ -27,7 +29,7 @@ function RouteComponent() {
           setEvents={setEvents}
         />
       ))}
-      <AddEventForm events={events} setEvents={setEvents} />
+      {user && <AddEventForm events={events} setEvents={setEvents} />}
     </>
   );
 }

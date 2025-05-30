@@ -7,6 +7,7 @@ import PDFUpload from "../components/PDFUpload/PDFUpload";
 import fetchStudiesAndPDFs from "../utils/fetchStudiesAndPDFs";
 import StudyTypes from "../types/StudyTypes.d";
 import PDFTypes from "../types/PDFTypes";
+import { useUser } from "../hooks/useUser";
 
 export const Route = createFileRoute("/womens-study")({
   component: RouteComponent,
@@ -29,6 +30,7 @@ function RouteComponent() {
     Array.isArray(pdf) ? pdf : pdf ? [pdf] : []
   );
   const { width, height } = useWindowDimensions();
+  const { user } = useUser()
   return (
     <>
       <HeroImg
@@ -99,7 +101,7 @@ function RouteComponent() {
           env={import.meta.env.VITE_WOMEN_STUDY_NAME}
         />
       )}
-      <PDFUpload studies={studies} setStudies={setStudies} />
+      {user && <PDFUpload studies={studies} setStudies={setStudies} />}
     </>
   );
 }

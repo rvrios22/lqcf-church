@@ -3,6 +3,7 @@ import EventTypes from "../../types/EventTypes";
 import styles from "./Event.module.css";
 import customFetch from "../../utils/customFetch";
 import sortEvents from "../../utils/sortEvents";
+import { useUser } from "../../hooks/useUser";
 
 function Event({
   id,
@@ -18,6 +19,7 @@ function Event({
     description,
     date,
   });
+  const { user } = useUser();
 
   const handleDelete = async (id: number) => {
     const options = {
@@ -71,8 +73,12 @@ function Event({
       <h2 className="sub-header">{title}</h2>
       <p className="general-text">{description}</p>
       <p className="general-text">{date}</p>
-      <button onClick={() => handleDelete(id)}>Delete</button>
-      <button onClick={() => setIsEventEditable(!isEventEditable)}>Edit</button>
+      {user && <button onClick={() => handleDelete(id)}>Delete</button>}
+      {user && (
+        <button onClick={() => setIsEventEditable(!isEventEditable)}>
+          Edit
+        </button>
+      )}
     </>
   );
   const editJSX = (
