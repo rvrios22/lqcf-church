@@ -1,6 +1,7 @@
 import express from "express"
 const router = express.Router()
 import db from "../models/index"
+import { verifyUser } from "../middleware/auth"
 const { Study } = db
 
 router.get('/', async (req, res, next) => {
@@ -12,7 +13,7 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', verifyUser, async (req, res, next) => {
     const { name } = req.body
     try {
         await Study.create({ name: name })
@@ -22,7 +23,7 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', verifyUser, async (req, res, next) => {
     const id = req.params.id
     const { name } = req.body
     try {
@@ -38,7 +39,7 @@ router.put('/:id', async (req, res, next) => {
     }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', verifyUser, async (req, res, next) => {
     const id = req.params.id
     try {
         const study = await Study.findByPk(id)

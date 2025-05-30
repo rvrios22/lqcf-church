@@ -4,6 +4,7 @@ const router = express.Router()
 import db from "../models"
 const { PDF, Study } = db
 import { pdfUpload } from '../middleware/multer'
+import { verifyUser } from '../middleware/auth'
 
 router.get('/', async (req, res, next) => {
     try {
@@ -37,7 +38,7 @@ router.get('/:studyName', async (req, res, next) => {
     }
 })
 
-router.post('/', pdfUpload.single('pdf'), async (req, res, next) => {
+router.post('/', verifyUser, pdfUpload.single('pdf'), async (req, res, next) => {
     if (!req.file) {
         res.status(400).json({ message: 'File not uploaded, please attach a PDF to upload' })
         return
@@ -72,7 +73,7 @@ router.post('/', pdfUpload.single('pdf'), async (req, res, next) => {
     }
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', verifyUser, async (req, res, next) => {
     const pdfId = req.params.id
     const { title, date, studyName } = req.body
     try {
@@ -97,7 +98,7 @@ router.put('/:id', async (req, res, next) => {
 
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', verifyUser, async (req, res, next) => {
     const pdfId = req.params.id
     try {
         const pdf = await PDF.findOne({ where: { id: pdfId } })

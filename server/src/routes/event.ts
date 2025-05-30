@@ -1,6 +1,7 @@
 import express from "express"
 const router = express.Router()
 import db from "../models/index"
+import { verifyUser } from "../middleware/auth"
 const { MonthEvent } = db
 
 router.get('/', async (req, res, next) => {
@@ -13,7 +14,7 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', verifyUser, async (req, res, next) => {
     const { title, description, date } = req.body
     try {
         const event = await MonthEvent.create({
@@ -27,7 +28,7 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', verifyUser, async (req, res, next) => {
     const id = req.params.id
     const { title, description, date } = req.body
     try {
@@ -47,7 +48,7 @@ router.put('/:id', async (req, res, next) => {
     }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', verifyUser, async (req, res, next) => {
     const id = req.params.id
     try {
         const event = await MonthEvent.findByPk(id)
