@@ -2,6 +2,7 @@ import { useState } from "react";
 import EventTypes from "../../types/EventTypes";
 import customFetch from "../../utils/customFetch";
 import sortEvents from "../../utils/sortEvents";
+import { logError } from "../../utils/axiom";
 interface AddEventFormTypes {
   events?: EventTypes[];
   setEvents?: React.Dispatch<React.SetStateAction<EventTypes[]>>;
@@ -30,7 +31,7 @@ function AddEventForm({ events, setEvents }: AddEventFormTypes) {
         setEvents(sortedEvents);
       }
     } catch (e) {
-      console.error(e);
+      logError(e as Error, "/api/event");
     } finally {
       setFormData({ title: "", date: "", description: "" });
     }

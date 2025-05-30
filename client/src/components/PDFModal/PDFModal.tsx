@@ -5,6 +5,7 @@ import StudyTypes from "../../types/StudyTypes.d";
 import dateFormat from "../../utils/dateFormat";
 import styles from "./PDFModal.module.css";
 import customFetch from "../../utils/customFetch";
+import { logError } from "../../utils/axiom";
 
 interface PDFModalTypes {
   pdfs: PDFTypes[];
@@ -28,7 +29,7 @@ function PDFModal({
       const data = await customFetch(`/api/pdf/${study}`);
       setPdfs(data);
     } catch (e) {
-      console.error(e);
+      logError(e as Error, `/api/pdf/${study}`);
     }
   };
   return (

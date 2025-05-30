@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import StudyTypes from "../../types/StudyTypes.d";
 import customFetch from "../../utils/customFetch";
-
+import { logError } from "../../utils/axiom";
 interface PDFUploadTypes {
   studies: StudyTypes[];
   setStudies: React.Dispatch<React.SetStateAction<StudyTypes[]>>;
@@ -52,7 +52,7 @@ function PDFUpload({ studies, setStudies }: PDFUploadTypes) {
         fileInputRef.current.value = ""; // <-- This clears the file input
       }
     } catch (e) {
-      console.error(e);
+      logError(e as Error, `/api/pdf`);
     }
   };
 

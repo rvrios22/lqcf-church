@@ -4,7 +4,8 @@ import styles from "./Event.module.css";
 import customFetch from "../../utils/customFetch";
 import sortEvents from "../../utils/sortEvents";
 import { useUser } from "../../hooks/useUser";
-
+import dateFormat from "../../utils/dateFormat";
+import { logError } from "../../utils/axiom";
 function Event({
   id,
   title,
@@ -36,7 +37,7 @@ function Event({
         setEvents(events.filter((e) => e.id !== id));
       }
     } catch (e) {
-      console.error(e);
+      logError(e as Error, `/api/event/${id}`);
     }
   };
 
@@ -64,7 +65,7 @@ function Event({
       }
       setIsEventEditable(false);
     } catch (e) {
-      console.error(e);
+      logError(e as Error, `/api/event/${id}`);
     }
   };
 
@@ -72,7 +73,7 @@ function Event({
     <>
       <h2 className="sub-header">{title}</h2>
       <p className="general-text">{description}</p>
-      <p className="general-text">{date}</p>
+      <p className="general-text">{dateFormat(date)}</p>
       {user && <button onClick={() => handleDelete(id)}>Delete</button>}
       {user && (
         <button onClick={() => setIsEventEditable(!isEventEditable)}>
