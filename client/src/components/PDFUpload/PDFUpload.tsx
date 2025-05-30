@@ -31,13 +31,13 @@ function PDFUpload({ studies, setStudies }: PDFUploadTypes) {
     const options: RequestInit = {
       method: "POST",
       body: formData,
-      // headers: {
-      //   Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-      // },
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
     };
 
     try {
-      const data = await customFetch("/api/pdf", options);
+      await customFetch("/api/pdf", options);
       if (!studies.some((study) => study.name === form.studyName)) {
         setStudies([
           ...studies,
@@ -103,7 +103,7 @@ function PDFUpload({ studies, setStudies }: PDFUploadTypes) {
         id="pdf"
         required
         accept=".pdf"
-        ref={fileInputRef} // <-- Add the ref here
+        ref={fileInputRef}
       />
       <input type="submit" value="Upload" className="button" />
     </form>

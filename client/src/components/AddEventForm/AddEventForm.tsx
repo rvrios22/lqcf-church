@@ -19,7 +19,7 @@ function AddEventForm({ events, setEvents }: AddEventFormTypes) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
       },
       body: JSON.stringify(formData),
     };

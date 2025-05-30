@@ -25,7 +25,7 @@ function Event({
     const options = {
       method: "DELETE",
       headers: {
-        // Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
       },
     };
     try {
@@ -49,7 +49,7 @@ function Event({
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        // Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
       },
       body: JSON.stringify(updatedEventData),
     };
