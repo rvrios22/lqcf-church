@@ -25,7 +25,7 @@ app.use('/api/event', event)
 app.use('/api/user', user)
 
 db.sequelize.sync({
-    // alert: true,
+    alert: true,
     // force: true
 }).then(() => {
     console.log('db synced')
