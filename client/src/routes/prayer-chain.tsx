@@ -1,18 +1,18 @@
-import { createFileRoute } from '@tanstack/react-router'
-import HeroImg from '../components/HeroImg/HeroImg'
-import { useWindowDimensions } from '../hooks/useWindowDimensions'
+import { createFileRoute } from "@tanstack/react-router";
+import HeroImg from "../components/HeroImg/HeroImg";
+import { useWindowDimensions } from "../hooks/useWindowDimensions";
 
-export const Route = createFileRoute('/prayer-chain')({
+export const Route = createFileRoute("/prayer-chain")({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
-  const { width, height } = useWindowDimensions();
+  const { width, initialHeightRef } = useWindowDimensions();
   return (
     <>
       <HeroImg
         width={width}
-        height={height}
+        height={initialHeightRef.current ?? 0}
         img="prayerChainHeader.avif"
         text="Prayer Chain"
       />

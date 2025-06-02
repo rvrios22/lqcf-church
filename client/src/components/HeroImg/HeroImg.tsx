@@ -20,7 +20,9 @@ function HeroImg({ width, height, img, text }: HeroImgTypes) {
         width={width}
         height={height}
       />
-      <h1 className={`${styles.text} ${!loaded ? '' : styles.slide}`}>{text}</h1>
+      <h1 className={`${styles.text} ${!loaded ? "" : styles.slide}`}>
+        {text}
+      </h1>
     </div>
   );
 }

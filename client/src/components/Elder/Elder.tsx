@@ -7,7 +7,7 @@ interface ElderTypes {
   img: string;
 }
 function Elder({ name, bio, img }: ElderTypes) {
-  const { width, height } = useWindowDimensions();
+  const { width, initialHeightRef } = useWindowDimensions();
   return (
     <figure className={styles.figure}>
       <div>
@@ -16,14 +16,17 @@ function Elder({ name, bio, img }: ElderTypes) {
           alt={name}
           className={`img-cover ${styles.img}`}
           width={width * 0.9}
-          height={height * 0.75}
+          height={initialHeightRef.current * 0.75}
           loading="lazy"
         />
         <h2 className="sub-header">{name}</h2>
       </div>
       <div>
         <p
-          style={{ maxHeight: width > 699 ? height * 0.75 : "auto", overflow: 'scroll' }}
+          style={{
+            maxHeight: width > 699 ? initialHeightRef.current * 0.75 : "auto",
+            overflow: "scroll",
+          }}
           className="general-text"
         >
           {bio}

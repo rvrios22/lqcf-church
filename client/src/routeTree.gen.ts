@@ -20,7 +20,6 @@ import { Route as LoginImport } from './routes/login'
 import { Route as IdentityYouthImport } from './routes/identity-youth'
 import { Route as GivingImport } from './routes/giving'
 import { Route as EventsImport } from './routes/events'
-import { Route as ErrorPageImport } from './routes/error-page'
 import { Route as EldersImport } from './routes/elders'
 import { Route as CurrentStudiesImport } from './routes/current-studies'
 import { Route as BeliefsImport } from './routes/beliefs'
@@ -82,12 +81,6 @@ const EventsRoute = EventsImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ErrorPageRoute = ErrorPageImport.update({
-  id: '/error-page',
-  path: '/error-page',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const EldersRoute = EldersImport.update({
   id: '/elders',
   path: '/elders',
@@ -142,13 +135,6 @@ declare module '@tanstack/react-router' {
       path: '/elders'
       fullPath: '/elders'
       preLoaderRoute: typeof EldersImport
-      parentRoute: typeof rootRoute
-    }
-    '/error-page': {
-      id: '/error-page'
-      path: '/error-page'
-      fullPath: '/error-page'
-      preLoaderRoute: typeof ErrorPageImport
       parentRoute: typeof rootRoute
     }
     '/events': {
@@ -224,7 +210,6 @@ export interface FileRoutesByFullPath {
   '/beliefs': typeof BeliefsRoute
   '/current-studies': typeof CurrentStudiesRoute
   '/elders': typeof EldersRoute
-  '/error-page': typeof ErrorPageRoute
   '/events': typeof EventsRoute
   '/giving': typeof GivingRoute
   '/identity-youth': typeof IdentityYouthRoute
@@ -241,7 +226,6 @@ export interface FileRoutesByTo {
   '/beliefs': typeof BeliefsRoute
   '/current-studies': typeof CurrentStudiesRoute
   '/elders': typeof EldersRoute
-  '/error-page': typeof ErrorPageRoute
   '/events': typeof EventsRoute
   '/giving': typeof GivingRoute
   '/identity-youth': typeof IdentityYouthRoute
@@ -259,7 +243,6 @@ export interface FileRoutesById {
   '/beliefs': typeof BeliefsRoute
   '/current-studies': typeof CurrentStudiesRoute
   '/elders': typeof EldersRoute
-  '/error-page': typeof ErrorPageRoute
   '/events': typeof EventsRoute
   '/giving': typeof GivingRoute
   '/identity-youth': typeof IdentityYouthRoute
@@ -278,7 +261,6 @@ export interface FileRouteTypes {
     | '/beliefs'
     | '/current-studies'
     | '/elders'
-    | '/error-page'
     | '/events'
     | '/giving'
     | '/identity-youth'
@@ -294,7 +276,6 @@ export interface FileRouteTypes {
     | '/beliefs'
     | '/current-studies'
     | '/elders'
-    | '/error-page'
     | '/events'
     | '/giving'
     | '/identity-youth'
@@ -310,7 +291,6 @@ export interface FileRouteTypes {
     | '/beliefs'
     | '/current-studies'
     | '/elders'
-    | '/error-page'
     | '/events'
     | '/giving'
     | '/identity-youth'
@@ -328,7 +308,6 @@ export interface RootRouteChildren {
   BeliefsRoute: typeof BeliefsRoute
   CurrentStudiesRoute: typeof CurrentStudiesRoute
   EldersRoute: typeof EldersRoute
-  ErrorPageRoute: typeof ErrorPageRoute
   EventsRoute: typeof EventsRoute
   GivingRoute: typeof GivingRoute
   IdentityYouthRoute: typeof IdentityYouthRoute
@@ -345,7 +324,6 @@ const rootRouteChildren: RootRouteChildren = {
   BeliefsRoute: BeliefsRoute,
   CurrentStudiesRoute: CurrentStudiesRoute,
   EldersRoute: EldersRoute,
-  ErrorPageRoute: ErrorPageRoute,
   EventsRoute: EventsRoute,
   GivingRoute: GivingRoute,
   IdentityYouthRoute: IdentityYouthRoute,
@@ -371,7 +349,6 @@ export const routeTree = rootRoute
         "/beliefs",
         "/current-studies",
         "/elders",
-        "/error-page",
         "/events",
         "/giving",
         "/identity-youth",
@@ -394,9 +371,6 @@ export const routeTree = rootRoute
     },
     "/elders": {
       "filePath": "elders.tsx"
-    },
-    "/error-page": {
-      "filePath": "error-page.tsx"
     },
     "/events": {
       "filePath": "events.tsx"

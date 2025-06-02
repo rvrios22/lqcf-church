@@ -29,13 +29,13 @@ function RouteComponent() {
   const [pdfs, setPdfs] = useState<PDFTypes[]>(
     Array.isArray(pdf) ? pdf : pdf ? [pdf] : []
   );
-  const { width, height } = useWindowDimensions();
+  const { width, initialHeightRef } = useWindowDimensions();
   const { user } = useUser();
   return (
     <>
       <HeroImg
         width={width}
-        height={height}
+        height={initialHeightRef.current ?? 0}
         img="mensStudyHeader.avif"
         text="Men's Study"
       />

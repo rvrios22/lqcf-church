@@ -7,12 +7,12 @@ export const Route = createFileRoute("/identity-youth")({
 });
 
 function RouteComponent() {
-  const { width, height } = useWindowDimensions();
+  const { width, initialHeightRef } = useWindowDimensions();
   return (
     <>
       <HeroImg
         width={width}
-        height={height}
+        height={initialHeightRef.current ?? 0}
         img="youthGroupHeader.avif"
         text="Identity Youth"
       />

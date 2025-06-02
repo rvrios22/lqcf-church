@@ -9,12 +9,12 @@ export const Route = createFileRoute("/")({
 });
 
 function RouteComponent() {
-  const { width, height } = useWindowDimensions();
+  const { width, initialHeightRef } = useWindowDimensions();
   return (
     <>
       <HeroImg
         width={width}
-        height={height}
+        height={initialHeightRef.current ?? 0}
         img="lqcfHome.avif"
         text="La Quinta Christian Fellowship Church"
       />
@@ -49,7 +49,7 @@ function RouteComponent() {
             desc={desc}
             src={src}
             link={link}
-            height={height}
+            height={initialHeightRef.current ?? 0}
             width={width}
           />
         ))}

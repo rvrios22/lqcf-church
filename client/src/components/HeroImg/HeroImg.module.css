@@ -6,6 +6,7 @@
 
 .img {
     object-fit: cover;
+    overflow: hidden;
 }
 
 .text {
@@ -19,7 +20,7 @@
     font-family: 'Inter', Tahoma, Verdana, sans-serif;
     -webkit-text-fill-color: white;
     text-shadow: 3px 2px 3px rgb(0, 0, 0);
-    transition: opacity 300ms ease; 
+    transition: opacity 300ms ease;
 }
 
 .slide {
