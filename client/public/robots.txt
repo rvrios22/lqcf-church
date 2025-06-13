@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Disallow the login page from being indexed
+Disallow: /login
