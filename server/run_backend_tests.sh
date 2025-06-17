@@ -100,16 +100,6 @@ test_db_query_performance() {
   local QUERY_URL="${BASE_URL}/test-db-query?model=${MODEL}&method=${METHOD}&limit=10"
   echo "Testing ${MODEL}.${METHOD}(limit=10)..."
   curl -s "$QUERY_URL" | jq '.queryTimeMs'
-  
-  # IMPORTANT: For real metrics, run this many times and average, or use 'wrk' against it.
-  # For example, to get average/percentiles for Product.findByPk(1) over 5 seconds:
-  echo "Running wrk on Product.findByPk(1) for average/percentiles..."
-  if ! command -v wrk &> /dev/null; then
-    echo "  (wrk not found, skipping detailed DB perf test)"
-  else
-    wrk -t1 -c5 -d5s "$BASE_URL/test-db-query?model=Product&method=findByPk&id=1"
-  fi
-  echo ""
 }
 
 # --- Main Script Logic ---
