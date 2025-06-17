@@ -74,7 +74,7 @@ test_error_rate() {
 test_db_query_performance() {
   echo "--- Testing Database Query Performance ---"
   echo "This test hits a special endpoint that executes a database query and returns its time."
-  echo "To customize, modify the '/api/test-db-query' call in this script."
+  echo "To customize, modify the '/api/test' call in this script."
 
   # Example queries you can run against your custom endpoint:
   # Replace 'User' with your actual model name, adjust method and parameters as needed.
@@ -82,7 +82,7 @@ test_db_query_performance() {
   # Test Event.findAll()
   local MODEL="Event"
   local METHOD="findAll"
-  local QUERY_URL="${BASE_URL}/test-db-query?model=${MODEL}&method=${METHOD}&limit=10"
+  local QUERY_URL="${BASE_URL}/test?model=${MODEL}&method=${METHOD}&limit=10"
   echo "Testing ${MODEL}.${METHOD}(limit=10)..."
   curl -s "$QUERY_URL" | jq '.queryTimeMs' # Uses jq to parse JSON and get the time
 
@@ -90,14 +90,14 @@ test_db_query_performance() {
   MODEL="PDF"
   METHOD="findByPk"
   local ID=1
-  QUERY_URL="${BASE_URL}/test-db-query?model=${MODEL}&method=${METHOD}&id=${ID}"
+  QUERY_URL="${BASE_URL}/test?model=${MODEL}&method=${METHOD}&id=${ID}"
   echo "Testing ${MODEL}.${METHOD}(${ID})..."
   curl -s "$QUERY_URL" | jq '.queryTimeMs'
 
   # Test Study.findAll()
   local MODEL="Study"
   local METHOD="findAll"
-  local QUERY_URL="${BASE_URL}/test-db-query?model=${MODEL}&method=${METHOD}&limit=10"
+  local QUERY_URL="${BASE_URL}/test?model=${MODEL}&method=${METHOD}&limit=10"
   echo "Testing ${MODEL}.${METHOD}(limit=10)..."
   curl -s "$QUERY_URL" | jq '.queryTimeMs'
 }
