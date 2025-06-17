@@ -14,7 +14,7 @@ const models = {
   Study: Study
 };
 
-router.get('/test-db-query', verifyUser, async (req, res) => {
+router.get('/', verifyUser, async (req, res) => {
   const { model: modelName, method, id, limit, whereField, whereValue } = req.query;
 
   if (!modelName || !models[modelName]) {
