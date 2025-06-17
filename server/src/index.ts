@@ -9,6 +9,7 @@ import pdf from './routes/pdf'
 import study from './routes/study'
 import event from './routes/event'
 import user from './routes/user'
+import test from './routes/test'
 import HttpError from './types/HttpError';
 dotenv.config();
 const app = express();
@@ -23,6 +24,7 @@ app.use('/api/pdf', pdf)
 app.use('/api/study', study)
 app.use('/api/event', event)
 app.use('/api/user', user)
+app.use('/api/test', test)
 
 db.sequelize.sync({
     alert: true,

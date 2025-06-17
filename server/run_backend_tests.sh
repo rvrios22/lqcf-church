@@ -71,17 +71,44 @@ test_error_rate() {
   echo "" # Newline
 }
 
-# Function to provide guidance on database query performance
-guidance_db_query_performance() {
-  echo "--- Database Query Performance (Guidance) ---"
-  echo "Database query performance needs to be measured *within your application*."
-  echo "1. Implement timing around critical database calls in your backend code."
-  echo "   (e.g., using 'process.hrtime.bigint()' in Node.js)."
-  echo "2. You can expose a dedicated API endpoint (e.g., /test-db-query) that triggers a common query"
-  echo "   and returns its execution time. Then you can hit this endpoint with 'wrk' or 'curl'."
-  echo "3. Collect multiple timings and calculate average/percentiles."
-  echo "   Example: If you have a /test-db-query endpoint that returns JSON: {\"queryTimeMs\": 12.34}"
-  echo "   You can use 'curl' in a loop or 'wrk' and parse the JSON response for the 'queryTimeMs' value."
+test_db_query_performance() {
+  echo "--- Testing Database Query Performance ---"
+  echo "This test hits a special endpoint that executes a database query and returns its time."
+  echo "To customize, modify the '/api/test-db-query' call in this script."
+
+  # Example queries you can run against your custom endpoint:
+  # Replace 'User' with your actual model name, adjust method and parameters as needed.
+
+  # Test Event.findAll()
+  local MODEL="Event"
+  local METHOD="findAll"
+  local QUERY_URL="${BASE_URL}/test-db-query?model=${MODEL}&method=${METHOD}&limit=10"
+  echo "Testing ${MODEL}.${METHOD}(limit=10)..."
+  curl -s "$QUERY_URL" | jq '.queryTimeMs' # Uses jq to parse JSON and get the time
+
+  # Test PDF.findByPk(1)
+  MODEL="PDF"
+  METHOD="findByPk"
+  local ID=1
+  QUERY_URL="${BASE_URL}/test-db-query?model=${MODEL}&method=${METHOD}&id=${ID}"
+  echo "Testing ${MODEL}.${METHOD}(${ID})..."
+  curl -s "$QUERY_URL" | jq '.queryTimeMs'
+
+  # Test Study.findAll()
+  local MODEL="Study"
+  local METHOD="findAll"
+  local QUERY_URL="${BASE_URL}/test-db-query?model=${MODEL}&method=${METHOD}&limit=10"
+  echo "Testing ${MODEL}.${METHOD}(limit=10)..."
+  curl -s "$QUERY_URL" | jq '.queryTimeMs'
+  
+  # IMPORTANT: For real metrics, run this many times and average, or use 'wrk' against it.
+  # For example, to get average/percentiles for Product.findByPk(1) over 5 seconds:
+  echo "Running wrk on Product.findByPk(1) for average/percentiles..."
+  if ! command -v wrk &> /dev/null; then
+    echo "  (wrk not found, skipping detailed DB perf test)"
+  else
+    wrk -t1 -c5 -d5s "$BASE_URL/test-db-query?model=Product&method=findByPk&id=1"
+  fi
   echo ""
 }
 
@@ -112,4 +139,4 @@ echo "" # Newline
 test_single_response_time "$FULL_TARGET_URL"
 test_throughput_and_latency "$FULL_TARGET_URL"
 test_error_rate "$FULL_TARGET_URL"
-guidance_db_query_performance # This function doesn't take an argument as it's explanatory
+test_db_query_performance
