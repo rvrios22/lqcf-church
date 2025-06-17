@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # --- Configuration ---
-# Default URL if not provided
-DEFAULT_URL="http://localhost:3001"
+# Base URL for your API - MODIFY THIS TO YOUR SERVER'S BASE URL
+BASE_URL="https://lqcfchurch.org/api"
+
 
 # wrk test parameters
 WRK_THREADS=2
@@ -16,17 +17,19 @@ ERROR_RATE_NUM_REQUESTS=100
 
 # Function to test single request response time
 test_single_response_time() {
+  local FULL_URL="$1" # Capture the full URL passed to the function
   echo "--- Testing Single Request Response Time ---"
-  echo "URL: $1"
-  time curl -s -o /dev/null -w "Total Time: %{time_total}s\nHTTP Code: %{http_code}\n\n" "$1"
+  echo "URL: $FULL_URL"
+  time curl -s -o /dev/null -w "Total Time: %{time_total}s\nHTTP Code: %{http_code}\n\n" "$FULL_URL"
 }
 
 # Function to test throughput and concurrent response time using wrk
 test_throughput_and_latency() {
+  local FULL_URL="$1" # Capture the full URL passed to the function
   echo "--- Testing Throughput and Concurrent Latency (with wrk) ---"
-  echo "URL: $1"
+  echo "URL: $FULL_URL"
   echo "Running for $WRK_DURATION with $WRK_THREADS threads and $WRK_CONNECTIONS connections..."
-  # Check if wrk is installed
+  
   if ! command -v wrk &> /dev/null
   then
       echo "Error: 'wrk' command not found. Please install wrk to run this test."
@@ -34,19 +37,20 @@ test_throughput_and_latency() {
       echo "Skipping throughput test."
       return 1 # Indicate failure
   fi
-  wrk -t"$WRK_THREADS" -c"$WRK_CONNECTIONS" -d"$WRK_DURATION" "$1"
+  wrk -t"$WRK_THREADS" -c"$WRK_CONNECTIONS" -d"$WRK_DURATION" "$FULL_URL"
   echo "" # Newline for readability
 }
 
 # Function to test error rate by looping curl requests
 test_error_rate() {
+  local FULL_URL="$1" # Capture the full URL passed to the function
   echo "--- Testing Error Rate ---"
-  echo "URL: $1"
+  echo "URL: $FULL_URL"
   echo "Sending $ERROR_RATE_NUM_REQUESTS requests..."
   
   ERROR_COUNT=0
   for i in $(seq 1 $ERROR_RATE_NUM_REQUESTS); do
-    HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$1")
+    HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$FULL_URL")
     if [[ "$HTTP_CODE" -ge 400 ]]; then
       # Uncomment the next line to see individual errors:
       # echo "  Request $i: ERROR! HTTP Code: $HTTP_CODE"
@@ -55,7 +59,7 @@ test_error_rate() {
   done
 
   # Using 'bc' for floating-point arithmetic
-  if (( $NUM_REQUESTS == 0 )); then
+  if (( ERROR_RATE_NUM_REQUESTS == 0 )); then # Handle division by zero
     ERROR_PERCENT="0.00"
   else
     ERROR_PERCENT=$(echo "scale=2; ($ERROR_COUNT / $ERROR_RATE_NUM_REQUESTS) * 100" | bc)
@@ -68,7 +72,6 @@ test_error_rate() {
 }
 
 # Function to provide guidance on database query performance
-# Note: This cannot be run directly from bash as it requires app internal metrics
 guidance_db_query_performance() {
   echo "--- Database Query Performance (Guidance) ---"
   echo "Database query performance needs to be measured *within your application*."
@@ -84,17 +87,29 @@ guidance_db_query_performance() {
 
 # --- Main Script Logic ---
 
-# Check if a URL argument was provided
+TARGET_ROUTE=""
+
+# Check if a route argument was provided
 if [ -z "$1" ]; then
-  URL=$DEFAULT_URL
-  echo "No URL provided. Using default: $URL"
+  TARGET_ROUTE=$DEFAULT_ROUTE
+  echo "No route provided. Using default route: $TARGET_ROUTE"
 else
-  URL="$1"
-  echo "Using URL from argument: $URL"
+  # Ensure the route starts with a '/' if it doesn't already, for proper URL construction
+  if [[ "$1" == /* ]]; then
+    TARGET_ROUTE="$1"
+  else
+    TARGET_ROUTE="/$1"
+  fi
+  echo "Using route from argument: $TARGET_ROUTE"
 fi
 
+# Construct the full URL
+FULL_TARGET_URL="${BASE_URL}${TARGET_ROUTE}"
+echo "Full URL to be tested: $FULL_TARGET_URL"
+echo "" # Newline
+
 # Run all tests
-test_single_response_time "$URL"
-test_throughput_and_latency "$URL"
-test_error_rate "$URL"
+test_single_response_time "$FULL_TARGET_URL"
+test_throughput_and_latency "$FULL_TARGET_URL"
+test_error_rate "$FULL_TARGET_URL"
 guidance_db_query_performance # This function doesn't take an argument as it's explanatory
