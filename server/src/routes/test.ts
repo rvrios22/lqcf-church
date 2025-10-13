@@ -1,27 +1,35 @@
 //@ts-nocheck
-import express from "express"
-const router = express.Router()
-import db from "../models/index"
-import { verifyUser } from "../middleware/auth"
-const { MonthEvent, User, PDF, Study } = db
-
+import express from "express";
+const router = express.Router();
+import db from "../models/index";
+import { verifyUser } from "../middleware/auth";
+const { MonthEvent, User, PDF, Study } = db;
 
 // Map string names to actual Sequelize models
 const models = {
   User: User,
   MonthEvent: MonthEvent,
   PDF: PDF,
-  Study: Study
+  Study: Study,
 };
 
-router.get('/', verifyUser, async (req, res) => {
-  const { model: modelName, method, id, limit, whereField, whereValue } = req.query;
+router.get("/", verifyUser, async (req, res) => {
+  const {
+    model: modelName,
+    method,
+    id,
+    limit,
+    whereField,
+    whereValue,
+  } = req.query;
 
   if (!modelName || !models[modelName]) {
-    return res.status(400).json({ error: 'Invalid or missing model name.' });
+    return res.status(400).json({ error: "Invalid or missing model name." });
   }
   if (!method) {
-    return res.status(400).json({ error: 'Missing query method (e.g., findAll, findOne).' });
+    return res
+      .status(400)
+      .json({ error: "Missing query method (e.g., findAll, findOne)." });
   }
 
   const Model = models[modelName];
@@ -31,10 +39,21 @@ router.get('/', verifyUser, async (req, res) => {
     queryOptions.limit = parseInt(limit, 10);
   }
   if (whereField && whereValue) {
-    // Basic where clause for demonstration. Be careful with user input here.
-    queryOptions.where = {
-      [whereField]: whereValue
-    };
+    // If requesting PDFs by study name, resolve the study first and query by studyId
+    if (modelName === "PDF" && String(whereField) === "studyName") {
+      const study = await Study.findOne({
+        where: { name: String(whereValue) },
+      });
+      if (!study) {
+        return res.status(404).json({ error: "Study not found." });
+      }
+      queryOptions.where = { studyId: study.id };
+    } else {
+      // Basic where clause for demonstration. Be careful with user input here.
+      queryOptions.where = {
+        [whereField]: whereValue,
+      };
+    }
   }
   if (id) {
     // For findByPk, you usually pass the ID directly, not as part of options
@@ -49,13 +68,13 @@ router.get('/', verifyUser, async (req, res) => {
 
   try {
     switch (method) {
-      case 'findAll':
+      case "findAll":
         result = await Model.findAll(queryOptions);
         break;
-      case 'findOne':
+      case "findOne":
         result = await Model.findOne(queryOptions);
         break;
-      case 'findByPk': // Find by Primary Key
+      case "findByPk": // Find by Primary Key
         if (!id) {
           throw new Error("Missing 'id' for findByPk method.");
         }
@@ -80,9 +99,11 @@ router.get('/', verifyUser, async (req, res) => {
       model: modelName,
       method: method,
       queryTimeMs: durationMs.toFixed(2),
-      recordCount: Array.isArray(result) ? result.length : (result ? 1 : 0),
+      recordCount: Array.isArray(result) ? result.length : result ? 1 : 0,
       // Optionally return a subset of data or just confirmation
-      message: `Query for ${modelName}.${method} completed in ${durationMs.toFixed(2)} ms.`
+      message: `Query for ${modelName}.${method} completed in ${durationMs.toFixed(
+        2
+      )} ms.`,
     });
   } else {
     res.status(500).json({
@@ -91,9 +112,9 @@ router.get('/', verifyUser, async (req, res) => {
       method: method,
       queryTimeMs: durationMs.toFixed(2), // Still include time for failed queries
       error: errorMessage,
-      message: `Query for ${modelName}.${method} failed.`
+      message: `Query for ${modelName}.${method} failed.`,
     });
   }
 });
 
-export default router
+export default router;

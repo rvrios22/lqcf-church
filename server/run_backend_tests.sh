@@ -94,11 +94,14 @@ test_db_query_performance() {
   echo "Testing ${MODEL}.${METHOD}(${ID})..."
   curl -s "$QUERY_URL" | jq '.queryTimeMs'
 
-  # Test Study.findAll()
-  local MODEL="Study"
-  local METHOD="findAll"
-  local QUERY_URL="${BASE_URL}/test?model=${MODEL}&method=${METHOD}&limit=10"
-  echo "Testing ${MODEL}.${METHOD}(limit=10)..."
+  # Test PDF.findAll() by study name (uses STUDY_NAME_PARAM env var or defaults to "ExampleStudy")
+  MODEL="PDF"
+  METHOD="findAll"
+  local STUDY_NAME_PARAM="${STUDY_NAME_PARAM:-ExampleStudy}"
+  # URL-encode spaces (simple replacement) to avoid issues in query string
+  local ENCODED_STUDY_NAME=$(printf "%s" "${STUDY_NAME_PARAM}" | sed 's/ /%20/g')
+  QUERY_URL="${BASE_URL}/test?model=${MODEL}&method=${METHOD}&whereField=studyName&whereValue=${ENCODED_STUDY_NAME}"
+  echo "Testing ${MODEL}.${METHOD} where studyName='${STUDY_NAME_PARAM}'..."
   curl -s "$QUERY_URL" | jq '.queryTimeMs'
 }
 
