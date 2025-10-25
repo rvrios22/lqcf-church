@@ -3,6 +3,7 @@ import { useWindowDimensions } from "../hooks/useWindowDimensions";
 import HeroImg from "../components/HeroImg/HeroImg";
 import whatsGoingOnData from "../../public/whatsGoingOnData";
 import WhatsGoingOnSquare from "../components/WhatsGoingOnSquare/WhatsGoingOnSquare";
+import { Button } from "@heroui/react";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,

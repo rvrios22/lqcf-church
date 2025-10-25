@@ -6,6 +6,7 @@ import { WindowDimensionsProvider } from "./context/WindowDimensionsContext";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 import NotFound from "./components/NotFound/NotFound";
+import Providers from "./components/Providers";
 
 // Create a new router instance
 const router = createRouter({ routeTree, defaultNotFoundComponent: NotFound });
@@ -32,11 +33,13 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <WindowDimensionsProvider>
-        <RouterProvider router={router} />
-      </WindowDimensionsProvider>
+      <Providers>
+        <WindowDimensionsProvider>
+          <RouterProvider router={router} />
+        </WindowDimensionsProvider>
+      </Providers>
     </StrictMode>
   );
 }
 
-removeLoader()
+removeLoader();
