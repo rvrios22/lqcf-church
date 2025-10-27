@@ -12,13 +12,8 @@ function RouteComponent() {
   const { width, initialHeightRef } = useWindowDimensions();
   return (
     <>
-      <HeroImg
-        width={width}
-        height={initialHeightRef.current ?? 0}
-        name="lqcfHome"
-        text="La Quinta Christian Fellowship Church"
-      />
-      <p className="">
+      <HeroImg name="lqcfHome" text="La Quinta Christian Fellowship Church" />
+      <p className="general-text">
         La Quinta Christian Fellowship Church is a non-denominational
         evangelical church committed to seeing redeemed, transformed individuals
         and community through the story of God's salvation. We gladly invite you
@@ -31,8 +26,7 @@ function RouteComponent() {
         be holy and blameless before Him. In love He predestined us to adoption
         as sons through Jesus Christ to Himself, according to the kind intention
         of His will, to the praise of the glory of His grace, which He freely
-        bestowed on us in the Beloved.
-        <span className="citation">Ephesians 1:3-6</span>
+        bestowed on us in the Beloved. Ephesians 1:3-6
       </p>
       <section
         style={{

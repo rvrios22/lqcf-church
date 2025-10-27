@@ -5,31 +5,14 @@
     margin: .5em auto;
 }
 
-.general-text {
-    font-family: "Fira Sans", sans-serif;
-    width: 90%;
-    margin: .5em auto .5em;
-    font-size: clamp(18px, 2.5vw, 20px);
-    text-align: center;
-}
+
 
 .bold {
     font-weight: 900;
 }
 
-.bible-text {
-    font-family: "Great Vibes", cursive;
-    font-size: clamp(20px, 2.8vw, 22px);
-    text-align: center;
-    margin: .5em auto .5em;
-    width: 90%;
-}
-
 .citation {
-    font-family: "Fira Sans", sans-serif;
-    font-size: clamp(8px, 1.5vw, 12px);
-    color: rgb(146, 146, 146);
-    white-space: nowrap;
+
 }
 
 .img-cover {

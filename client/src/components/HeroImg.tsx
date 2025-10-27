@@ -2,8 +2,6 @@ import { useState } from "react";
 import { Image } from "@heroui/react";
 
 interface HeroImgTypes {
-  width: number;
-  height: number;
   name: string;
   text: string;
 }

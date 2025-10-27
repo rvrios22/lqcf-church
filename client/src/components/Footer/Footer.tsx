@@ -30,7 +30,7 @@ function Footer() {
         <img
           className="img-cover"
           loading="lazy"
-          src="/api/static/imgs/churchMap.avif"
+          src="/api/static/imgs/churchMap.webp"
           alt="A location of the church"
           height={height * 0.33}
         />
