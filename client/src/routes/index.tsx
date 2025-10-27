@@ -1,9 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useWindowDimensions } from "../hooks/useWindowDimensions";
-import HeroImg from "../components/HeroImg/HeroImg";
+import HeroImg from "../components/HeroImg";
 import whatsGoingOnData from "../../public/whatsGoingOnData";
 import WhatsGoingOnSquare from "../components/WhatsGoingOnSquare/WhatsGoingOnSquare";
-import { Button } from "@heroui/react";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -16,10 +15,10 @@ function RouteComponent() {
       <HeroImg
         width={width}
         height={initialHeightRef.current ?? 0}
-        img="lqcfHome.avif"
+        name="lqcfHome"
         text="La Quinta Christian Fellowship Church"
       />
-      <p className="general-text">
+      <p className="">
         La Quinta Christian Fellowship Church is a non-denominational
         evangelical church committed to seeing redeemed, transformed individuals
         and community through the story of God's salvation. We gladly invite you

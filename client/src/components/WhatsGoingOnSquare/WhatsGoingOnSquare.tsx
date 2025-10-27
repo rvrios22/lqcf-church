@@ -27,7 +27,7 @@ function WhatsGoingOnSquare({
         loading="lazy"
         src={src}
         alt={title}
-        height={width > 699 ? height * 0.33 : height * 0.25}
+        // height={width > 699 ? height * 0.33 : height * 0.25}
         className={`img-cover ${styles.img}`}
       />
       <div style={textContainerStyle} className={styles.textContainer}>

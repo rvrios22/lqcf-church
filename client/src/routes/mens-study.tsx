@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import HeroImg from "../components/HeroImg/HeroImg";
+import HeroImg from "../components/HeroImg";
 import { useWindowDimensions } from "../hooks/useWindowDimensions";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
