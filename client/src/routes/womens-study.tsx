@@ -36,7 +36,7 @@ function RouteComponent() {
       <HeroImg
         width={width}
         height={initialHeightRef.current ?? 0}
-        img="womensStudyHeader.avif"
+        name="womensStudy"
         text="Women's Study"
       />
       <h1 className="sub-header">Women's Study</h1>

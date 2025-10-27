@@ -14,7 +14,7 @@ export const Route = createFileRoute("/mens-study")({
   loader: () =>
     fetchStudiesAndPDFs<StudyTypes, PDFTypes>(
       "/api/study",
-      `/api/pdf/${import.meta.env.VITE_MEN_STUDY_NAME}`
+      `/api/pdf/${import.meta.env.VITE_MEN_STUDY_NAME}`,
     ),
 });
 
@@ -24,10 +24,10 @@ function RouteComponent() {
   const pdf = loaderData?.[1];
   const [isModalShowing, setIsModalShowing] = useState<boolean>(false);
   const [studies, setStudies] = useState<StudyTypes[]>(
-    Array.isArray(study) ? study : study ? [study] : []
+    Array.isArray(study) ? study : study ? [study] : [],
   );
   const [pdfs, setPdfs] = useState<PDFTypes[]>(
-    Array.isArray(pdf) ? pdf : pdf ? [pdf] : []
+    Array.isArray(pdf) ? pdf : pdf ? [pdf] : [],
   );
   const { width, initialHeightRef } = useWindowDimensions();
   const { user } = useUser();
@@ -36,7 +36,7 @@ function RouteComponent() {
       <HeroImg
         width={width}
         height={initialHeightRef.current ?? 0}
-        img="mensStudyHeader.avif"
+        name="mensStudy"
         text="Men's Study"
       />
       <h1 className="sub-header">Men's Study</h1>

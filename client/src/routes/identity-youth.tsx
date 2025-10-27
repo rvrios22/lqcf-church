@@ -13,7 +13,7 @@ function RouteComponent() {
       <HeroImg
         width={width}
         height={initialHeightRef.current ?? 0}
-        img="youthGroupHeader.avif"
+        name="youthGroup"
         text="Identity Youth"
       />
       <p className="general-text">

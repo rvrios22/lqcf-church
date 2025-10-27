@@ -13,7 +13,7 @@ function RouteComponent() {
       <HeroImg
         width={width}
         height={initialHeightRef.current ?? 0}
-        img="prayerChainHeader.avif"
+        name="prayerChain"
         text="Prayer Chain"
       />
       <h1 className="sub-header">Prayer Chain</h1>
