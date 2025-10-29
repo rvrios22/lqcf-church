@@ -21,18 +21,20 @@ function WhatsGoingOnSquare({
   const [textHeight, setTextHeight] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
+  const textHeightDifference = 18;
+
   const handleMouseEnter = () => {
     setTextHeight(0);
   };
 
   const handleMouseLeave = () => {
     if (!textRef.current) return;
-    setTextHeight(textRef.current.clientHeight + 9);
+    setTextHeight(textRef.current.clientHeight + textHeightDifference);
   };
 
   useEffect(() => {
     if (!textRef.current || !isLoaded) return;
-    setTextHeight(textRef.current.clientHeight + 9);
+    setTextHeight(textRef.current.clientHeight + textHeightDifference);
   }, [isLoaded]);
 
   return (
@@ -45,13 +47,14 @@ function WhatsGoingOnSquare({
         <Image
           src={`/api/static/imgs/${name}/${name}-696.webp`}
           alt={alt}
-          className="object-cover"
+          className="object-cover md:min-h-[200px]"
           onLoad={() => setIsLoaded(true)}
         />
         <div
-          className="text-shadow absolute left-1/2 z-15 w-full -translate-x-1/2 text-center text-white transition-all"
+          className="text-shadow absolute left-1/2 z-15 w-[90%] -translate-x-1/2 text-center text-white transition-all"
           // due to section element on index route having grid and figure not having defined height, the calcluated text height will be pushed down to bottom of screen. I let the browswer position based off normal positioning (e.g. 0) first and once image is loaded with height we can safely calculate text height
-          style={{ bottom: isLoaded ? `-${textHeight}px` : "0px" }}
+          // style={{ bottom: isLoaded ? `-${textHeight}px` : "0px" }}
+          style={{ bottom: `-${textHeight}px` }}
         >
           <h3 className="sub-header">{title}</h3>
           <p className="general-text block w-full text-center" ref={textRef}>
