@@ -1,18 +1,11 @@
 .sub-header {
-    font-size: clamp(20px, 2.5vw, 32px);
-    font-family: 'Inter', Tahoma, Verdana, sans-serif;
-    text-align: center;
-    margin: .5em auto;
+
 }
 
 
 
 .bold {
     font-weight: 900;
-}
-
-.citation {
-
 }
 
 .img-cover {

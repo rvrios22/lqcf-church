@@ -29,22 +29,22 @@ function RouteComponent() {
         bestowed on us in the Beloved. Ephesians 1:3-6
       </p>
       <section
-        style={{
-          display: width >= 700 ? "grid" : "block",
-          gridTemplateColumns: width >= 700 ? "1fr 1fr" : "none",
-          padding: width >= 700 ? "1em" : "0",
-          gap: "1em",
-        }}
+        className="px-4 md:grid md:grid-cols-2 md:gap-4"
+        // style={{
+        //   display: width >= 700 ? "grid" : "block",
+        //   gridTemplateColumns: width >= 700 ? "1fr 1fr" : "none",
+        //   padding: width >= 700 ? "1em" : "0",
+        //   gap: "1em",
+        // }}
       >
-        {whatsGoingOnData.map(({ title, desc, link, src }, idx) => (
+        {whatsGoingOnData.map(({ title, desc, link, name, alt }, idx) => (
           <WhatsGoingOnSquare
             key={idx}
             title={title}
             desc={desc}
-            src={src}
+            name={name}
             link={link}
-            height={initialHeightRef.current ?? 0}
-            width={width}
+            alt={alt}
           />
         ))}
       </section>

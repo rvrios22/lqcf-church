@@ -1,82 +1,57 @@
 import { Link } from "@tanstack/react-router";
-import styles from "./WhatsGoingOnSquare.module.css";
 import { useEffect, useRef, useState } from "react";
+import { Image } from "@heroui/react";
 
 interface WhatsGoingOnSquareTypes {
   title: string;
   desc: string;
   link: string;
-  src: string;
-  height: number;
-  width: number;
+  name: string;
+  alt: string;
 }
 
 function WhatsGoingOnSquare({
   title,
   desc,
   link,
-  src,
-  height,
-  width,
+  name,
+  alt,
 }: WhatsGoingOnSquareTypes) {
-  const text = useRef<HTMLHeadingElement>(null);
-  const [textContainerStyle, setTextContainerStyle] = useState({});
-  const content = (
-    <div className={styles.container}>
-      <img
-        loading="lazy"
-        src={src}
-        alt={title}
-        // height={width > 699 ? height * 0.33 : height * 0.25}
-        className={`img-cover ${styles.img}`}
+  const textRef = useRef<HTMLParagraphElement | null>(null);
+  const [textHeight, setTextHeight] = useState<number>(0);
+
+  const handleMouseEnter = () => {
+    setTextHeight(0);
+  };
+
+  const handleMouseLeave = () => {
+    if (!textRef.current) return;
+    setTextHeight(textRef.current.clientHeight + 9);
+  };
+
+  useEffect(() => {
+    if (!textRef.current) return;
+    setTextHeight(textRef.current.clientHeight + 9);
+  }, []);
+
+  return (
+    <figure className="relative mx-auto mb-4 ">
+      <Image
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        src={`/api/static/imgs/${name}/${name}-696.webp`}
+        alt={alt}
+        className="object-cover"
       />
-      <div style={textContainerStyle} className={styles.textContainer}>
-        <h2 className="sub-header">{title}</h2>
-        <p ref={text} className="general-text">
+      <div
+        className="text-shadow absolute left-0 z-15 mx-auto text-center text-white transition-all"
+        style={{ bottom: `-${textHeight}px` }}
+      >
+        <h3 className="sub-header">{title}</h3>
+        <p className="general-text border-1 border-red-500 w-full block text-center" ref={textRef}>
           {desc}
         </p>
       </div>
-    </div>
-  );
-
-  useEffect(() => {
-    if (!text) return;
-    const getHeightDifference = () => {
-      const textAndMarginHeight = text.current!.clientHeight + 9;
-      setTextContainerStyle({
-        transform: `translate(0, ${textAndMarginHeight}px)`,
-      });
-    };
-    getHeightDifference();
-    window.addEventListener("resize", getHeightDifference);
-    return () => window.removeEventListener("resize", getHeightDifference);
-  }, []);
-
-  const handleMouseEnter = () => {
-    setTextContainerStyle({
-      transform: `translate(0, 0)`,
-      transition: "transform 100ms",
-    });
-  };
-
-  const handleMouseExit = () => {
-    if (!text) return;
-    const textAndMarginHeight = text.current!.clientHeight + 9;
-    setTextContainerStyle({
-      transform: `translate(0, ${textAndMarginHeight}px)`,
-      transition: "transform 200ms",
-    });
-  };
-
-  return (
-    <figure className={styles.figure} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseExit}>
-      {link.startsWith("/") ? (
-        <Link to={link}>{content}</Link>
-      ) : (
-        <a href={link} target="_blank" rel="noopener noreferrer">
-          {content}
-        </a>
-      )}
     </figure>
   );
 }

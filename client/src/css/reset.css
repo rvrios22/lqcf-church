@@ -5,7 +5,7 @@
 @utility general-text {
   font-family: "Fira Sans", sans-serif;
   width: 90%;
-  margin: 0.5em auto 0.5em;
+  margin: 0.5em auto;
   font-size: clamp(18px, 2.5vw, 20px);
   text-align: center;
 }
@@ -14,8 +14,16 @@
   font-family: "Great Vibes", cursive;
   font-size: clamp(20px, 2.8vw, 22px);
   text-align: center;
-  margin: 0.5em auto 0.5em;
+  margin: 0.5em auto;
   width: 90%;
+}
+
+@utility text-shadow {
+  text-shadow:
+    -1px -1px 0 black,
+    1px -1px 0 black,
+    -1px 1px 0 black,
+    1px 1px 0 black;
 }
 
 @utility citation {
@@ -23,6 +31,12 @@
   font-size: clamp(8px, 1.5vw, 12px);
   color: rgb(146, 146, 146);
   white-space: nowrap;
+}
+
+@utility sub-header {
+  font-size: clamp(20px, 2.5vw, 32px);
+  font-family: "Inter", Tahoma, Verdana, sans-serif;
+  text-align: center;
 }
 
 body {
