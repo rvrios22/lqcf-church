@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useWindowDimensions } from "../hooks/useWindowDimensions";
 import HeroImg from "../components/HeroImg";
 import whatsGoingOnData from "../../public/whatsGoingOnData";
 import WhatsGoingOnSquare from "../components/WhatsGoingOnSquare/WhatsGoingOnSquare";
@@ -9,7 +8,6 @@ export const Route = createFileRoute("/")({
 });
 
 function RouteComponent() {
-  const { width, initialHeightRef } = useWindowDimensions();
   return (
     <>
       <HeroImg name="lqcfHome" text="La Quinta Christian Fellowship Church" />
@@ -29,7 +27,7 @@ function RouteComponent() {
         bestowed on us in the Beloved. Ephesians 1:3-6
       </p>
       <section
-        className="px-4 md:grid md:grid-cols-2 md:gap-4"
+        className="px-4 md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-3 w-[90%] mx-auto"
         // style={{
         //   display: width >= 700 ? "grid" : "block",
         //   gridTemplateColumns: width >= 700 ? "1fr 1fr" : "none",
