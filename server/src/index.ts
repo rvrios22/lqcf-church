@@ -31,7 +31,7 @@ app.use("/api/test", test);
 db.sequelize
   .sync({
     alert: true,
-    force: true
+    // force: true
   })
   .then(() => {
     console.log("db synced");

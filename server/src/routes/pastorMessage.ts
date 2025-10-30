@@ -6,7 +6,7 @@ const { PastorMessage } = db;
 
 router.get("/", async (req, res, next) => {
   try {
-    const pastorMessage = await PastorMessage.findAll({ limit: 1 });
+    const pastorMessage = await PastorMessage.findByPk(1);
     res.status(200).json(pastorMessage);
   } catch (err) {
     next(err);
@@ -30,7 +30,7 @@ router.put("/:id", verifyUser, async (req, res, next) => {
   const id = req.params.id;
   const { author, message } = req.body;
   try {
-    const pastorMessage = await PastorMessage.findByPK(id);
+    const pastorMessage = await PastorMessage.findByPk(id);
     if (!pastorMessage) {
       res.status(404).json({ message: "Message does not exist" });
       return;
@@ -45,7 +45,7 @@ router.put("/:id", verifyUser, async (req, res, next) => {
 router.delete("/:id", verifyUser, async (req, res, next) => {
   const id = req.params.id;
   try {
-    const pastorMessage = await PastorMessage.findByPK(id);
+    const pastorMessage = await PastorMessage.findByPk(id);
     if (!pastorMessage) {
       res.status(404).json({ message: "Message does not exist" });
       return;
