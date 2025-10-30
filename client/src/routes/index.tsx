@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import HeroImg from "../components/HeroImg";
 import whatsGoingOnData from "../../public/whatsGoingOnData";
-import WhatsGoingOnSquare from "../components/WhatsGoingOnSquare/WhatsGoingOnSquare";
+import WhatsGoingOnSquare from "../components/WhatsGoingOnSquare";
 import customFetch from "../utils/customFetch";
 import { useEffect, useState } from "react";
 import type PastorMessage from "../types/PastorMessage";
