@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { Image } from "@heroui/react";
+import { useInView } from "react-intersection-observer";
 
 interface WhatsGoingOnSquareTypes {
   title: string;
@@ -20,6 +20,9 @@ function WhatsGoingOnSquare({
   const textRef = useRef<HTMLParagraphElement | null>(null);
   const [textHeight, setTextHeight] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+  });
 
   const textHeightDifference = 18;
 
@@ -39,15 +42,16 @@ function WhatsGoingOnSquare({
 
   return (
     <figure
-      className="relative mx-auto mb-4 max-w-[600px] overflow-clip"
+      ref={ref}
+      className={`relative mx-auto mb-4 max-w-[600px] overflow-clip transition-opacity duration-300 ${inView ? "opacity-100" : "opacity-0"}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <Link to={link}>
-        <Image
+        <img
           src={`/api/static/imgs/${name}/${name}-696.webp`}
           alt={alt}
-          className="object-cover md:min-h-[200px]"
+          className="rounded-2xl object-cover md:min-h-[250px]"
           onLoad={() => setIsLoaded(true)}
         />
         <div
@@ -56,10 +60,17 @@ function WhatsGoingOnSquare({
           // style={{ bottom: isLoaded ? `-${textHeight}px` : "0px" }}
           style={{ bottom: `-${textHeight}px` }}
         >
-          <h3 className="sub-header">{title}</h3>
-          <p className="general-text block w-full text-center" ref={textRef}>
-            {desc}
-          </p>
+          {isLoaded && (
+            <>
+              <h3 className="sub-header">{title}</h3>
+              <p
+                className="general-text block w-full text-center"
+                ref={textRef}
+              >
+                {desc}
+              </p>
+            </>
+          )}
         </div>
       </Link>
     </figure>
