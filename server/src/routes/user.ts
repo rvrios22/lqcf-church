@@ -22,20 +22,20 @@ router.get('/verify', verifyUser, (req: Request, res: Response, next: NextFuncti
 })
 
 //register user commented out for security
-// router.post('/sign-up', async (req, res, next) => {
-//     const { username, password } = req.body
-//     try {
-//         const user = await User.create({
-//             username: username,
-//             password: await hashPassword(password)
-//         })
-//         res.status(200).json(user)
-//     } catch (err) {
-//         console.error(err)
-//         next(err)
-//         return
-//     }
-// })
+router.post('/sign-up', async (req, res, next) => {
+    const { username, password } = req.body
+    try {
+        const user = await User.create({
+            username: username,
+            password: await hashPassword(password)
+        })
+        res.status(200).json(user)
+    } catch (err) {
+        console.error(err)
+        next(err)
+        return
+    }
+})
 
 //log user in and assign jwt
 router.post('/login', async (req, res, next) => {
