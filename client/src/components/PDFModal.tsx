@@ -1,15 +1,14 @@
 import { useState } from "react";
 
-import PDFTypes from "../../types/PDFTypes";
-import StudyTypes from "../../types/StudyTypes.d";
-import dateFormat from "../../utils/dateFormat";
-import customFetch from "../../utils/customFetch";
-import { logError } from "../../utils/axiom";
+import PDFTypes from "../types/PDFTypes";
+import StudyTypes from "../types/StudyTypes.d";
+import dateFormat from "../utils/dateFormat";
+import customFetch from "../utils/customFetch";
+import { logError } from "../utils/axiom";
 
 interface PDFModalTypes {
   pdfs: PDFTypes[];
   setPdfs: React.Dispatch<React.SetStateAction<PDFTypes[]>>;
-  setIsModalShowing: React.Dispatch<React.SetStateAction<boolean>>;
   studies: StudyTypes[];
   env: string;
 }

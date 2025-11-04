@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import HeroImg from "../components/HeroImg";
 import { useWindowDimensions } from "../hooks/useWindowDimensions";
 import { useState } from "react";
-import PDFModal from "../components/PDFModal/PDFModal";
+import PDFModal from "../components/PDFModal";
 import PDFUpload from "../components/PDFUpload/PDFUpload";
 import fetchStudiesAndPDFs from "../utils/fetchStudiesAndPDFs";
 import StudyTypes from "../types/StudyTypes.d";
@@ -14,7 +14,7 @@ export const Route = createFileRoute("/womens-study")({
   loader: () =>
     fetchStudiesAndPDFs<StudyTypes, PDFTypes>(
       "/api/study",
-      `/api/pdf/${import.meta.env.VITE_WOMEN_STUDY_NAME}`
+      `/api/pdf/${import.meta.env.VITE_WOMEN_STUDY_NAME}`,
     ),
 });
 
@@ -24,10 +24,10 @@ function RouteComponent() {
   const pdf = loaderData?.[1];
   const [isModalShowing, setIsModalShowing] = useState<boolean>(false);
   const [studies, setStudies] = useState<StudyTypes[]>(
-    Array.isArray(study) ? study : study ? [study] : []
+    Array.isArray(study) ? study : study ? [study] : [],
   );
   const [pdfs, setPdfs] = useState<PDFTypes[]>(
-    Array.isArray(pdf) ? pdf : pdf ? [pdf] : []
+    Array.isArray(pdf) ? pdf : pdf ? [pdf] : [],
   );
   const { width, initialHeightRef } = useWindowDimensions();
   const { user } = useUser();

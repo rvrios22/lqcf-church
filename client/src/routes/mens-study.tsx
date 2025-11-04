@@ -1,27 +1,53 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
+import { queryClient } from "../components/Providers";
 import HeroImg from "../components/HeroImg";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import PDFModal from "../components/PDFModal/PDFModal";
+import PDFModal from "../components/PDFModal";
 import PDFUpload from "../components/PDFUpload/PDFUpload";
 import fetchStudiesAndPDFs from "../utils/fetchStudiesAndPDFs";
 import StudyTypes from "../types/StudyTypes.d";
 import PDFTypes from "../types/PDFTypes";
 import { useUser } from "../hooks/useUser";
+import { useCustomQuery } from "../utils/useCustomQuery";
 export const Route = createFileRoute("/mens-study")({
   component: RouteComponent,
-  loader: () =>
-    fetchStudiesAndPDFs<StudyTypes, PDFTypes>(
-      "/api/study",
-      `/api/pdf/${import.meta.env.VITE_MEN_STUDY_NAME}`,
-    ),
+  // 👇 loader prefetches data into React Query's cache
+  loader: async () => {
+    const [studies, pdfs] = await Promise.all([
+      queryClient.ensureQueryData({
+        queryKey: ["study"],
+        queryFn: async () => {
+          const response = await fetch("/api/study");
+          if (!response.ok) {
+            throw Error(`HTTP Error, ${response.status}`);
+          }
+          return response.json();
+        },
+      }),
+      queryClient.ensureQueryData({
+        queryKey: ["pdf", import.meta.env.VITE_MEN_STUDY_NAME],
+        queryFn: async () => {
+          const response = await fetch(
+            `/api/pdf/${import.meta.env.VITE_MEN_STUDY_NAME}`,
+          );
+          if (!response.ok) {
+            throw Error(`HTTP Error, ${response.status}`);
+          }
+          return response.json();
+        },
+      }),
+    ]);
+    return { studies, pdfs };
+  },
 });
 
 function RouteComponent() {
   const loaderData = Route.useLoaderData();
-  const study = loaderData?.[0];
-  const pdf = loaderData?.[1];
-  const [isModalShowing, setIsModalShowing] = useState<boolean>(false);
+  console.log(loaderData);
+  const study = loaderData?.studies;
+  const pdf = loaderData?.pdfs;
   const [studies, setStudies] = useState<StudyTypes[]>(
     Array.isArray(study) ? study : study ? [study] : [],
   );
@@ -61,7 +87,6 @@ function RouteComponent() {
       <PDFModal
         pdfs={pdfs}
         setPdfs={setPdfs}
-        setIsModalShowing={setIsModalShowing}
         studies={studies}
         env={import.meta.env.VITE_MEN_STUDY_NAME}
       />
@@ -73,14 +98,7 @@ function RouteComponent() {
           <span className="underline">events</span>
         </Link>{" "}
         page to verify our meeting dates each month as well as the topic of our
-        study. To see a list of all of the outlines in this series click{" "}
-        <span
-          className="underline"
-          onClick={() => setIsModalShowing(!isModalShowing)}
-        >
-          here
-        </span>
-        .
+        study.
       </p>
       {user && <PDFUpload studies={studies} setStudies={setStudies} />}
     </>
