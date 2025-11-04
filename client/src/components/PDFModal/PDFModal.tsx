@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { useWindowDimensions } from "../../hooks/useWindowDimensions";
+
 import PDFTypes from "../../types/PDFTypes";
 import StudyTypes from "../../types/StudyTypes.d";
 import dateFormat from "../../utils/dateFormat";
-import styles from "./PDFModal.module.css";
 import customFetch from "../../utils/customFetch";
 import { logError } from "../../utils/axiom";
 
@@ -15,14 +14,7 @@ interface PDFModalTypes {
   env: string;
 }
 
-function PDFModal({
-  pdfs,
-  setPdfs,
-  setIsModalShowing,
-  studies,
-  env,
-}: PDFModalTypes) {
-  const { height, width } = useWindowDimensions();
+function PDFModal({ pdfs, setPdfs, studies, env }: PDFModalTypes) {
   const [study, setStudy] = useState<string>(env);
   const fetchPDFs = async (study: string) => {
     try {
@@ -33,21 +25,12 @@ function PDFModal({
     }
   };
   return (
-    <div
-      style={{ height: height * 0.6, width: width * 0.8 }}
-      className={styles.container}
-    >
-      <img
-        src="./close.svg"
-        alt="close"
-        className={styles.close}
-        height={25}
-        onClick={() => setIsModalShowing(false)}
-      />
-      <div className={styles.flex}>
+    <div className="mx-auto my-4 min-h-[60vh] w-[90%] overflow-y-auto rounded-xl border-1 bg-white shadow-md">
+      <div className="flex justify-between border-b px-4 py-2">
         <h2 className="sub-header">Title</h2>
         <select
-          className={styles.select}
+          // className={styles.select}
+          className="max-w-[50%] truncate"
           value={study}
           onChange={(e) => {
             setStudy(e.target.value);
@@ -66,13 +49,12 @@ function PDFModal({
           href={`/api/static/${pdfPath.split("/public")[1]}`}
           target="_blank"
           rel="noopener noreferrer"
+          className="flex justify-between border-b-1 px-4 last-of-type:border-b-0"
         >
-          <div key={id} className={styles.flex}>
-            <span className="general-text">{title}</span>
-            <span className="general-text">
-              {date ? dateFormat(date) : "N/A"}
-            </span>
-          </div>
+          <span className="general-text text-left">{title}</span>
+          <span className="general-text text-right">
+            {date ? dateFormat(date) : "N/A"}
+          </span>
         </a>
       ))}
     </div>

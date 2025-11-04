@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import HeroImg from "../components/HeroImg";
-import { useWindowDimensions } from "../hooks/useWindowDimensions";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import PDFModal from "../components/PDFModal/PDFModal";
@@ -29,16 +28,10 @@ function RouteComponent() {
   const [pdfs, setPdfs] = useState<PDFTypes[]>(
     Array.isArray(pdf) ? pdf : pdf ? [pdf] : [],
   );
-  const { width, initialHeightRef } = useWindowDimensions();
   const { user } = useUser();
   return (
     <>
-      <HeroImg
-        width={width}
-        height={initialHeightRef.current ?? 0}
-        name="mensStudy"
-        text="Men's Study"
-      />
+      <HeroImg name="mensStudy" text="Men's Study" />
       <h1 className="sub-header">Men's Study</h1>
       <p className="general-text">
         The Book of Revelation cannot be properly interpreted without
@@ -63,9 +56,19 @@ function RouteComponent() {
         Revelation was a reminder from God to the faithful not to give in to
         their enemies, but to remain faithful, hopeful and spiritually strong
         and to be overcomers against all that stands opposed to and against Gods
-        chosen people, the church. <br></br>Our men's ministry is led by Pastor
-        Curtis Claire. We meet at 7:30 AM in the sanctuary of the church every
-        2nd and 4th Saturday of each month. Please see our{" "}
+        chosen people, the church.
+      </p>
+      <PDFModal
+        pdfs={pdfs}
+        setPdfs={setPdfs}
+        setIsModalShowing={setIsModalShowing}
+        studies={studies}
+        env={import.meta.env.VITE_MEN_STUDY_NAME}
+      />
+      <p className="general-text">
+        Our men's ministry is led by Pastor Curtis Claire. We meet at 7:30 AM in
+        the sanctuary of the church every 2nd and 4th Saturday of each month.
+        Please see our{" "}
         <Link to="/events">
           <span className="underline">events</span>
         </Link>{" "}
@@ -79,15 +82,6 @@ function RouteComponent() {
         </span>
         .
       </p>
-      {isModalShowing && (
-        <PDFModal
-          pdfs={pdfs}
-          setPdfs={setPdfs}
-          setIsModalShowing={setIsModalShowing}
-          studies={studies}
-          env={import.meta.env.VITE_MEN_STUDY_NAME}
-        />
-      )}
       {user && <PDFUpload studies={studies} setStudies={setStudies} />}
     </>
   );
