@@ -17,7 +17,7 @@ function PDFModal({ pdfs, setPdfs, studies, env }: PDFModalTypes) {
   const [study, setStudy] = useState<string>(env);
   const fetchPDFs = async (study: string) => {
     try {
-      const data = await customFetch(`/api/pdf/${study}`);
+      const data = await customFetch(`pdf/${study}`);
       setPdfs(data);
     } catch (e) {
       logError(e as Error, `/api/pdf/${study}`);

@@ -55,7 +55,7 @@ function Event({
       body: JSON.stringify(updatedEventData),
     };
     try {
-      const data = await customFetch<EventTypes>(`/api/event/${id}`, options);
+      const data = await customFetch<EventTypes>(`event/${id}`, options);
       const updatedEvents = events?.map((event) =>
         event.id === id ? { ...event, ...data } : event
       );

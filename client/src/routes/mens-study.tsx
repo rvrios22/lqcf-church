@@ -1,59 +1,38 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useQueryClient } from "@tanstack/react-query";
 import { queryClient } from "../components/Providers";
 import HeroImg from "../components/HeroImg";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import PDFModal from "../components/PDFModal";
 import PDFUpload from "../components/PDFUpload/PDFUpload";
-import fetchStudiesAndPDFs from "../utils/fetchStudiesAndPDFs";
 import StudyTypes from "../types/StudyTypes.d";
 import PDFTypes from "../types/PDFTypes";
 import { useUser } from "../hooks/useUser";
-import { useCustomQuery } from "../utils/useCustomQuery";
+import customFetch from "../utils/customFetch";
 export const Route = createFileRoute("/mens-study")({
   component: RouteComponent,
   // 👇 loader prefetches data into React Query's cache
   loader: async () => {
-    const [studies, pdfs] = await Promise.all([
+    const [studies, initialPDF] = await Promise.all([
       queryClient.ensureQueryData({
         queryKey: ["study"],
-        queryFn: async () => {
-          const response = await fetch("/api/study");
-          if (!response.ok) {
-            throw Error(`HTTP Error, ${response.status}`);
-          }
-          return response.json();
-        },
+        queryFn: () => customFetch<StudyTypes[]>("study"),
       }),
       queryClient.ensureQueryData({
         queryKey: ["pdf", import.meta.env.VITE_MEN_STUDY_NAME],
-        queryFn: async () => {
-          const response = await fetch(
-            `/api/pdf/${import.meta.env.VITE_MEN_STUDY_NAME}`,
-          );
-          if (!response.ok) {
-            throw Error(`HTTP Error, ${response.status}`);
-          }
-          return response.json();
-        },
+        queryFn: async () =>
+          customFetch<PDFTypes[]>(`pdf/${import.meta.env.VITE_MEN_STUDY_NAME}`),
       }),
     ]);
-    return { studies, pdfs };
+    return { studies, initialPDF };
   },
 });
 
 function RouteComponent() {
   const loaderData = Route.useLoaderData();
   console.log(loaderData);
-  const study = loaderData?.studies;
-  const pdf = loaderData?.pdfs;
-  const [studies, setStudies] = useState<StudyTypes[]>(
-    Array.isArray(study) ? study : study ? [study] : [],
-  );
-  const [pdfs, setPdfs] = useState<PDFTypes[]>(
-    Array.isArray(pdf) ? pdf : pdf ? [pdf] : [],
-  );
+  const { studies, initialPDF } = loaderData;
+  const [pdfs, setPdfs] = useState<PDFTypes[]>(initialPDF);
   const { user } = useUser();
   return (
     <>
@@ -100,7 +79,7 @@ function RouteComponent() {
         page to verify our meeting dates each month as well as the topic of our
         study.
       </p>
-      {user && <PDFUpload studies={studies} setStudies={setStudies} />}
+      {user && <PDFUpload studies={studies} />}
     </>
   );
 }

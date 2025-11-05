@@ -25,7 +25,7 @@ function AddEventForm({ events, setEvents }: AddEventFormTypes) {
       body: JSON.stringify(formData),
     };
     try {
-      const data = await customFetch<EventTypes>("/api/event", options);
+      const data = await customFetch<EventTypes>("event", options);
       if (events && setEvents) {
         const sortedEvents = sortEvents([...events, data]);
         setEvents(sortedEvents);

@@ -4,9 +4,8 @@ import customFetch from "../../utils/customFetch";
 import { logError } from "../../utils/axiom";
 interface PDFUploadTypes {
   studies: StudyTypes[];
-  setStudies: React.Dispatch<React.SetStateAction<StudyTypes[]>>;
 }
-function PDFUpload({ studies, setStudies }: PDFUploadTypes) {
+function PDFUpload({ studies }: PDFUploadTypes) {
   const [form, setForm] = useState<{
     title: string;
     studyName: string;
@@ -37,15 +36,8 @@ function PDFUpload({ studies, setStudies }: PDFUploadTypes) {
     };
 
     try {
-      await customFetch("/api/pdf", options);
+      await customFetch("pdf", options);
       if (!studies.some((study) => study.name === form.studyName)) {
-        setStudies([
-          ...studies,
-          {
-            id: Math.floor(Math.random() * (1000 - 100) + 100),
-            name: form.studyName,
-          },
-        ]);
       }
       setForm({ title: "", studyName: "", date: "", pdf: null });
       if (fileInputRef.current) {

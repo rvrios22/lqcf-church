@@ -23,7 +23,7 @@ function RouteComponent() {
       body: JSON.stringify(form),
     };
     try {
-      const data = await customFetch("/api/user/login", options);
+      const data = await customFetch("user/login", options);
       sessionStorage.setItem("token", data);
       setUser(getUserFromToken())
       setForm({ username: "", password: "" });

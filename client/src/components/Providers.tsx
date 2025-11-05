@@ -1,6 +1,6 @@
 import { HeroUIProvider, ToastProvider } from "@heroui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 export const queryClient = new QueryClient();
 
 function Providers({ children }: { children: React.ReactNode }) {
@@ -9,6 +9,7 @@ function Providers({ children }: { children: React.ReactNode }) {
       <HeroUIProvider>
         <ToastProvider />
         {children}
+        <ReactQueryDevtools initialIsOpen={false} />
       </HeroUIProvider>
     </QueryClientProvider>
   );
