@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { queryClient } from "../components/Providers";
 import HeroImg from "../components/HeroImg";
-import { Link } from "@tanstack/react-router";
 import dateFormat from "../utils/dateFormat";
 import { useState } from "react";
 import PDFModal from "../components/PDFModal";
@@ -80,7 +79,8 @@ function RouteComponent() {
       <p className="general-text">
         Our men's ministry is led by Pastor Curtis Claire. We are meeting on{" "}
         {dates.map(({ date }, idx) =>
-          idx === dates.length - 1 ? (
+          // handles case where there is only one entry in array so it does not add "and"
+          idx === dates.length - 1 && dates.length !== 1 ? (
             <span> and {dateFormat(date)}</span>
           ) : (
             <span>{dateFormat(date)}</span>

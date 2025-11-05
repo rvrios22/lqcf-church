@@ -28,12 +28,12 @@ function PDFModal({ pdfs, setPdfs, studies, env }: PDFModalTypes) {
     }
   };
   return (
-    <div className="mx-auto my-4 min-h-[60vh] w-[90%] overflow-y-auto rounded-xl border-1 bg-white shadow-md">
+    <div className="mx-auto my-4 min-h-[60vh] w-[90%] overflow-y-auto rounded-xl border-1 bg-white shadow-md lg:w-4/5">
       <div className="flex justify-between border-b px-4 py-2">
         <h2 className="sub-header">Title</h2>
         <select
           // className={styles.select}
-          className="max-w-[50%] truncate"
+          className="pointer max-w-[50%] cursor-pointer truncate rounded-xl border-1"
           value={study}
           onChange={(e) => {
             setStudy(e.target.value);

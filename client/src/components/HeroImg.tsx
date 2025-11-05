@@ -10,7 +10,7 @@ function HeroImg({ name, text }: HeroImgTypes) {
   const [loaded, setLoaded] = useState<boolean>(false);
 
   return (
-    <div className="relative mx-auto my-6 flex w-4/5 justify-center overflow-clip">
+    <div className="relative mx-auto my-6 flex w-4/5 justify-center overflow-clip rounded-2xl shadow-md">
       <Image
         srcSet={`
     /api/static/imgs/${name}/${name}-300.webp 300w,
