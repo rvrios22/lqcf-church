@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { queryClient } from "../components/Providers";
 import HeroImg from "../components/HeroImg";
 import { Link } from "@tanstack/react-router";
+import dateFormat from "../utils/dateFormat";
 import { useState } from "react";
 import PDFModal from "../components/PDFModal";
 import PDFUpload from "../components/PDFUpload/PDFUpload";
@@ -9,10 +10,12 @@ import StudyTypes from "../types/StudyTypes.d";
 import PDFTypes from "../types/PDFTypes";
 import { useUser } from "../hooks/useUser";
 import customFetch from "../utils/customFetch";
+import EventTypes from "../types/EventTypes";
+import getDatesFromEvents from "../utils/getDatesFromEvents";
 export const Route = createFileRoute("/mens-study")({
   component: RouteComponent,
   loader: async () => {
-    const [studies, initialPDF] = await Promise.all([
+    const [studies, initialPDFs, events] = await Promise.all([
       queryClient.ensureQueryData({
         queryKey: ["study"],
         queryFn: () => customFetch<StudyTypes[]>("study"),
@@ -22,16 +25,23 @@ export const Route = createFileRoute("/mens-study")({
         queryFn: async () =>
           customFetch<PDFTypes[]>(`pdf/${import.meta.env.VITE_MEN_STUDY_NAME}`),
       }),
+      queryClient.ensureQueryData({
+        queryKey: ["event"],
+        queryFn: async () => customFetch<EventTypes[]>("event"),
+      }),
     ]);
-    return { studies, initialPDF };
+    return { studies, initialPDFs, events };
   },
 });
 
 function RouteComponent() {
   const loaderData = Route.useLoaderData();
-  const { studies, initialPDF } = loaderData;
-  const [pdfs, setPdfs] = useState<PDFTypes[]>(initialPDF);
+  const { studies, initialPDFs, events } = loaderData;
+  const [pdfs, setPdfs] = useState<PDFTypes[]>(initialPDFs);
   const { user } = useUser();
+
+  const dates = getDatesFromEvents(events, "men");
+  console.log(dates);
   return (
     <>
       <HeroImg name="mensStudy" text="Men's Study" />
@@ -68,14 +78,15 @@ function RouteComponent() {
         env={import.meta.env.VITE_MEN_STUDY_NAME}
       />
       <p className="general-text">
-        Our men's ministry is led by Pastor Curtis Claire. We meet at 7:30 AM in
-        the sanctuary of the church every 2nd and 4th Saturday of each month.
-        Please see our{" "}
-        <Link to="/events">
-          <span className="underline">events</span>
-        </Link>{" "}
-        page to verify our meeting dates each month as well as the topic of our
-        study.
+        Our men's ministry is led by Pastor Curtis Claire. We are meeting on{" "}
+        {dates.map(({ date }, idx) =>
+          idx === dates.length - 1 ? (
+            <span> and {dateFormat(date)}</span>
+          ) : (
+            <span>{dateFormat(date)}</span>
+          ),
+        )}{" "}
+        at 7:30AM in the sanctuary.
       </p>
       {user && <PDFUpload studies={studies} />}
     </>
