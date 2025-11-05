@@ -11,7 +11,6 @@ import { useUser } from "../hooks/useUser";
 import customFetch from "../utils/customFetch";
 export const Route = createFileRoute("/mens-study")({
   component: RouteComponent,
-  // 👇 loader prefetches data into React Query's cache
   loader: async () => {
     const [studies, initialPDF] = await Promise.all([
       queryClient.ensureQueryData({
@@ -30,7 +29,6 @@ export const Route = createFileRoute("/mens-study")({
 
 function RouteComponent() {
   const loaderData = Route.useLoaderData();
-  console.log(loaderData);
   const { studies, initialPDF } = loaderData;
   const [pdfs, setPdfs] = useState<PDFTypes[]>(initialPDF);
   const { user } = useUser();

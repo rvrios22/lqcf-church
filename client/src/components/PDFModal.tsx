@@ -1,10 +1,10 @@
 import { useState } from "react";
-
 import PDFTypes from "../types/PDFTypes";
 import StudyTypes from "../types/StudyTypes.d";
 import dateFormat from "../utils/dateFormat";
 import customFetch from "../utils/customFetch";
 import { logError } from "../utils/axiom";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface PDFModalTypes {
   pdfs: PDFTypes[];
@@ -15,12 +15,16 @@ interface PDFModalTypes {
 
 function PDFModal({ pdfs, setPdfs, studies, env }: PDFModalTypes) {
   const [study, setStudy] = useState<string>(env);
+  const queryClient = useQueryClient();
   const fetchPDFs = async (study: string) => {
     try {
-      const data = await customFetch(`pdf/${study}`);
+      const data = await queryClient.fetchQuery({
+        queryKey: ["pdf", study],
+        queryFn: () => customFetch<PDFTypes[]>(`pdf/${study}`),
+      });
       setPdfs(data);
     } catch (e) {
-      logError(e as Error, `/api/pdf/${study}`);
+      logError(e as Error, `pdf/${study}`);
     }
   };
   return (
