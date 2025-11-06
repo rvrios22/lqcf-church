@@ -48,16 +48,31 @@ function RouteComponent() {
         Mail your offering to: P.O. Box 676 La Quinta, CA 92247
       </p>
       <p className="general-text">
-        Give online by clicking{" "}
-        <a
-          href="https://www.zeffy.com/en-US/donation-form/5da45795-5ea3-42d7-8d39-bb107f0ce0db"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline"
-        >
-          here
-        </a>
+        Give via our online portal below. We use Zeffy, a non-profit
+        organization. Zeffy does not charge any online fees so your whole
+        donation is given directly to the ministry!
+        <span className="citation block">
+          If you feel more comfortable giving via Zeffy's site you can can give
+          online by clicking{" "}
+          <a
+            href="https://www.zeffy.com/en-US/donation-form/5da45795-5ea3-42d7-8d39-bb107f0ce0db"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline"
+          >
+            here
+          </a>
+        </span>
       </p>
+      <div className="no-scrollbar relative h-[90vh] w-full lg:h-[70vh] xl:h-[60vh]">
+        <iframe
+          title="Donation form powered by Zeffy"
+          className="absolute top-0 right-0 bottom-0 left-0 h-full w-full border-0"
+          src="https://www.zeffy.com/embed/donation-form/5da45795-5ea3-42d7-8d39-bb107f0ce0db"
+          allow="payment *"
+          allowTransparency={true}
+        ></iframe>
+      </div>
     </>
   );
 }
