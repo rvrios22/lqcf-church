@@ -102,6 +102,9 @@ function MobileNavbar() {
               <li>
                 <Link to="/beliefs">What We Believe</Link>
               </li>
+              <li>
+                <Link to="/current-studies">Current Studies</Link>
+              </li>
             </div>
           </ul>
         </li>
