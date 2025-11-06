@@ -1,7 +1,7 @@
 const elders = [
-    {
-        name: "Pastor Mark Collins",
-        bio: `Pastor Mark A. Collins was saved by the grace of God in June of 1977 at the
+  {
+    name: "Pastor Mark Collins",
+    bio: `Pastor Mark A. Collins was saved by the grace of God in June of 1977 at the
         age of nineteen at a revival service at 1st Baptist Church of Coachella. (Eph.
         1:3-6)
         Called into the ministry by the Holy Spirit at the same church, he served as a
@@ -20,22 +20,21 @@ const elders = [
         His life verses are Col. 3:23-24, “Whatever you do, do your work heartily, as
         for the Lord rather than for men, knowing that from the Lord you will
         receive the reward of the inheritance. It is the Lord Christ whom you serve.”`,
-        img: "./collinsImg.avif",
-    },
-    {
-        name: "Pastor Mark Cook",
-        bio: `Pastor Mark Cook: Pastor Cook was ordained as a Pastor in 1997. He has been attending La
+    img: "/collinsImg.webp",
+  },
+  {
+    name: "Pastor Mark Cook",
+    bio: `Pastor Mark Cook: Pastor Cook was ordained as a Pastor in 1997. He has been attending La
         Quinta Christian Fellowship since 2003, and became the Associate Pastor of La Quinta Christian
         Fellowship Church in November 2004. He has a Master’s degree in Christian Leadership from
         Grand Canyon University. He serves with the youth, teaches adult bible study, heads the prayer
         ministry, and heads the outreach ministry. He is married and has a grown daughter living in
         Washington.`,
-        img: "./cookImg.avif",
-
-    },
-    {
-        name: "Pastor Curtis Claire",
-        bio: `Pastor Claire was chosen in Christ before the foundation of the world according to the will of God the Father to the praise of His glorious grace. (Ephesians 1:3-6) And was called and justified on November 1, 1999 at Calvary Chapel Costa Mesa. (Romans 8:29-30)
+    img: "/cookImg.webp",
+  },
+  {
+    name: "Pastor Curtis Claire",
+    bio: `Pastor Claire was chosen in Christ before the foundation of the world according to the will of God the Father to the praise of His glorious grace. (Ephesians 1:3-6) And was called and justified on November 1, 1999 at Calvary Chapel Costa Mesa. (Romans 8:29-30)
         A decade after his calling, God called him into evangelism as well as pastoring, eventually leading him to
         be the founder and director of Jesus is the Cure ministries. (Matthew 25:34-40)
         He has a passion for biblical studies, Protestant church history and contending for the faith that was
@@ -53,9 +52,8 @@ const elders = [
         And how are they to believe in him of whom they have never heard? And how are they to hear without
         someone preaching? And how are they to preach unless they are sent? As it is written, “How
         beautiful are the feet of those who preach the good news!”`,
-        img: "./claireImg.avif",
+    img: "/claireImg.webp",
+  },
+];
 
-    },
-]
-
-export default elders
+export default elders;

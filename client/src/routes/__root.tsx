@@ -5,7 +5,6 @@ import { useWindowDimensions } from "../hooks/useWindowDimensions";
 import Navbar from "../components/Navbar/Navbar";
 import MobileNavbar from "../components/MobileNavbar/MobileNavbar";
 import Footer from "../components/Footer/Footer";
-import { UserProvider } from "../context/UserContext";
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -16,11 +15,11 @@ function RootComponent() {
 
   return (
     <>
-      <UserProvider>
+      <div style={{ minHeight: "80vh" }}>
         {width > 700 ? <Navbar /> : <MobileNavbar />}
         <Outlet />
-        <Footer />
-      </UserProvider>
+      </div>
+      <Footer />
     </>
   );
 }

@@ -1,21 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import HeroImg from "../components/HeroImg";
-import { useWindowDimensions } from "../hooks/useWindowDimensions";
 
 export const Route = createFileRoute("/prayer-chain")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const { width, initialHeightRef } = useWindowDimensions();
   return (
     <>
-      <HeroImg
-        width={width}
-        height={initialHeightRef.current ?? 0}
-        name="prayerChain"
-        text="Prayer Chain"
-      />
+      <HeroImg name="prayerChain" text="Prayer Chain" />
       <h1 className="sub-header">Prayer Chain</h1>
       <p className="general-text">
         Our Prayer Chain ministry is led by Pastor Mark Cook. We meet the first

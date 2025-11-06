@@ -1,5 +1,4 @@
-import styles from "./Elder.module.css";
-import { useWindowDimensions } from "../../hooks/useWindowDimensions";
+import { Image } from "@heroui/react";
 
 interface ElderTypes {
   name: string;
@@ -7,24 +6,19 @@ interface ElderTypes {
   img: string;
 }
 function Elder({ name, bio, img }: ElderTypes) {
-  const { width, initialHeightRef } = useWindowDimensions();
   return (
-    <figure className={styles.figure}>
+    <figure>
       <div>
-        <img
+        <Image
           src={`api/static/imgs/${img}`}
           alt={name}
-          className={`img-cover ${styles.img}`}
-          width={width * 0.9}
-          height={initialHeightRef.current * 0.75}
-          loading="lazy"
+          className="m-auto w-4/5 rounded-2xl shadow-md"
         />
         <h2 className="sub-header">{name}</h2>
       </div>
       <div>
         <p
           style={{
-            maxHeight: width > 699 ? initialHeightRef.current * 0.75 : "auto",
             overflow: "scroll",
           }}
           className="general-text"
