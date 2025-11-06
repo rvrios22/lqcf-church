@@ -20,7 +20,7 @@ const elders = [
         His life verses are Col. 3:23-24, “Whatever you do, do your work heartily, as
         for the Lord rather than for men, knowing that from the Lord you will
         receive the reward of the inheritance. It is the Lord Christ whom you serve.”`,
-    img: "/collinsImg.webp",
+    img: "collinsImg",
   },
   {
     name: "Pastor Mark Cook",
@@ -30,7 +30,7 @@ const elders = [
         Grand Canyon University. He serves with the youth, teaches adult bible study, heads the prayer
         ministry, and heads the outreach ministry. He is married and has a grown daughter living in
         Washington.`,
-    img: "/cookImg.webp",
+    img: "cookImg",
   },
   {
     name: "Pastor Curtis Claire",
@@ -52,7 +52,7 @@ const elders = [
         And how are they to believe in him of whom they have never heard? And how are they to hear without
         someone preaching? And how are they to preach unless they are sent? As it is written, “How
         beautiful are the feet of those who preach the good news!”`,
-    img: "/claireImg.webp",
+    img: "claireImg",
   },
 ];
 
