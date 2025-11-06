@@ -11,6 +11,7 @@ import { useUser } from "../hooks/useUser";
 import customFetch from "../utils/customFetch";
 import EventTypes from "../types/EventTypes";
 import getDatesFromEvents from "../utils/getDatesFromEvents";
+
 export const Route = createFileRoute("/mens-study")({
   component: RouteComponent,
   loader: async () => {
@@ -40,7 +41,6 @@ function RouteComponent() {
   const { user } = useUser();
 
   const dates = getDatesFromEvents(events, "men");
-  console.log(dates);
   return (
     <>
       <HeroImg name="mensStudy" text="Men's Study" />

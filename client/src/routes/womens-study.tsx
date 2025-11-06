@@ -1,51 +1,57 @@
 import { createFileRoute } from "@tanstack/react-router";
 import HeroImg from "../components/HeroImg";
-import { useWindowDimensions } from "../hooks/useWindowDimensions";
 import { useState } from "react";
 import PDFModal from "../components/PDFModal";
 import PDFUpload from "../components/PDFUpload/PDFUpload";
-import fetchStudiesAndPDFs from "../utils/fetchStudiesAndPDFs";
 import StudyTypes from "../types/StudyTypes.d";
 import PDFTypes from "../types/PDFTypes";
 import { useUser } from "../hooks/useUser";
-
+import { queryClient } from "../components/Providers";
+import customFetch from "../utils/customFetch";
+import EventTypes from "../types/EventTypes";
+import getDatesFromEvents from "../utils/getDatesFromEvents";
+import dateFormat from "../utils/dateFormat";
 export const Route = createFileRoute("/womens-study")({
   component: RouteComponent,
-  loader: () =>
-    fetchStudiesAndPDFs<StudyTypes, PDFTypes>(
-      "/api/study",
-      `/api/pdf/${import.meta.env.VITE_WOMEN_STUDY_NAME}`,
-    ),
+  loader: async () => {
+    const [studies, initialPDFs, events] = await Promise.all([
+      queryClient.ensureQueryData({
+        queryKey: ["study"],
+        queryFn: () => customFetch<StudyTypes[]>("study"),
+      }),
+      queryClient.ensureQueryData({
+        queryKey: ["pdf", import.meta.env.VITE_WOMEN_STUDY_NAME],
+        queryFn: async () =>
+          customFetch<PDFTypes[]>(
+            `pdf/${import.meta.env.VITE_WOMEN_STUDY_NAME}`,
+          ),
+      }),
+      queryClient.ensureQueryData({
+        queryKey: ["event"],
+        queryFn: async () => customFetch<EventTypes[]>("event"),
+      }),
+    ]);
+    return { studies, initialPDFs, events };
+  },
 });
 
 function RouteComponent() {
   const loaderData = Route.useLoaderData();
-  const study = loaderData?.[0];
-  const pdf = loaderData?.[1];
-  const [isModalShowing, setIsModalShowing] = useState<boolean>(false);
-  const [studies, setStudies] = useState<StudyTypes[]>(
-    Array.isArray(study) ? study : study ? [study] : [],
-  );
-  const [pdfs, setPdfs] = useState<PDFTypes[]>(
-    Array.isArray(pdf) ? pdf : pdf ? [pdf] : [],
-  );
-  const { width, initialHeightRef } = useWindowDimensions();
+  const { studies, initialPDFs, events } = loaderData;
+  const [pdfs, setPdfs] = useState<PDFTypes[]>(initialPDFs);
   const { user } = useUser();
+
+  const dates = getDatesFromEvents(events, "women");
   return (
     <>
-      <HeroImg
-        width={width}
-        height={initialHeightRef.current ?? 0}
-        name="womensStudy"
-        text="Women's Study"
-      />
+      <HeroImg name="womensStudy" text="Women's Study" />
       <h1 className="sub-header">Women's Study</h1>
       <img
-        src="./womensStudySubHeader.avif"
+        src="/api/static/imgs/womensStudySubHeader.webp"
         alt="Women's Group"
-        width={width * 0.75}
-        className="img-cover"
-        style={{ margin: "0 auto", borderRadius: "10px" }}
+        className="max-w[600px] m-auto h-[30vh] max-h-[450px] w-4/5 rounded-2xl object-cover object-top shadow-md"
+        width={600}
+        height={450}
       />
       <p className="general-text">
         Women joining together in the Word, fellowship, encouragement, and
@@ -74,11 +80,15 @@ function RouteComponent() {
         God. Each study is unique and created to be a stand-alone study, but
         pairs beautifully with the previous and upcoming studies. This allows
         the opportunity for ladies to join in when their schedule permits. To
-        see a list of all of the outlines in this series click{" "}
-        <span onClick={() => setIsModalShowing(true)} className="underline">
-          here
-        </span>
-        . <br></br>
+        see a list of all of the outlines in this series click.
+      </p>
+      <PDFModal
+        pdfs={pdfs}
+        setPdfs={setPdfs}
+        studies={studies}
+        env={import.meta.env.VITE_WOMEN_STUDY_NAME}
+      />
+      <p className="general-text">
         Jennifer has a passion for learning and teaching Scripture, and a heart
         for encouraging and leading the women in this ministry. Please feel free
         to contact Jennifer at{" "}
@@ -91,16 +101,19 @@ function RouteComponent() {
         </a>{" "}
         with any questions about this ministry.
       </p>
-      {isModalShowing && (
-        <PDFModal
-          pdfs={pdfs}
-          setPdfs={setPdfs}
-          setIsModalShowing={setIsModalShowing}
-          studies={studies}
-          env={import.meta.env.VITE_WOMEN_STUDY_NAME}
-        />
-      )}
-      {user && <PDFUpload studies={studies} setStudies={setStudies} />}
+      <p className="general-text">
+        Our women will be meeting on {""}
+        {dates.map(({ date }, idx) =>
+          // handles case where there is only one entry in array so it does not add "and"
+          idx === dates.length - 1 && dates.length !== 1 ? (
+            <span> and {dateFormat(date)}</span>
+          ) : (
+            <span>{dateFormat(date)}</span>
+          ),
+        )}{" "}
+        at Jennifer's home.
+      </p>
+      {user && <PDFUpload studies={studies} />}
     </>
   );
 }
