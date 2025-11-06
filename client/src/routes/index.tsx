@@ -3,22 +3,21 @@ import HeroImg from "../components/HeroImg";
 import whatsGoingOnData from "../../public/whatsGoingOnData";
 import WhatsGoingOnSquare from "../components/WhatsGoingOnSquare";
 import customFetch from "../utils/customFetch";
-import { useEffect, useState } from "react";
 import type PastorMessage from "../types/PastorMessage";
+import { queryClient } from "../components/Providers";
 export const Route = createFileRoute("/")({
   component: RouteComponent,
+  loader: async () => {
+    const message = await queryClient.ensureQueryData({
+      queryKey: ["pastorMessage"],
+      queryFn: () => customFetch<PastorMessage>("pastorMessage"),
+    });
+    return message;
+  },
 });
 
 function RouteComponent() {
-  const [message, setMessage] = useState<PastorMessage>();
-  useEffect(() => {
-    const fetchPastorMessage = async () => {
-      console.log("asdfa");
-      const message = await customFetch("/api/pastorMessage");
-      setMessage(message);
-    };
-    fetchPastorMessage();
-  }, []);
+  const { message, author } = Route.useLoaderData();
   return (
     <>
       <HeroImg name="lqcfHome" text="La Quinta Christian Fellowship Church" />
@@ -50,11 +49,11 @@ function RouteComponent() {
         ))}
       </section>
       <section className="mb-4">
-        <h3 className="sub-header">From Our Pastors Hearts</h3>
         {message && (
           <>
-            <p className="general-text">{message.message}</p>
-            <p className="bold w-[90%] text-right">- {message.author}</p>
+            <h3 className="sub-header">From Our Pastors Hearts</h3>
+            <p className="general-text">{message}</p>
+            <p className="bold w-[90%] text-right">- {author}</p>
           </>
         )}
       </section>
