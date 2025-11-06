@@ -81,9 +81,9 @@ function RouteComponent() {
         {dates.map(({ date }, idx) =>
           // handles case where there is only one entry in array so it does not add "and"
           idx === dates.length - 1 && dates.length !== 1 ? (
-            <span> and {dateFormat(date)}</span>
+            <span key={date}> and {dateFormat(date)}</span>
           ) : (
-            <span>{dateFormat(date)}</span>
+            <span key={date}>{dateFormat(date)}</span>
           ),
         )}{" "}
         at 7:30AM in the sanctuary.
