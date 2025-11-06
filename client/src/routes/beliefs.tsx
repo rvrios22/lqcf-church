@@ -9,17 +9,14 @@ function RouteComponent() {
     <main>
       <ul>
         {beliefs.map(({ title, statement, citations }, idx) => (
-          <li key={idx}>
-            <h2 className="sub-header" style={{ marginBottom: 0 }}>
-              {title}
-            </h2>
-            <p className="general-text" style={{ margin: "0 auto" }}>
-              {statement}
-            </p>
-            <p className="general-text bold" style={{ marginTop: 0 }}>
-              {citations}
-            </p>
-          </li>
+          <>
+            <li key={idx} className="mt-8">
+              <h2 className="sub-header">{title}</h2>
+              <p className="general-text mt-0">{statement}</p>
+              <p className="general-text bold">{citations}</p>
+            </li>
+            <hr className="mx-auto w-4/5"></hr>
+          </>
         ))}
       </ul>
     </main>
