@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import Swal from "sweetalert2";
+import { Button, Form, Input, Textarea } from "@heroui/react";
 
 export const Route = createFileRoute("/prayer")({
   component: RouteComponent,
@@ -14,7 +15,6 @@ function RouteComponent() {
     message: "",
   });
   const formRef = useRef<HTMLFormElement | null>(null);
-  const buttonRef = useRef<HTMLInputElement | null>(null);
 
   const Toast = Swal.mixin({
     toast: true,
@@ -30,7 +30,7 @@ function RouteComponent() {
         import.meta.env.VITE_SERVICE_ID,
         import.meta.env.VITE_TEMPLATE_ID,
         formRef.current!,
-        import.meta.env.VITE_PUBLIC_KEY
+        import.meta.env.VITE_PUBLIC_KEY,
       );
       Toast.fire({
         title:
@@ -48,8 +48,6 @@ function RouteComponent() {
         color: "black",
       });
       console.error(err);
-    } finally {
-      buttonRef.current!.blur();
     }
   };
   return (
@@ -71,48 +69,45 @@ function RouteComponent() {
         Please full out our form to send us your prayer request and we will pray
         for you.
       </p>
-      <form ref={formRef} onSubmit={handleSubmit}>
-        <label className="general-text" htmlFor="name">
-          Name
-        </label>
-        <input
+      <Form ref={formRef} onSubmit={handleSubmit} className="w-[90%] mx-auto">
+        <Input
+          label="Name"
+          isClearable
           type="text"
           id="name"
-          required
+          isRequired
           name="user_name"
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         />
-        <label className="general-text" htmlFor="email">
-          Email
-        </label>
-        <input
+
+        <Input
+          label="Email"
+          isClearable
           type="email"
           id="email"
-          required
+          isRequired
           name="user_email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
-        <label className="general-text" htmlFor="request">
-          Prayer Request
-        </label>
-        <textarea
+
+        <Textarea
           id="request"
-          required
+          isRequired
+          isClearable
+          label="Prayer Request"
+          placeholder="How can we pray for you?"
           name="message"
           value={formData.message}
           onChange={(e) =>
             setFormData({ ...formData, message: e.target.value })
           }
-        ></textarea>
-        <input
-          type="submit"
-          value="Submit"
-          className="general-text button"
-          ref={buttonRef}
         />
-      </form>
+        <Button type="submit" value="Submit" className="general-text button">
+          Submit
+        </Button>
+      </Form>
     </>
   );
 }

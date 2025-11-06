@@ -51,7 +51,7 @@ function RouteComponent() {
         Give via our online portal below. We use Zeffy, a non-profit
         organization. Zeffy does not charge any online fees so your whole
         donation is given directly to the ministry!
-        <span className="citation block">
+        <span className="citation block text-wrap">
           If you feel more comfortable giving via Zeffy's site you can can give
           online by clicking{" "}
           <a
