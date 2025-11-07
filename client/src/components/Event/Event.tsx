@@ -6,6 +6,7 @@ import sortEvents from "../../utils/sortEvents";
 import { useUser } from "../../hooks/useUser";
 import dateFormat from "../../utils/dateFormat";
 import { logError } from "../../utils/axiom";
+import { Button, Input, Textarea } from "@heroui/react";
 function Event({
   id,
   title,
@@ -43,7 +44,7 @@ function Event({
 
   const handleEdit = async (
     e: React.FormEvent<HTMLFormElement>,
-    id: number
+    id: number,
   ) => {
     e.preventDefault();
     const options: RequestInit = {
@@ -57,7 +58,7 @@ function Event({
     try {
       const data = await customFetch<EventTypes>(`event/${id}`, options);
       const updatedEvents = events?.map((event) =>
-        event.id === id ? { ...event, ...data } : event
+        event.id === id ? { ...event, ...data } : event,
       );
       if (updatedEvents && setEvents) {
         const sortedEvents = sortEvents(updatedEvents);
@@ -74,17 +75,24 @@ function Event({
       <h2 className="sub-header">{title}</h2>
       <p className="general-text">{description}</p>
       <p className="general-text">{dateFormat(date)}</p>
-      {user && <button onClick={() => handleDelete(id)}>Delete</button>}
       {user && (
-        <button onClick={() => setIsEventEditable(!isEventEditable)}>
+        <Button color="danger" onPress={() => handleDelete(id)}>
+          Delete
+        </Button>
+      )}
+      {user && (
+        <Button
+          color="warning"
+          onPress={() => setIsEventEditable(!isEventEditable)}
+        >
           Edit
-        </button>
+        </Button>
       )}
     </>
   );
   const editJSX = (
     <form onSubmit={(e) => handleEdit(e, id)}>
-      <input
+      <Input
         type="text"
         name="title"
         id="title"
@@ -93,7 +101,7 @@ function Event({
           setUpdatedEventData({ ...updatedEventData, title: e.target.value })
         }
       />
-      <input
+      <Input
         type="date"
         name="date"
         id="date"
@@ -102,7 +110,7 @@ function Event({
           setUpdatedEventData({ ...updatedEventData, date: e.target.value })
         }
       />
-      <textarea
+      <Textarea
         name="description"
         id="description"
         value={updatedEventData.description}
@@ -112,11 +120,16 @@ function Event({
             description: e.target.value,
           })
         }
-      ></textarea>
-      <input type="submit" value="Edit" className="button" />
-      <button onClick={() => setIsEventEditable(!isEventEditable)}>
+      />
+      <Button type="submit" color="success">
+        Edit
+      </Button>
+      <Button
+        color="danger"
+        onPress={() => setIsEventEditable(!isEventEditable)}
+      >
         Cancel
-      </button>
+      </Button>
     </form>
   );
   return (

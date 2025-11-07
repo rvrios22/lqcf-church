@@ -3,6 +3,7 @@ import EventTypes from "../../types/EventTypes";
 import customFetch from "../../utils/customFetch";
 import sortEvents from "../../utils/sortEvents";
 import { logError } from "../../utils/axiom";
+import { Button, Input, Textarea } from "@heroui/react";
 interface AddEventFormTypes {
   events?: EventTypes[];
   setEvents?: React.Dispatch<React.SetStateAction<EventTypes[]>>;
@@ -40,7 +41,7 @@ function AddEventForm({ events, setEvents }: AddEventFormTypes) {
     <section>
       <h2 className="sub-header">Add Event</h2>
       <form action="" onSubmit={handleSubmit}>
-        <input
+        <Input
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           value={formData.title}
           type="text"
@@ -49,7 +50,7 @@ function AddEventForm({ events, setEvents }: AddEventFormTypes) {
           placeholder="Title"
           required
         />
-        <input
+        <Input
           onChange={(e) => setFormData({ ...formData, date: e.target.value })}
           value={formData.date}
           type="date"
@@ -57,7 +58,7 @@ function AddEventForm({ events, setEvents }: AddEventFormTypes) {
           id="date"
           required
         />
-        <textarea
+        <Textarea
           onChange={(e) =>
             setFormData({ ...formData, description: e.target.value })
           }
@@ -66,8 +67,10 @@ function AddEventForm({ events, setEvents }: AddEventFormTypes) {
           id="description"
           placeholder="Description"
           required
-        ></textarea>
-        <input type="submit" value="Submit" className="button" />
+        />
+        <Button type="submit" value="Submit" color="success">
+          Submit
+        </Button>
       </form>
     </section>
   );
