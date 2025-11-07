@@ -53,7 +53,7 @@ function RouteComponent() {
           <>
             <h3 className="sub-header">From Our Pastors Hearts</h3>
             <p className="general-text">{message}</p>
-            <p className="bold w-[90%] text-right">- {author}</p>
+            <p className="w-[90%] text-right font-black">- {author}</p>
           </>
         )}
       </section>

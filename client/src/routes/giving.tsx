@@ -64,13 +64,12 @@ function RouteComponent() {
           </a>
         </span>
       </p>
-      <div className="no-scrollbar relative h-[90vh] w-full lg:h-[70vh] xl:h-[60vh]">
+      <div className="no-scrollbar relative h-[90vh] w-full lg:h-[70vh]">
         <iframe
           title="Donation form powered by Zeffy"
           className="absolute top-0 right-0 bottom-0 left-0 h-full w-full border-0"
           src="https://www.zeffy.com/embed/donation-form/5da45795-5ea3-42d7-8d39-bb107f0ce0db"
           allow="payment *"
-          allowTransparency={true}
         ></iframe>
       </div>
     </>

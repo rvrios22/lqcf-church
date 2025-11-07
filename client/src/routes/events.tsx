@@ -5,16 +5,23 @@ import AddEventForm from "../components/AddEventForm/AddEventForm";
 import { useState } from "react";
 import customFetch from "../utils/customFetch";
 import { useUser } from "../hooks/useUser";
+import { queryClient } from "../components/Providers";
 
 export const Route = createFileRoute("/events")({
   component: RouteComponent,
-  loader: () => customFetch("/api/event"),
+  loader: async () => {
+    const events = await queryClient.ensureQueryData({
+      queryKey: ["event"],
+      queryFn: () => customFetch<EventTypes[]>("event"),
+    });
+    return events;
+  },
 });
 
 function RouteComponent() {
   const { user } = useUser();
-  const e = Route.useLoaderData();
-  const [events, setEvents] = useState<EventTypes[]>(e);
+  const eventData = Route.useLoaderData();
+  const [events, setEvents] = useState<EventTypes[]>(eventData);
   return (
     <>
       <h1 className="sub-header">Upcoming Events:</h1>

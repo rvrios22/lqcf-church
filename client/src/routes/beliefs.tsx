@@ -9,14 +9,16 @@ function RouteComponent() {
     <main>
       <ul>
         {beliefs.map(({ title, statement, citations }, idx) => (
-          <>
-            <li key={idx} className="mt-8">
-              <h2 className="sub-header">{title}</h2>
+          <div key={idx}>
+            <li>
+              <h2 className="sub-header mb-2 border-b-1 border-gray-400">
+                {title}
+              </h2>
               <p className="general-text mt-0">{statement}</p>
-              <p className="general-text bold">{citations}</p>
+              <p className="general-text text-sm font-bold">{citations}</p>
             </li>
-            <hr className="mx-auto w-4/5"></hr>
-          </>
+            <hr className="mx-auto mb-4 w-4/5 last-of-type:hidden"></hr>
+          </div>
         ))}
       </ul>
     </main>

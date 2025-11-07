@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useRef, useEffect } from "react";
-import emailjs from "@emailjs/browser";
+import { useState, useEffect } from "react";
 import { addToast, Button, Form, Input, Textarea } from "@heroui/react";
 import { useForm } from "@formspree/react";
 import { logError } from "../utils/axiom";
@@ -16,7 +15,6 @@ function RouteComponent() {
     message: "",
   });
   const [state, handleSubmit] = useForm(import.meta.env.VITE_FORM_SPREE);
-  const formRef = useRef<HTMLFormElement | null>(null);
   const variant = "bordered";
 
   useEffect(() => {
@@ -60,7 +58,6 @@ function RouteComponent() {
         for you.
       </p>
       <Form
-        ref={formRef}
         onSubmit={handleSubmit}
         className="mx-auto mt-4 mb-8 w-[90%] rounded-3xl border-2 border-gray-200 p-4 shadow-sm lg:w-[70%]"
       >
