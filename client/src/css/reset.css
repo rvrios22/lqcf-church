@@ -40,6 +40,36 @@
 }
 
 @layer utilities {
+  .button {
+    margin: 1em auto;
+    width: 40%;
+    max-width: 150px;
+    border-radius: 50px;
+    background-image: linear-gradient(
+      to right,
+      oklch(95.719% 0.00354 248.563),
+      oklch(92.8% 0.006 264.531)
+    );
+    border: 1px solid gray;
+    opacity: 1;
+    transition:
+      opacity 200ms,
+      scale 200ms,
+      color 200ms;
+  }
+
+  .button:hover {
+    opacity: 0.7;
+    scale: 1.05;
+    color: rgb(50, 50, 50);
+    transition:
+      opacity 200ms,
+      color 200ms,
+      scale 200ms;
+  }
+}
+
+@layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
   }

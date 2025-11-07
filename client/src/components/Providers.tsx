@@ -8,7 +8,12 @@ function Providers({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <HeroUIProvider>
-        <ToastProvider />
+        <ToastProvider
+          toastProps={{
+            hideIcon: true,
+          }}
+          placement="bottom-center"
+        />
         <UserProvider>{children}</UserProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </HeroUIProvider>

@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
-import Swal from "sweetalert2";
-import { Button, Form, Input, Textarea } from "@heroui/react";
+import { addToast, Button, Form, Input, Textarea } from "@heroui/react";
+import { useForm } from "@formspree/react";
+import { logError } from "../utils/axiom";
 
 export const Route = createFileRoute("/prayer")({
   component: RouteComponent,
@@ -14,42 +15,31 @@ function RouteComponent() {
     email: "",
     message: "",
   });
+  const [state, handleSubmit] = useForm(import.meta.env.VITE_FORM_SPREE);
   const formRef = useRef<HTMLFormElement | null>(null);
+  const variant = "bordered";
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "center",
-    showConfirmButton: false,
-    timer: 4000,
-  });
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      await emailjs.sendForm(
-        import.meta.env.VITE_SERVICE_ID,
-        import.meta.env.VITE_TEMPLATE_ID,
-        formRef.current!,
-        import.meta.env.VITE_PUBLIC_KEY,
-      );
-      Toast.fire({
-        title:
-          "Thank you for your request. We will keep you in prayer and reach out if we see fit. God bless!",
-        background: "#F5F6F7",
-        color: "black",
+  useEffect(() => {
+    if (state.succeeded) {
+      addToast({
+        title: "Thank you",
+        description:
+          "We will keep you in prayer and reach out if we see fit. God bless!",
       });
       setFormData({ name: "", email: "", message: "" });
-    } catch (err) {
-      Toast.fire({
-        title:
-          "So sorry, there's seems to be an issue in our system. Feel free to call our church or email us and we will pray for you. Thank you.",
-        icon: "error",
-        background: "#F5F6F7",
-        color: "black",
-      });
-      console.error(err);
     }
-  };
+
+    if (state.errors) {
+      addToast({
+        title: "Something went wrong",
+        description:
+          "There's seems to be an issue in our system. Feel free to call our church or email us and we will pray for you.",
+        color: "danger",
+      });
+      logError(new Error("something went wrong"), "Prayer Form");
+    }
+  }, [state.succeeded, state.errors]);
+
   return (
     <>
       <h1 className="sub-header">Why Should We Pray?</h1>
@@ -69,10 +59,14 @@ function RouteComponent() {
         Please full out our form to send us your prayer request and we will pray
         for you.
       </p>
-      <Form ref={formRef} onSubmit={handleSubmit} className="w-[90%] mx-auto">
+      <Form
+        ref={formRef}
+        onSubmit={handleSubmit}
+        className="mx-auto mt-4 mb-8 w-[90%] rounded-3xl border-2 border-gray-200 p-4 shadow-sm lg:w-[70%]"
+      >
         <Input
           label="Name"
-          isClearable
+          variant={variant}
           type="text"
           id="name"
           isRequired
@@ -83,7 +77,7 @@ function RouteComponent() {
 
         <Input
           label="Email"
-          isClearable
+          variant={variant}
           type="email"
           id="email"
           isRequired
@@ -95,7 +89,7 @@ function RouteComponent() {
         <Textarea
           id="request"
           isRequired
-          isClearable
+          variant={variant}
           label="Prayer Request"
           placeholder="How can we pray for you?"
           name="message"
