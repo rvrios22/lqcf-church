@@ -72,9 +72,11 @@ function Event({
 
   const readJSX = (
     <>
-      <h2 className="sub-header">{title}</h2>
-      <p className="general-text">{description}</p>
-      <p className="general-text">{dateFormat(date)}</p>
+      <h2 className="sub-header ml-0 text-left">{title}</h2>
+      <p className="general-text my-0 ml-0 text-left">{description}</p>
+      <p className="general-text mt-0 ml-0 text-left text-sm">
+        {dateFormat(date)}
+      </p>
       {user && (
         <Button color="danger" onPress={() => handleDelete(id)}>
           Delete
@@ -133,9 +135,9 @@ function Event({
     </form>
   );
   return (
-    <section className={styles.section}>
+    <figure className="mx-auto my-0.5 w-[90%] border-b-1 last-of-type:border-b-0">
       {isEventEditable ? editJSX : readJSX}
-    </section>
+    </figure>
   );
 }
 

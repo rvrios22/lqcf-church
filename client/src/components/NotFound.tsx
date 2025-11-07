@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useWindowDimensions } from "../../hooks/useWindowDimensions";
+import { useWindowDimensions } from "../hooks/useWindowDimensions";
 function NotFound() {
   const { height } = useWindowDimensions();
 

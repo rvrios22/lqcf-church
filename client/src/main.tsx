@@ -5,7 +5,7 @@ import { WindowDimensionsProvider } from "./context/WindowDimensionsContext";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
-import NotFound from "./components/NotFound/NotFound";
+import NotFound from "./components/NotFound";
 import Providers from "./components/Providers";
 
 // Create a new router instance
@@ -38,7 +38,7 @@ if (!rootElement.innerHTML) {
           <RouterProvider router={router} />
         </WindowDimensionsProvider>
       </Providers>
-    </StrictMode>
+    </StrictMode>,
   );
 }
 
