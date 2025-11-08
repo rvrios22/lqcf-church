@@ -4,7 +4,7 @@ import "../css/reset.css";
 import { useWindowDimensions } from "../hooks/useWindowDimensions";
 import Navbar from "../components/Navbar/Navbar";
 import MobileNavbar from "../components/MobileNavbar/MobileNavbar";
-import Footer from "../components/Footer/Footer";
+import Footer from "../components/Footer";
 
 export const Route = createRootRoute({
   component: RootComponent,
