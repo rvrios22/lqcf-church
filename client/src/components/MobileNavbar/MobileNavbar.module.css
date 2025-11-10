@@ -1,11 +1,11 @@
-nav {
+/* nav {
     position: sticky;
     top: 0;
     height: 30px;
     background-color: white;
     border-bottom: 1px solid black;
     z-index: 9999;
-}
+} */
 
 nav label {
     position: absolute;
@@ -16,7 +16,7 @@ nav label {
 .menu {
     width: 100%;
     position: absolute;
-    background-color: white;
+    background-color: black;
     top: -500px;
     transition: top 500ms ease-out;
 }

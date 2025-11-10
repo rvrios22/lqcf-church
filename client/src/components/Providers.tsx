@@ -1,13 +1,32 @@
 import { HeroUIProvider, ToastProvider } from "@heroui/react";
+import {
+  useRouter,
+  createLink,
+  type NavigateOptions,
+  type ToOptions,
+} from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { UserProvider } from "../context/UserContext";
+import { useEffect } from "react";
 export const queryClient = new QueryClient();
 
+declare module "@react-types/shared" {
+  interface RouterConfig {
+    href: ToOptions["to"];
+    routerOptions: Omit<NavigateOptions, keyof ToOptions>;
+  }
+}
+
 function Providers({ children }: { children: React.ReactNode }) {
+  let router = useRouter();
+
   return (
     <QueryClientProvider client={queryClient}>
-      <HeroUIProvider>
+      <HeroUIProvider
+        navigate={(to, options) => router.navigate({ to, ...options })}
+        useHref={(to) => router.buildLocation({ to }).href}
+      >
         <ToastProvider
           toastProps={{
             hideIcon: true,
