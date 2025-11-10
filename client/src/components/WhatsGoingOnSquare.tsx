@@ -51,7 +51,7 @@ function WhatsGoingOnSquare({
         <img
           src={`/api/static/imgs/${name}/${name}-696.webp`}
           alt={alt}
-          className="rounded-2xl object-cover md:min-h-[250px]"
+          className="rounded-2xl object-cover shadow-2xl md:min-h-[250px]"
           onLoad={() => setIsLoaded(true)}
         />
         <div

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import Event from "../components/Event/Event";
+import Event from "../components/Event";
 import EventTypes from "../types/EventTypes";
-import AddEventForm from "../components/AddEventForm/AddEventForm";
+import AddEventForm from "../components/AddEventForm";
 import { useState } from "react";
 import customFetch from "../utils/customFetch";
 import { useUser } from "../hooks/useUser";

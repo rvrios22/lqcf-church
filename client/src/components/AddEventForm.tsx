@@ -1,8 +1,8 @@
 import { useState } from "react";
-import EventTypes from "../../types/EventTypes";
-import customFetch from "../../utils/customFetch";
-import sortEvents from "../../utils/sortEvents";
-import { logError } from "../../utils/axiom";
+import EventTypes from "../types/EventTypes";
+import customFetch from "../utils/customFetch";
+import sortEvents from "../utils/sortEvents";
+import { logError } from "../utils/axiom";
 import { Button, Input, Textarea } from "@heroui/react";
 interface AddEventFormTypes {
   events?: EventTypes[];

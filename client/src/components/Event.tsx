@@ -1,11 +1,10 @@
 import { useState } from "react";
-import EventTypes from "../../types/EventTypes";
-import styles from "./Event.module.css";
-import customFetch from "../../utils/customFetch";
-import sortEvents from "../../utils/sortEvents";
-import { useUser } from "../../hooks/useUser";
-import dateFormat from "../../utils/dateFormat";
-import { logError } from "../../utils/axiom";
+import EventTypes from "../types/EventTypes";
+import customFetch from "../utils/customFetch";
+import sortEvents from "../utils/sortEvents";
+import { useUser } from "../hooks/useUser";
+import dateFormat from "../utils/dateFormat";
+import { logError } from "../utils/axiom";
 import { Button, Input, Textarea } from "@heroui/react";
 function Event({
   id,

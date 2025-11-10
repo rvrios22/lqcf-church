@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import HeroImg from "../components/HeroImg";
 import { useState } from "react";
 import PDFModal from "../components/PDFModal";
-import PDFUpload from "../components/PDFUpload/PDFUpload";
+import PDFUpload from "../components/PDFUpload";
 import StudyTypes from "../types/StudyTypes.d";
 import PDFTypes from "../types/PDFTypes";
 import { useUser } from "../hooks/useUser";

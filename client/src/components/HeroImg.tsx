@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Image } from "@heroui/react";
 
 interface HeroImgTypes {
   name: string;
@@ -11,7 +10,7 @@ function HeroImg({ name, text }: HeroImgTypes) {
 
   return (
     <div className="relative mx-auto my-6 flex w-4/5 justify-center overflow-clip rounded-2xl shadow-md">
-      <Image
+      <img
         srcSet={`
     /api/static/imgs/${name}/${name}-300.webp 300w,
     /api/static/imgs/${name}/${name}-600.webp 600w,

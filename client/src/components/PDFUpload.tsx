@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
-import StudyTypes from "../../types/StudyTypes.d";
-import customFetch from "../../utils/customFetch";
-import { logError } from "../../utils/axiom";
+import StudyTypes from "../types/StudyTypes.d";
+import customFetch from "../utils/customFetch";
+import { logError } from "../utils/axiom";
 interface PDFUploadTypes {
   studies: StudyTypes[];
 }
