@@ -12,12 +12,11 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
-  const { width } = useWindowDimensions();
 
   return (
     <Providers>
       <div style={{ minHeight: "80vh" }}>
-        {width > 700 ? <Navbar /> : <MobileNavbar />}
+        <Navbar />
         <Outlet />
       </div>
       <Footer />

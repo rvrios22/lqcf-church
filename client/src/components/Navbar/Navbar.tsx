@@ -12,83 +12,21 @@ import {
   DropdownItem,
   NavbarMenuToggle,
 } from "@heroui/react";
-import { Link } from "@tanstack/react-router";
-import styles from "./Navbar.module.css";
-import DropDown from "../DropDown/DropDown";
-import { useState } from "react";
+import { Link, useRouter } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { useUser } from "../../hooks/useUser";
 
 function Navbar() {
-  const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const { user } = useUser();
-  const handleMouseEnter = (menu: string) => setOpenMenu(menu);
-  const handleMouseLeave = () => setOpenMenu(null);
 
+  const router = useRouter();
+  useEffect(() => {
+    const unsubscribe = router.history.subscribe(() => setIsMenuOpen(false));
+
+    return () => unsubscribe();
+  }, [router]);
   return (
-    // <nav className={styles.nav}>
-    //   <div>
-    //     <Link to="/">
-    //       <span className="general-text">LQCF Church</span>
-    //       {user && (
-    //         <span style={{ marginLeft: "1em" }} className="general-text">
-    //           {user.username}
-    //         </span>
-    //       )}
-    //     </Link>
-    //   </div>
-    //   <div className={styles.flex}>
-    //     <div
-    //       onMouseEnter={() => handleMouseEnter("who")}
-    //       onMouseLeave={handleMouseLeave}
-    //       className="general-text"
-    //       style={{ position: "relative" }}
-    //     >
-    //       <span>Who We Are</span>
-    //       {openMenu === "who" && (
-    //         <DropDown
-    //           links={[
-    //             { name: "Elders", link: "/elders" },
-    //             { name: "What We Believe", link: "/beliefs" },
-    //             { name: "Current Studies", link: "/current-studies" },
-    //           ]}
-    //         />
-    //       )}
-    //     </div>
-
-    //     <div
-    //       onMouseEnter={() => handleMouseEnter("ministries")}
-    //       onMouseLeave={handleMouseLeave}
-    //       className="general-text"
-    //       style={{ position: "relative" }}
-    //     >
-    //       <span>Ministries</span>
-    //       {openMenu === "ministries" && (
-    //         <DropDown
-    //           links={[
-    //             { name: "Men's Study", link: "/mens-study" },
-    //             { name: "Women's Study", link: "/womens-study" },
-    //             { name: "Identity Youth", link: "/identity-youth" },
-    //             { name: "Prayer Chain", link: "/prayer-chain" },
-    //           ]}
-    //         />
-    //       )}
-    //     </div>
-
-    //     <Link to="/school">
-    //       <span className="general-text">School</span>
-    //     </Link>
-    //     <Link to="/giving">
-    //       <span className="general-text">Giving</span>
-    //     </Link>
-    //     <Link to="/events">
-    //       <span className="general-text">Events</span>
-    //     </Link>
-    //     <Link to="/prayer">
-    //       <span className="general-text">Prayer</span>
-    //     </Link>
-    //   </div>
-    // </nav>
     <Header
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
@@ -105,8 +43,8 @@ function Navbar() {
             <p className="text-inherit lg:text-2xl">LQCF Church</p>
           </Link>
         </NavbarBrand>
+        {user && <NavbarItem>{user.username}</NavbarItem>}
       </NavbarContent>
-
       <NavbarContent justify="end" className="hidden gap-4 sm:flex">
         <Dropdown>
           <NavbarItem>
@@ -124,7 +62,7 @@ function Navbar() {
           </NavbarItem>
           <DropdownMenu>
             <DropdownItem key="elders" href="/elders">
-              Elders
+              Our Elders
             </DropdownItem>
             <DropdownItem key="beliefs" href="/beliefs">
               Who We Are
@@ -182,18 +120,66 @@ function Navbar() {
           </Link>
         </NavbarItem>
       </NavbarContent>
-
       {/* mobile menu */}
       <NavbarMenu className="items-center justify-center">
         <NavbarMenuItem>
           <Link to="/">Home</Link>
         </NavbarMenuItem>
-
         <NavbarMenuItem>
-          <Link to="/" className="w-full"></Link>
+          <Link to="/elders" className="w-full">
+            Our Elders
+          </Link>
         </NavbarMenuItem>
-
-        <NavbarMenuItem></NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link to="/beliefs" className="w-full">
+            What We Beleive
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link to="/current-studies" className="w-full">
+            Current Studies
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link to="/mens-study" className="w-full">
+            Men's Study
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link to="/womens-study" className="w-full">
+            Women's Study
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link to="/prayer-chain" className="w-full">
+            Prayer Chain
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link to="/identity-youth" className="w-full">
+            Identity Youth
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link to="/school" className="w-full">
+            School
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link to="/events" className="w-full">
+            Events
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link to="/giving" className="w-full">
+            Giving
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link to="/prayer" className="w-full">
+            Prayer
+          </Link>
+        </NavbarMenuItem>
       </NavbarMenu>
     </Header>
   );
