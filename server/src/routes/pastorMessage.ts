@@ -14,11 +14,12 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/", verifyUser, async (req, res, next) => {
-  const { author, message } = req.body;
+  const { author, message, coramDeo } = req.body;
   try {
     const pastorMessage = await PastorMessage.create({
       author: author,
       message: message,
+      coramDeo: coramDeo,
     });
     res.status(200).json(pastorMessage);
   } catch (err) {
@@ -28,14 +29,18 @@ router.post("/", verifyUser, async (req, res, next) => {
 
 router.put("/:id", verifyUser, async (req, res, next) => {
   const id = req.params.id;
-  const { author, message } = req.body;
+  const { author, message, coraemDeo } = req.body;
   try {
     const pastorMessage = await PastorMessage.findByPk(id);
     if (!pastorMessage) {
       res.status(404).json({ message: "Message does not exist" });
       return;
     }
-    await pastorMessage.update({ author: author, message: message });
+    await pastorMessage.update({
+      author: author,
+      message: message,
+      coraemDeo: coraemDeo,
+    });
     res.status(200).json(pastorMessage);
   } catch (err) {
     next(err);

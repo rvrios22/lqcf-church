@@ -8,7 +8,11 @@ module.exports = (
     "pastorMessage",
     {
       message: {
-        type: dataTypes.TEXT('long'),
+        type: dataTypes.TEXT("long"),
+        allowNull: false,
+      },
+      coramDeo: {
+        type: dataTypes.TEXT("long"),
         allowNull: false,
       },
       author: {
