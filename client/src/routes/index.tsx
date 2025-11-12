@@ -3,8 +3,10 @@ import HeroImg from "../components/HeroImg";
 import whatsGoingOnData from "../../public/whatsGoingOnData";
 import WhatsGoingOnSquare from "../components/WhatsGoingOnSquare";
 import customFetch from "../utils/customFetch";
+import { useUser } from "../hooks/useUser";
 import type PastorMessage from "../types/PastorMessage";
 import { queryClient } from "../components/Providers";
+import PastorsHeartEditor from "../components/PastorsHeartEditor";
 export const Route = createFileRoute("/")({
   component: RouteComponent,
   loader: async () => {
@@ -17,7 +19,14 @@ export const Route = createFileRoute("/")({
 });
 
 function RouteComponent() {
-  const { message, author } = Route.useLoaderData();
+  const { user } = useUser();
+  const data = Route.useLoaderData() ?? {
+    message: "",
+    author: "",
+    coramDeo: "",
+  };
+  const { message, author, coramDeo } = data;
+
   return (
     <>
       <HeroImg name="lqcfHome" text="La Quinta Christian Fellowship Church" />
@@ -49,12 +58,22 @@ function RouteComponent() {
         ))}
       </section>
       <section className="mb-4">
-        {message && (
-          <>
-            <h3 className="sub-header">From Our Pastors Hearts</h3>
-            <p className="general-text">{message}</p>
-            <p className="w-[90%] text-right font-black">- {author}</p>
-          </>
+        {user ? (
+          <PastorsHeartEditor
+            message={message}
+            author={author}
+            coramDeo={coramDeo}
+            id={1}
+          />
+        ) : (
+          message && (
+            <>
+              <h3 className="sub-header">From Our Pastors Hearts</h3>
+              <p className="general-text">{message}</p>
+              <p className="w-[90%] text-right font-black">- {author}</p>
+              <p className="general-text">Deo Coram: {coramDeo}</p>
+            </>
+          )
         )}
       </section>
     </>

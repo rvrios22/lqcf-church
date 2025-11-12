@@ -1,9 +1,8 @@
 import { Outlet, createRootRoute } from "@tanstack/react-router";
+import Navbar from "../components/Navbar";
 import "../css/global.css";
 import "../css/reset.css";
-import { useWindowDimensions } from "../hooks/useWindowDimensions";
-import Navbar from "../components/Navbar/Navbar";
-import MobileNavbar from "../components/MobileNavbar/MobileNavbar";
+
 import Footer from "../components/Footer";
 import Providers from "../components/Providers";
 
@@ -12,7 +11,6 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
-
   return (
     <Providers>
       <div style={{ minHeight: "80vh" }}>

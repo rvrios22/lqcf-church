@@ -14,7 +14,7 @@ import {
 } from "@heroui/react";
 import { Link, useRouter } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { useUser } from "../../hooks/useUser";
+import { useUser } from "../hooks/useUser";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
