@@ -29,7 +29,7 @@ router.post("/", verifyUser, async (req, res, next) => {
 
 router.put("/:id", verifyUser, async (req, res, next) => {
   const id = req.params.id;
-  const { author, message, coraemDeo } = req.body;
+  const { author, message, coramDeo } = req.body;
   try {
     const pastorMessage = await PastorMessage.findByPk(id);
     if (!pastorMessage) {
@@ -39,7 +39,7 @@ router.put("/:id", verifyUser, async (req, res, next) => {
     await pastorMessage.update({
       author: author,
       message: message,
-      coraemDeo: coraemDeo,
+      coramDeo: coramDeo,
     });
     res.status(200).json(pastorMessage);
   } catch (err) {
