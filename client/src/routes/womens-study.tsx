@@ -49,7 +49,7 @@ function RouteComponent() {
       <img
         src="/api/static/imgs/womensStudySubHeader.webp"
         alt="Women's Group"
-        className="max-w[600px] m-auto h-[30vh] max-h-[450px] w-4/5 rounded-2xl object-cover object-top shadow-md"
+        className="max-w[600px] mx-auto my-4 h-[30vh] max-h-[450px] w-1/2 rounded-2xl object-cover object-top shadow-md"
         width={600}
         height={450}
       />
