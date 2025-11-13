@@ -1,18 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import HeroImg from "../components/HeroImg";
-import { useWindowDimensions } from "../hooks/useWindowDimensions";
 
 export const Route = createFileRoute("/identity-youth")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const { width, initialHeightRef } = useWindowDimensions();
   return (
     <>
       <HeroImg
-        width={width}
-        height={initialHeightRef.current ?? 0}
         name="youthGroup"
         text="Identity Youth"
       />

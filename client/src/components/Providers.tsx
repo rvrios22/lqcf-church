@@ -1,14 +1,12 @@
 import { HeroUIProvider, ToastProvider } from "@heroui/react";
 import {
   useRouter,
-  createLink,
   type NavigateOptions,
   type ToOptions,
 } from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { UserProvider } from "../context/UserContext";
-import { useEffect } from "react";
 export const queryClient = new QueryClient();
 
 declare module "@react-types/shared" {

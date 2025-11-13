@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useWindowDimensions } from "../hooks/useWindowDimensions";
 import { useState } from "react";
 import customFetch from "../utils/customFetch";
 import { useUser } from "../hooks/useUser";
@@ -10,8 +9,7 @@ export const Route = createFileRoute("/login")({
 });
 
 function RouteComponent() {
-  const { height } = useWindowDimensions();
-  const { setUser } = useUser()
+  const { setUser } = useUser();
   const [form, setForm] = useState({ username: "", password: "" });
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,14 +23,14 @@ function RouteComponent() {
     try {
       const data = await customFetch("user/login", options);
       sessionStorage.setItem("token", data);
-      setUser(getUserFromToken())
+      setUser(getUserFromToken());
       setForm({ username: "", password: "" });
     } catch (e) {
       console.error(e);
     }
   };
   return (
-    <div style={{ height: height * 0.8 }}>
+    <div>
       <h1 className="sub-header">Login</h1>
       <form action="post" onSubmit={handleLogin}>
         <input
