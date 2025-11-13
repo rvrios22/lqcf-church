@@ -69,9 +69,14 @@ function RouteComponent() {
           message && (
             <>
               <h3 className="sub-header">From Our Pastors Hearts</h3>
-              <p className="general-text">{message}</p>
+              <p className="general-text text-left whitespace-pre-line">
+                {message}
+              </p>
               <p className="w-[90%] text-right font-black">- {author}</p>
-              <p className="general-text">Deo Coram: {coramDeo}</p>
+              <p className="general-text text-left whitespace-pre-line">
+                <span className="font-bold">Coram Deo: </span>
+                {coramDeo}
+              </p>
             </>
           )
         )}
