@@ -10,6 +10,7 @@ import study from "./routes/study";
 import event from "./routes/event";
 import user from "./routes/user";
 import pastorMessage from "./routes/pastorMessage";
+import youtube from "./routes/youtube";
 import test from "./routes/test";
 import HttpError from "./types/HttpError";
 dotenv.config();
@@ -25,6 +26,7 @@ app.use("/api/pdf", pdf);
 app.use("/api/study", study);
 app.use("/api/event", event);
 app.use("/api/user", user);
+app.use("/api/youtube", youtube);
 app.use("/api/pastorMessage", pastorMessage);
 app.use("/api/test", test);
 
