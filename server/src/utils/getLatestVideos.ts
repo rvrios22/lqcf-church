@@ -23,7 +23,6 @@ export async function getLatestVideos() {
   }
 
   const data = await response.json();
-
   const videos = data.items.map((item: YouTubeSearchResource) => ({
     videoId: item.id.videoId,
     title: item.snippet.title,
@@ -32,5 +31,5 @@ export async function getLatestVideos() {
     thumbnail: item.snippet.thumbnails?.high?.url,
   }));
 
-  return videos;
+  return JSON.stringify({ newestDate: videos[0].publishedAt, videos });
 }
