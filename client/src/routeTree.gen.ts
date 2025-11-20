@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as WomensStudyImport } from './routes/womens-study'
+import { Route as VideosImport } from './routes/videos'
 import { Route as SchoolImport } from './routes/school'
 import { Route as PrayerChainImport } from './routes/prayer-chain'
 import { Route as PrayerImport } from './routes/prayer'
@@ -30,6 +31,12 @@ import { Route as IndexImport } from './routes/index'
 const WomensStudyRoute = WomensStudyImport.update({
   id: '/womens-study',
   path: '/womens-study',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const VideosRoute = VideosImport.update({
+  id: '/videos',
+  path: '/videos',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -193,6 +200,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SchoolImport
       parentRoute: typeof rootRoute
     }
+    '/videos': {
+      id: '/videos'
+      path: '/videos'
+      fullPath: '/videos'
+      preLoaderRoute: typeof VideosImport
+      parentRoute: typeof rootRoute
+    }
     '/womens-study': {
       id: '/womens-study'
       path: '/womens-study'
@@ -218,6 +232,7 @@ export interface FileRoutesByFullPath {
   '/prayer': typeof PrayerRoute
   '/prayer-chain': typeof PrayerChainRoute
   '/school': typeof SchoolRoute
+  '/videos': typeof VideosRoute
   '/womens-study': typeof WomensStudyRoute
 }
 
@@ -234,6 +249,7 @@ export interface FileRoutesByTo {
   '/prayer': typeof PrayerRoute
   '/prayer-chain': typeof PrayerChainRoute
   '/school': typeof SchoolRoute
+  '/videos': typeof VideosRoute
   '/womens-study': typeof WomensStudyRoute
 }
 
@@ -251,6 +267,7 @@ export interface FileRoutesById {
   '/prayer': typeof PrayerRoute
   '/prayer-chain': typeof PrayerChainRoute
   '/school': typeof SchoolRoute
+  '/videos': typeof VideosRoute
   '/womens-study': typeof WomensStudyRoute
 }
 
@@ -269,6 +286,7 @@ export interface FileRouteTypes {
     | '/prayer'
     | '/prayer-chain'
     | '/school'
+    | '/videos'
     | '/womens-study'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -284,6 +302,7 @@ export interface FileRouteTypes {
     | '/prayer'
     | '/prayer-chain'
     | '/school'
+    | '/videos'
     | '/womens-study'
   id:
     | '__root__'
@@ -299,6 +318,7 @@ export interface FileRouteTypes {
     | '/prayer'
     | '/prayer-chain'
     | '/school'
+    | '/videos'
     | '/womens-study'
   fileRoutesById: FileRoutesById
 }
@@ -316,6 +336,7 @@ export interface RootRouteChildren {
   PrayerRoute: typeof PrayerRoute
   PrayerChainRoute: typeof PrayerChainRoute
   SchoolRoute: typeof SchoolRoute
+  VideosRoute: typeof VideosRoute
   WomensStudyRoute: typeof WomensStudyRoute
 }
 
@@ -332,6 +353,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrayerRoute: PrayerRoute,
   PrayerChainRoute: PrayerChainRoute,
   SchoolRoute: SchoolRoute,
+  VideosRoute: VideosRoute,
   WomensStudyRoute: WomensStudyRoute,
 }
 
@@ -357,6 +379,7 @@ export const routeTree = rootRoute
         "/prayer",
         "/prayer-chain",
         "/school",
+        "/videos",
         "/womens-study"
       ]
     },
@@ -395,6 +418,9 @@ export const routeTree = rootRoute
     },
     "/school": {
       "filePath": "school.tsx"
+    },
+    "/videos": {
+      "filePath": "videos.tsx"
     },
     "/womens-study": {
       "filePath": "womens-study.tsx"
