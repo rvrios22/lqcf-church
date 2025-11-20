@@ -28,7 +28,9 @@ export async function getLatestVideos() {
     title: item.snippet.title,
     desc: item.snippet.description,
     publishedAt: item.snippet.publishedAt,
-    thumbnail: item.snippet.thumbnails?.high?.url,
+    thumbnail: item.snippet.thumbnails.high?.url,
+    width: item.snippet.thumbnails.high.width,
+    height: item.snippet.thumbnails.high.height,
   }));
 
   return JSON.stringify({ newestDate: videos[0].publishedAt, videos });
