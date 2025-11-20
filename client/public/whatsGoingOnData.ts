@@ -16,7 +16,7 @@ const whatsGoingOnData = [
   {
     title: "Past Services",
     desc: "View our past services here and our current live stream.",
-    link: "https://www.youtube.com/@LQCFChurch",
+    link: "/videos",
     name: "homeLiveStream",
     alt: "Click here to see our past services",
   },
