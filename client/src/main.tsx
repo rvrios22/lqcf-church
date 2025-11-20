@@ -26,5 +26,3 @@ if (!rootElement.innerHTML) {
     </StrictMode>,
   );
 }
-
-removeLoader();
