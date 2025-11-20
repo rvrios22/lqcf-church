@@ -16,15 +16,6 @@ declare module "@tanstack/react-router" {
   }
 }
 
-const removeLoader = () => {
-  const loader = document.getElementById("loader");
-  if (loader) {
-    loader.style.opacity = "0";
-    loader.style.transition = "opacity 300ms ease";
-    setTimeout(() => loader.remove(), 1000);
-  }
-};
-
 // Render the app
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
@@ -32,7 +23,7 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <RouterProvider router={router} />
-    </StrictMode>
+    </StrictMode>,
   );
 }
 
