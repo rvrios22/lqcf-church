@@ -29,8 +29,8 @@ function PDFModal({ pdfs, setPdfs, studies, env }: PDFModalTypes) {
   };
   return (
     <div className="mx-auto my-4 h-[60vh] w-[90%] overflow-y-auto rounded-xl border-1 bg-white shadow-md lg:w-4/5">
-      <div className="flex justify-between border-b px-4 py-2">
-        <h2 className="sub-header">Title</h2>
+      <div className="sticky top-0 flex justify-between border-b bg-white px-4 py-4">
+        <h2 className="sub-header m-0 w-auto">Title</h2>
         <select
           // className={styles.select}
           className="pointer max-w-[50%] cursor-pointer truncate rounded-xl border-1"
@@ -44,7 +44,7 @@ function PDFModal({ pdfs, setPdfs, studies, env }: PDFModalTypes) {
             <option key={id}>{name}</option>
           ))}
         </select>
-        <h2 className="sub-header">Date</h2>
+        <h2 className="sub-header m-0 w-auto">Date</h2>
       </div>
       {pdfs.map(({ id, title, pdfPath, date }) => (
         <a
