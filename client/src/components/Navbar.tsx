@@ -141,6 +141,11 @@ function Navbar() {
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
+          <Link to="/videos" className="w-full">
+            Past Streams
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
           <Link to="/mens-study" className="w-full">
             Men's Study
           </Link>
