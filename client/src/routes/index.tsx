@@ -7,6 +7,7 @@ import { useUser } from "../hooks/useUser";
 import type PastorMessage from "../types/PastorMessage";
 import { queryClient } from "../components/Providers";
 import PastorsHeartEditor from "../components/PastorsHeartEditor";
+import { Button } from "@heroui/react";
 export const Route = createFileRoute("/")({
   component: RouteComponent,
   loader: async () => {

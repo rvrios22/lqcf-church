@@ -51,7 +51,7 @@ function Navbar() {
             <DropdownTrigger>
               <Button
                 disableRipple
-                className="bg-transparent p-0 data-[hover=true]:bg-transparent lg:text-lg"
+                className="lg:m4-0 overflow-visible bg-transparent p-0 data-[hover=true]:bg-transparent md:mr-4 lg:text-lg"
                 endContent={<img src="./chevron-down.svg" />}
                 radius="sm"
                 variant="light"
@@ -77,7 +77,7 @@ function Navbar() {
             <DropdownTrigger>
               <Button
                 disableRipple
-                className="bg-transparent p-0 data-[hover=true]:bg-transparent lg:text-lg"
+                className="overflow-visible bg-transparent p-0 data-[hover=true]:bg-transparent lg:text-lg"
                 endContent={<img src="./chevron-down.svg" />}
                 radius="sm"
                 variant="light"
@@ -138,11 +138,6 @@ function Navbar() {
         <NavbarMenuItem>
           <Link to="/current-studies" className="w-full">
             Current Studies
-          </Link>
-        </NavbarMenuItem>
-        <NavbarMenuItem>
-          <Link to="/videos" className="w-full">
-            Past Streams
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
