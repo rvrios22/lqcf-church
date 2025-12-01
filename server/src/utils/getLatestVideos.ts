@@ -12,7 +12,7 @@ export async function getLatestVideos() {
   url.searchParams.set("channelId", CHANNEL_ID);
   url.searchParams.set("part", "snippet");
   url.searchParams.set("order", "date");
-  url.searchParams.set("maxResults", "10");
+  url.searchParams.set("maxResults", "12");
   url.searchParams.set("type", "video");
 
   const response = await fetch(url.toString());
