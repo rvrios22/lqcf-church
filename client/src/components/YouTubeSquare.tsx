@@ -28,7 +28,7 @@ function YouTubeSquare({
         {title}
       </h3>
       <p className="general-text mt-0 text-sm text-pretty">
-        {desc} Streamed on: {dateFormat(publishedAt)}
+        {desc} Publshed on: {dateFormat(publishedAt)}
       </p>
     </figure>
   );
