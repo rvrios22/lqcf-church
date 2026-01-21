@@ -1,14 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Fira_Sans,
+  Geist,
+  Geist_Mono,
+  Great_Vibes,
+  Inter,
+} from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+
+const firaSans = Fira_Sans({
+  variable: "--font-fira-sans",
+  weight: ["400", "900"],
   subsets: ["latin"],
 });
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const greatVibes = Great_Vibes({
+  variable: "--font-great-vibes",
+  weight: ["400"],
+  subsets: ["latin"],
+});
+const inter = Inter({
+  variable: "--font-inter",
+  weight: ["700"],
   subsets: ["latin"],
 });
 
@@ -26,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${firaSans.variable} ${greatVibes.variable} ${inter.variable} antialiased`}
       >
         {children}
       </body>
