@@ -7,7 +7,7 @@ import {
   Inter,
 } from "next/font/google";
 import "./globals.css";
-
+import Providers from "@/components/Providers";
 
 const firaSans = Fira_Sans({
   variable: "--font-fira-sans",
@@ -41,7 +41,7 @@ export default function RootLayout({
       <body
         className={`${firaSans.variable} ${greatVibes.variable} ${inter.variable} antialiased`}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
