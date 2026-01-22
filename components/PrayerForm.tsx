@@ -3,38 +3,37 @@
 import { useState, useEffect } from "react";
 import { addToast, Button, Form, Input, Textarea } from "@heroui/react";
 import { useForm } from "@formspree/react";
-import { logError } from "../utils/axiom";
-
-const [formData, setFormData] = useState({
-  name: "",
-  email: "",
-  message: "",
-});
-const [state, handleSubmit] = useForm(import.meta.env.VITE_FORM_SPREE);
-const variant = "bordered";
-
-useEffect(() => {
-  if (state.succeeded) {
-    addToast({
-      title: "Thank you",
-      description:
-        "We will keep you in prayer and reach out if we see fit. God bless!",
-    });
-    setFormData({ name: "", email: "", message: "" });
-  }
-
-  if (state.errors) {
-    addToast({
-      title: "Something went wrong",
-      description:
-        "There's seems to be an issue in our system. Feel free to call our church or email us and we will pray for you.",
-      color: "danger",
-    });
-    logError(new Error("something went wrong"), "Prayer Form");
-  }
-}, [state.succeeded, state.errors]);
+// import { logError } from "../utils/axiom";
 
 function PrayerForm() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [state, handleSubmit] = useForm(process.env.NEXT_PUBLIC_FORM_SPREE!);
+  const variant = "bordered";
+
+  useEffect(() => {
+    if (state.succeeded) {
+      addToast({
+        title: "Thank you",
+        description:
+          "We will keep you in prayer and reach out if we see fit. God bless!",
+      });
+      setFormData({ name: "", email: "", message: "" });
+    }
+
+    if (state.errors) {
+      addToast({
+        title: "Something went wrong",
+        description:
+          "There's seems to be an issue in our system. Feel free to call our church or email us and we will pray for you.",
+        color: "danger",
+      });
+      // logError(new Error("something went wrong"), "Prayer Form");
+    }
+  }, [state.succeeded, state.errors]);
   return (
     <Form
       onSubmit={handleSubmit}
