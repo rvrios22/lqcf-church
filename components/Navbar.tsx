@@ -102,9 +102,7 @@ function Navbar() {
             <DropdownItem key="identity-youth" href="/identity-youth">
               Identity Youth
             </DropdownItem>
-            <DropdownItem key="school" href="/school">
-              LQCF School
-            </DropdownItem>
+            
           </DropdownMenu>
         </Dropdown>
         <NavbarItem>
@@ -168,11 +166,7 @@ function Navbar() {
             Identity Youth
           </Link>
         </NavbarMenuItem>
-        <NavbarMenuItem>
-          <Link href="/school" className="w-full">
-            School
-          </Link>
-        </NavbarMenuItem>
+        
         <NavbarMenuItem>
           <Link href="/events" className="w-full">
             Events
