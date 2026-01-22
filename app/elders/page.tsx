@@ -1,0 +1,13 @@
+import Elder from "@/components/Elder";
+import elders from "@/public/data/elders";
+
+export default function Page() {
+  return (
+    <>
+      <h1 className="sub-header mb-4">Meet Our Elders</h1>
+      {elders.map(({ name, img, bio }, idx) => (
+        <Elder key={idx} name={name} img={img} bio={bio} />
+      ))}
+    </>
+  );
+}
