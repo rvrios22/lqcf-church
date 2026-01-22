@@ -19,8 +19,6 @@
 
 @utility general-text {
   font-family: "Fira Sans", sans-serif;
-  width: 90%;
-  margin: 0.5em auto;
   font-size: clamp(18px, 2.5vw, 20px);
   text-align: center;
 }
@@ -29,8 +27,6 @@
   font-family: "Great Vibes", cursive;
   font-size: clamp(20px, 2.8vw, 22px);
   text-align: center;
-  margin: 0.5em auto;
-  width: 90%;
 }
 
 @utility text-shadow {
@@ -39,7 +35,6 @@
 }
 
 @utility citation {
-  font-family: "Fira Sans", sans-serif;
   font-size: clamp(8px, 1.5vw, 12px);
   color: rgb(146, 146, 146);
   white-space: nowrap;
@@ -49,8 +44,6 @@
   font-size: clamp(20px, 2.5vw, 32px);
   font-family: "Inter", Tahoma, Verdana, sans-serif;
   text-align: center;
-  width: 90%;
-  margin: 0 auto;
   text-wrap: pretty;
 }
 
@@ -93,8 +86,17 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-fira-sans), Arial, Helvetica, sans-serif;
-  width: 90%;
   margin: 0.5em auto;
   font-size: clamp(18px, 2.5vw, 20px);
   text-align: center;
+}
+
+p,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  width: 90%;
+  margin: 0.5em auto;
 }

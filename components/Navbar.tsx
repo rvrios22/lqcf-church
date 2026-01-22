@@ -55,7 +55,7 @@ function Navbar() {
               <Button
                 disableRipple
                 className="lg:m4-0 overflow-visible bg-transparent p-0 data-[hover=true]:bg-transparent md:mr-4 lg:text-lg"
-                endContent={<img src="./chevron-down.svg" />}
+                endContent={<img src="/arrow.svg" />}
                 radius="sm"
                 variant="light"
               >
@@ -81,7 +81,7 @@ function Navbar() {
               <Button
                 disableRipple
                 className="overflow-visible bg-transparent p-0 data-[hover=true]:bg-transparent lg:text-lg"
-                endContent={<img src="./chevron-down.svg" />}
+                endContent={<img src="/arrow.svg" />}
                 radius="sm"
                 variant="light"
               >
