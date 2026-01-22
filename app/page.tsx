@@ -1,5 +1,5 @@
 import HeroImg from "@/components/HeroImg";
-import whatsGoingOnData from "@/public/whatsGoingOnData";
+import whatsGoingOnData from "@/public/data/whatsGoingOnData";
 import WhatsGoingOnSquare from "@/components/WhatsGoingOnSquare";
 
 export default function Home() {
