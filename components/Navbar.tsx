@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Button,
   Dropdown,
@@ -11,21 +13,22 @@ import {
   DropdownMenu,
   DropdownItem,
   NavbarMenuToggle,
+  Link,
 } from "@heroui/react";
-import { Link, useRouter } from "@tanstack/react-router";
+// import { Link, useRouter } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { useUser } from "../hooks/useUser";
+// import { useUser } from "../hooks/useUser";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const { user } = useUser();
+  //   const { user } = useUser();
 
-  const router = useRouter();
-  useEffect(() => {
-    const unsubscribe = router.history.subscribe(() => setIsMenuOpen(false));
+  //   const router = useRouter();
+  //   useEffect(() => {
+  //     const unsubscribe = router.history.subscribe(() => setIsMenuOpen(false));
 
-    return () => unsubscribe();
-  }, [router]);
+  //     return () => unsubscribe();
+  //   }, [router]);
   return (
     <Header
       isMenuOpen={isMenuOpen}
@@ -39,11 +42,11 @@ function Navbar() {
           className="sm:hidden"
         />
         <NavbarBrand>
-          <Link to="/">
+          <Link href="/">
             <p className="text-inherit lg:text-2xl">LQCF Church</p>
           </Link>
         </NavbarBrand>
-        {user && <NavbarItem>{user.username}</NavbarItem>}
+        {/* {user && <NavbarItem>{user.username}</NavbarItem>} */}
       </NavbarContent>
       <NavbarContent justify="end" className="hidden gap-4 sm:flex">
         <Dropdown>
@@ -105,17 +108,17 @@ function Navbar() {
           </DropdownMenu>
         </Dropdown>
         <NavbarItem>
-          <Link to="/giving">
+          <Link href="/giving">
             <span className="lg:text-lg">Giving</span>
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link to="/events">
+          <Link href="/events">
             <span className="lg:text-lg">Events</span>
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link to="/prayer">
+          <Link href="/prayer">
             <span className="lg:text-lg">Prayer</span>
           </Link>
         </NavbarItem>
@@ -123,65 +126,65 @@ function Navbar() {
       {/* mobile menu */}
       <NavbarMenu className="items-center justify-center">
         <NavbarMenuItem>
-          <Link to="/">Home</Link>
+          <Link href="/">Home</Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <Link to="/elders" className="w-full">
+          <Link href="/elders" className="w-full">
             Our Elders
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <Link to="/beliefs" className="w-full">
+          <Link href="/beliefs" className="w-full">
             What We Beleive
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <Link to="/current-studies" className="w-full">
+          <Link href="/current-studies" className="w-full">
             Current Studies
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <Link to="/videos" className="w-full">
+          <Link href="/videos" className="w-full">
             Past Streams
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <Link to="/mens-study" className="w-full">
+          <Link href="/mens-study" className="w-full">
             Men's Study
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <Link to="/womens-study" className="w-full">
+          <Link href="/womens-study" className="w-full">
             Women's Study
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <Link to="/prayer-chain" className="w-full">
+          <Link href="/prayer-chain" className="w-full">
             Prayer Chain
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <Link to="/identity-youth" className="w-full">
+          <Link href="/identity-youth" className="w-full">
             Identity Youth
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <Link to="/school" className="w-full">
+          <Link href="/school" className="w-full">
             School
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <Link to="/events" className="w-full">
+          <Link href="/events" className="w-full">
             Events
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <Link to="/giving" className="w-full">
+          <Link href="/giving" className="w-full">
             Giving
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <Link to="/prayer" className="w-full">
+          <Link href="/prayer" className="w-full">
             Prayer
           </Link>
         </NavbarMenuItem>

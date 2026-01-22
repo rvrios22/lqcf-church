@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import {
   Fira_Sans,
-  Geist,
-  Geist_Mono,
   Great_Vibes,
   Inter,
 } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
+import Navbar from "@/components/Navbar";
 
 const firaSans = Fira_Sans({
   variable: "--font-fira-sans",
@@ -41,7 +40,9 @@ export default function RootLayout({
       <body
         className={`${firaSans.variable} ${greatVibes.variable} ${inter.variable} antialiased`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <Navbar />
+          {children}</Providers>
       </body>
     </html>
   );
