@@ -8,11 +8,11 @@ function HeroImg({ name, text }: HeroImgTypes) {
     <div className="relative mx-auto my-6 flex w-4/5 justify-center overflow-clip rounded-2xl shadow-md">
       <img
         srcSet={`
-          /${name}/${name}-300.webp 300w,
-          /${name}/${name}-600.webp 600w,
-          /${name}/${name}-1000.webp 1000w,
-          /${name}/${name}-1500.webp 1500w,
-          /${name}/${name}-2000.webp 2000w
+          /imgs/${name}/${name}-300.webp 300w,
+          /imgs/${name}/${name}-600.webp 600w,
+          /imgs/${name}/${name}-1000.webp 1000w,
+          /imgs/${name}/${name}-1500.webp 1500w,
+          /imgs/${name}/${name}-2000.webp 2000w
         `}
         sizes="
           (min-width: 2560px) 80vw,

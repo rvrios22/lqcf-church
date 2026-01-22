@@ -1,4 +1,6 @@
 import HeroImg from "@/components/HeroImg";
+import whatsGoingOnData from "@/public/whatsGoingOnData";
+import WhatsGoingOnSquare from "@/components/WhatsGoingOnSquare";
 
 export default function Home() {
   return (
@@ -19,6 +21,18 @@ export default function Home() {
         of His will, to the praise of the glory of His grace, which He freely
         bestowed on us in the Beloved. Ephesians 1:3-6
       </p>
+      <section className="mx-auto w-[90%] px-4 md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-3">
+        {whatsGoingOnData.map(({ title, desc, link, name, alt }, idx) => (
+          <WhatsGoingOnSquare
+            key={idx}
+            title={title}
+            desc={desc}
+            name={name}
+            link={link}
+            alt={alt}
+          />
+        ))}
+      </section>
     </>
   );
 }
