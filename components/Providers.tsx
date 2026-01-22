@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { HeroUIProvider } from "@heroui/react";
+import { HeroUIProvider, ToastProvider } from "@heroui/react";
 import { ReactNode } from "react";
 
 declare module "@react-types/shared" {
@@ -14,7 +14,12 @@ declare module "@react-types/shared" {
 
 function Providers({ children }: { children: ReactNode }) {
   const router = useRouter();
-  return <HeroUIProvider navigate={router.push}>{children}</HeroUIProvider>;
+  return (
+    <HeroUIProvider navigate={router.push}>
+      {children}
+      <ToastProvider />
+    </HeroUIProvider>
+  );
 }
 
 export default Providers;
